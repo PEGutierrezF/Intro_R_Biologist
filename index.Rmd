@@ -8,7 +8,7 @@ output:
     highlight: github
 ---
 
-<img src="20191031_122742.jpg" width="550" height="415"/>
+<img src="20191031_122742.jpg" width="550" height="320"/>
 
 
 ### [HomeWork 1]()
