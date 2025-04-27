@@ -8,4 +8,6 @@ output:
     highlight: github
 ---
 
+<img src="" width="550" height="415"/>
+
 ### [Typora](Homework12.html)
