@@ -69,8 +69,6 @@ xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presenta
     - Add a description (optional)
 
 ---
-
----       
 # Clone the repository
 
 - Clone the repository to your computer
@@ -86,3 +84,4 @@ xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presenta
     - Paste the URL
     - Select a directory
     - Click `Create Project`
+  

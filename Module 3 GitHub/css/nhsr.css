@@ -155,7 +155,7 @@ blockquote {
 .title-slide {
   background-image: url(../css/logo.png);
   background-position: 50% 85%;
-  background-size: 200px;
+  background-size: 115px;
   background-color: #fff;
   padding-left: 100px;  /* delete this for 4:3 aspect ratio */
 }
