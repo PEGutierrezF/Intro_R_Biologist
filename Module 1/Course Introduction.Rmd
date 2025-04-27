@@ -48,3 +48,41 @@ xaringanExtra::use_extra_styles(
 )
 xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presentation
 ```
+
+
+# Create an account in GitHub
+- Create and account in .link-style2[[GitHub](https://github.com/)]
+
+---
+# Create a repository
+- Create a `Repository` for this course.
+    - `New`
+    - Create a new repository
+    - add a name
+    - Click `public`
+    - `Add a README file`
+    - Add a .gitignore file
+        - `R`
+    - Add a license
+        - `MIT`
+    - Click `Create repository`
+    - Add a description (optional)
+
+---
+
+---       
+# Clone the repository
+
+- Clone the repository to your computer
+    - Click on `Code`
+    - Copy the URL
+
+---
+# Create a project in RStudio in your computer
+- Open RStudio
+- Go to `File` > `New Project...`
+    - Select `Version Control`
+    - Select `Git`
+    - Paste the URL
+    - Select a directory
+    - Click `Create Project`
