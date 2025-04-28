@@ -1,7 +1,8 @@
 ---
 title: "Introduction to R for Biologist"
+subtitle: 'BIOL 4994/BIOL 4991 undergrads <br> BIOL 6994/BIOL 6997 grads'
 author: "Pablo E. Gutiérrez-Fonseca"
-date: "2025-04-27"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 output: 
   prettydoc::html_pretty:
     theme: cayman
@@ -10,5 +11,11 @@ output:
 
 <img src="20191031_122742.jpg" width="550" height="320"/>
 
+### Español:  
+Bienvenidos a todos. En esta página encontrarán los prompts para los R Tutorials que desarrollaremos durante la clase.
 
+### Inglés:  
+Welcome everyone. On this page, you will find the prompts for the R Tutorials that we will work on during class.
+
+## R Tutorials Prompts:
 ### [HomeWork 1]()
