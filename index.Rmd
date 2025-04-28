@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R for Biologist"
+title: "Introduction to R for Biologists"
 subtitle: 'BIOL 4994/BIOL 4991 undergrads <br> BIOL 6994/BIOL 6997 grads'
 author: "Pablo E. Gutiérrez-Fonseca"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
