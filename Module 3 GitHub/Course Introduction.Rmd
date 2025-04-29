@@ -84,4 +84,8 @@ xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presenta
     - Paste the URL
     - Select a directory
     - Click `Create Project`
-  
+    
+    
+    
+
+
