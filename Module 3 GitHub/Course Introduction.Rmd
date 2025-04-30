@@ -77,14 +77,16 @@ xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presenta
 
 ---
 # Create a project in RStudio in your computer
-- Open RStudio
-- Go to `File` > `New Project...`
-    - Select `Version Control`
-    - Select `Git`
-    - Paste the URL
-    - Select a directory
-    - Click `Create Project`
-    
+
+1. Open RStudio on your computer.
+2. In the top menu, go to `File` > `New Project....`
+3. A window will pop up. Select the option:
+    - `Version Control` > `Git`.
+4. Paste the Git repository URL in the provided field.
+5. Choose the directory where you'd like to store your project.
+6. Click `Create Project` to initialize your RStudio project connected to Git.
+
+
     
     
 

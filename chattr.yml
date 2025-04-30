@@ -1,0 +1,27 @@
+default:
+  path: '[path to compiled program]'
+  model: '[path to model]'
+  prompt: Use the R language, the tidyverse, and tidymodels
+  max_data_files: 0
+  max_data_frames: 0
+  include_doc_contents: no
+  include_history: no
+  provider: LlamaGPT
+  model_arguments:
+    threads: 4
+    temp: 0.01
+    n_predict: 1000
+  label: GPT4ALL 1.3 (LlamaGPT)
+  mode: llamagpt
+console:
+  path: ~/LlamaGPTJ-chat/build/bin/chat
+  model: ~/ggml-gpt4all-j-v1.3-groovy.bin
+chat:
+  path: ~/LlamaGPTJ-chat/build/bin/chat
+  model: ~/ggml-gpt4all-j-v1.3-groovy.bin
+notebook:
+  path: ~/LlamaGPTJ-chat/build/bin/chat
+  model: ~/ggml-gpt4all-j-v1.3-groovy.bin
+script:
+  path: ~/LlamaGPTJ-chat/build/bin/chat
+  model: ~/ggml-gpt4all-j-v1.3-groovy.bin
