@@ -183,9 +183,8 @@ knitr::include_graphics("fig/Rstudio.png")
 ---
 # Create a repository
 - Create a `Repository` for this course.
-    - New
-    - `r emo::ji("smile")`
-    - Create a new repository
+    - New `r emo::ji("arrow_right")`
+    - Create a new repository `r emo::ji("computer_mouse")`
     - add a name
     - Click `public`
     - `Add a README file`
