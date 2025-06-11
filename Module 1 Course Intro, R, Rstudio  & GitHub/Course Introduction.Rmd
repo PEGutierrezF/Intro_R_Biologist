@@ -47,6 +47,7 @@ xaringanExtra::use_extra_styles(
   mute_unhighlighted_code = TRUE  #<<
 )
 xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presentation
+library(emo)
 ```
 
 # What is R Programming?
@@ -182,7 +183,8 @@ knitr::include_graphics("fig/Rstudio.png")
 ---
 # Create a repository
 - Create a `Repository` for this course.
-    - `New`
+    - New
+    - `r emo::ji("smile")`
     - Create a new repository
     - add a name
     - Click `public`
