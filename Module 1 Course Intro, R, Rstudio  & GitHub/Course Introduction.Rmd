@@ -177,7 +177,60 @@ knitr::include_graphics("fig/Rstudio.png")
 
 ---
 # Create an account in GitHub
+.pull-left[
 - Create and account in .link-style2[[GitHub](https://github.com/)]
+]
+
+.pull-right[
+```{r, echo=FALSE, fig.cap="", out.width = '120%'}
+knitr::include_graphics("fig/profile.png")
+```
+]
+
+
+---
+# Create a repository
+.pull-left[
+- Create a `Repository` for this course.
+    - `New`
+    - Create a new repository
+    - add a name
+    - Click `public`
+    - `Add a README file`
+    - Add a .gitignore file
+        - `R`
+    - Add a license
+        - `MIT`
+    - Click `Create repository`
+    - Add a description (optional)
+]
+
+.pull-right[
+]
+
+
+---
+# Create a repository
+.pull-left[
+- Create a `Repository` for this course.
+    - `New`
+    - Create a new repository
+    - add a name
+    - Click `public`
+    - `Add a README file`
+    - Add a .gitignore file
+        - `R`
+    - Add a license
+        - `MIT`
+    - Click `Create repository`
+    - Add a description (optional)
+]
+
+.pull-right[
+```{r, echo=FALSE, fig.cap="", out.width = '90%'}
+knitr::include_graphics("fig/repository.png")
+```
+]
 
 ---
 # Create a repository
