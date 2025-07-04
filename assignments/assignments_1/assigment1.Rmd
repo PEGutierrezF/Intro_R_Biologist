@@ -5,4 +5,5 @@ author: "Pablo E. Gutiérrez-Fonseca"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 ---
 
-- Something to do :)
+- Something exciting to do with R Markdown for the R course.
+:)
