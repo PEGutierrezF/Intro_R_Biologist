@@ -19,4 +19,3 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 ## R Tutorials Prompts:
 ### [HomeWork 1](assignments/assignments_1/assigment1.html)
-### [HomeWork 2]
