@@ -90,3 +90,6 @@ library(dplyr)
 **Q10.** Use R's help system to find out what the function `mean()` does. (Usa el sistema de ayuda de R para averiguar qué hace la función `mean()`.)
 <br><br>
 
+
+
+
