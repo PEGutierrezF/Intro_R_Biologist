@@ -18,4 +18,4 @@ Bienvenidos a todos. En esta página encontrarán los prompts para los R Tutoria
 Welcome everyone. On this page, you will find the prompts for the R Tutorials that we will work on during class.
 
 ## R Tutorials Prompts:
-### [HomeWork 1](assignments/assignments_1/assigment1.html)
+### [HomeWork 1](assignments/assignments_1/homework1.html)

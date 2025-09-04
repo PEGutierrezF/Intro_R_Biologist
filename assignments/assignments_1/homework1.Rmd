@@ -92,6 +92,12 @@ library(dplyr)
 <br><br><br><br><br><br><br><br>
 
 
+Q11
+Suma 5+10
+```{r}
+5+10
+```
+
 
 
 
