@@ -53,8 +53,8 @@ class(df1)
 <br><br>
 
 #### **Accessing 1st &2nd rows**
-**Q3.** Create a subset of the `df` from Q2 that includes only the first and second rows. Print the subset.
-**Q3.** Crea un subconjunto del `df` de la Q2 que incluya únicamente la primera y segunda fila. Imprime el subconjunto.
+**Q3.** Create a subset of the `df` dataset that includes only the **first and second rows**. Print the subset..
+**Q3.** Crea un subconjunto del `df` que incluya únicamente la **primera y la segunda fila**. Imprime el subconjunto.
 ```{r}
 df=data.frame(
   A=c("Raju","Kumar","Chandru","Deepak","Raina", "Dhoni", "Hema", "Vandana", "Bela","Anand" ),
@@ -69,57 +69,57 @@ class(df)
 <br><br>
 
 #### **Accessing 1st &2nd columns**
-**Q4.** Create a subset of the df from Q2 that includes only the first and second columns. Print the subset.
-**Q4.** Crea un subconjunto del df de la Q2 que incluya únicamente la primera y segunda columna. Imprime el subconjunto.
+**Q4.** Create a subset of the df from Q3 that includes only the first and second columns. Print the subset.
+**Q4.** Crea un subconjunto del df de la Q3 que incluya únicamente la primera y segunda columna. Imprime el subconjunto.
 ```{r}
 # Your subset here
 ```
 <br><br>
 
 ### **Sorting the dataframe**
-**Q5.** Sort the df from Q2 by the `Age` column in ascending order. Print the sorted data frame.
-**Q5.** Ordena el df de la Q2 por la columna `Age` en orden ascendente. Imprime el data frame ordenado.
+**Q5.** Sort the df from Q3 by the `Age` column in ascending order. Print the sorted data frame.
+**Q5.** Ordena el df de la Q3 por la columna `Age` en orden ascendente. Imprime el data frame ordenado.
 ```{r}
 # Print the sorted subset
 ```
 <br><br>
 
 #### **Adding a new column**
-**Q6.** Add a new column called **Score** to the df from Q2 with the following values: 85, 90, 78, 88, 90, 92, 80, 90, 87, 100. Print the updated data frame.
-**Q6.** Agrega una nueva columna llamada **Score** al df de la Q2 con los siguientes valores: 85, 90, 78, 88, 90, 92, 80, 90, 87, 100. Imprime el data frame actualizado.
+**Q6.** Add a new column called **Score** to the df from Q3 with the following values: 85, 90, 78, 88, 90, 92, 80, 90, 87, 100. Print the updated data frame.
+**Q6.** Agrega una nueva columna llamada **Score** al df de la Q3 con los siguientes valores: 85, 90, 78, 88, 90, 92, 80, 90, 87, 100. Imprime el data frame actualizado.
 ```{r}
 # Your subset here
 ```
 <br><br>
 
 #### **Filtering rows with a condition**
-**Q7.** From the df in Q2, create a subset where Age is greater than 30. Print the subset.
-**Q7.** Del df de la Q2, crea un subconjunto donde Age sea mayor a 30. Imprime el subconjunto.
+**Q7.** From the `df` in Q3, create a subset where Age is greater than 30. Print the subset.
+**Q7.** Del `df` de la Q3, crea un subconjunto donde Age sea mayor a 30. Imprime el subconjunto.
 ```{r}
 # Your subset here
 ```
 <br><br>
 
 **Renaming columns**
-**Q8.** Q8. Rename the columns of df from Q2 as **Person, Years, Index, and Nation**. Print the updated data frame.
-**Q8.** Renombra las columnas del df de la Q2 como Person, Years, Index y Nation. Imprime el data frame actualizado..
+**Q8.** Q8. Rename the columns of df from Q3 as **Person, Years, Gender, and Nation**. Print the updated data frame.
+**Q8.** Renombra las columnas del df de la Q3 como Person, Years, Index y Nation. Imprime el data frame actualizado..
 ```{r}
 # Your new column names here
 ```
 <br><br>
 
 #### **Selecting multiple conditions**
-**Q9.** From the df in Q2, select rows where Age is greater than 20 and BMI is less than 15. Print the subset.
-**Q9.** Del df de la Q2, selecciona las filas donde Age sea mayor a 20 y BMI menor a 15. Imprime el subconjunto.
+**Q9.** From the **df in Q2**, select rows where Age is greater than 20 and BMI is less than 15. Print the subset.
+**Q9.** Del **df de la Q2**, selecciona las filas donde Age sea mayor a 20 y BMI menor a 15. Imprime el subconjunto.
 ```{r}
 # Your subset here
 ```
 <br><br>
 
 #### **Summarizing a column**
-**Q10.** Calculate the mean of the **Age** column from df in Q2. Print the result.
-**Q10.** Calcula la media de la columna **Age** del df de la Q2. Imprime el resultado.
+**Q10.** Calculate the mean of the **Age** column from **df in Q2**. Print the result.
+**Q10.** Calcula la media de la columna **Age** del **df de la Q2**. Imprime el resultado.
 ```{r}
 # Your code here
 ```
-
+<br><br>
