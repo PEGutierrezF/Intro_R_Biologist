@@ -1,0 +1,36 @@
+---
+title: "Exam Practice"
+subtitle: ''
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+---
+
+# Load libraries
+
+```{r}
+library(readxl)
+```
+
+The data in **cereal.csv** includes nutrition information collected from breakfast cereals. The data, which were provided by (Lock:2020?), were obtained from <http://nutritionresource.com/>.
+
+-   The attributes included in the data are:
+    -   name: Brand name of cereal
+    -   company: Manufacturer (G=General Mills, K=Kellog’s or Q=Quaker)
+    -   serving: Serving size (in cups)
+    -   calories: Calories (per cup)
+    -   fat: Fat (grams per cup)
+    -   sodium: Sodium (mg per cup)
+    -   carbs: Carbohydrates (grams per cup)
+    -   fiber: Dietary Fiber (grams per cup)
+    -   sugars: Sugars (grams per cup)
+    -   protein: Protein (grams per cup)
+
+```{r}
+cereal <- read_excel("cereal.xlsx")
+head(cereal)
+```
+
+# Using Base R:
+
+-   Extract rows 1 to 10 from the cereal data frame.
+-   Make a new data frame called Kelloggs which only contains rows that belongs to manufacturer, Kellogs (when mfr takes the value “K”).
