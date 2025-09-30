@@ -18,6 +18,13 @@ Bienvenidos a todos. En esta página encontrarán los prompts para los R Tutoria
 Welcome everyone. On this page, you will find the prompts for the R Tutorials that we will work on during class.
 
 ## R Tutorials Prompts:
-### [HomeWork 1](assignments/assignments_1/homework1.html)
-### [HomeWork 2](assignments/assignments_2/assignments2.html)
-### [HomeWork 3](assignments/assignment_3/assignment3.html)
+### [RTutorial 1](assignments/assignments_1/homework1.html)
+### [RTutorial 2](assignments/assignments_2/assignments2.html)
+### [RTutorial 3](assignments/assignment_3/assignment3.html)
+<br>
+
+## Study Guide
+### [Base R](assignments/exam practice/Study-Guide.html)
+### [dplyr](assignments/exam practice/Study-Guide-dplyr.html)
+### [](assignments/exam practice/practice.html)
+<br><br>
