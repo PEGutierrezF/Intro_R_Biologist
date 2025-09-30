@@ -80,6 +80,18 @@ summary(y)
 ```
 <br><br>
 
+#### 12. Subsetting with logical conditions
+```{r}
+# Extract rows 1 to 10 from a dataset
+iris[1:10, ]
+
+# Subset rows where Sepal.Length is greater than 7
+subset(iris, Sepal.Length > 7)
+
+# Extract only the Species names where Petal.Width is less than 0.2
+iris$Species[iris$Petal.Width < 0.2]
+```
+
 
 ## Creating Objects in R
 

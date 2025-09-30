@@ -1,0 +1,112 @@
+---
+title: "Study Guide: dplyr for Data Manipulation"
+subtitle: ''
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "r format(Sys.time(), '%Y-%b-%d, %I:%M %p')"
+---
+<br><br>
+
+1. library() Load dplyr
+Required for all dplyr functions.
+```{r}
+library(dplyr)
+```
+
+
+
+
+
+<br><br>
+
+2. %>% Pipe operator
+# Chains commands
+data %>%
+  filter(condition) %>%
+  group_by(group_var) %>%
+  summarise(mean_value = mean(var))
+
+
+Sends output of one function to the next. Essential for readable workflows.
+
+<br><br>
+
+3. filter() Subset rows
+# Basic filtering
+data %>% filter(variable > 5)
+
+# Multiple conditions
+data %>% filter(variable > 5 & other_var == "A")
+
+
+Use &, |, and ! for logical combinations.
+
+<br><br>
+
+4. select() Pick columns
+data %>% select(col1, col2, col3)
+
+# Helpers
+data %>% select(starts_with("eq"))   # all columns starting with 'eq'
+data %>% select(everything())        # keep all columns
+
+
+<br><br>
+
+5. mutate() Create or transform columns
+# Create new column
+data %>% mutate(new_col = var1 / var2)
+
+# Multiple columns
+data %>% mutate(ratio = a / b, log_c = log(c))
+
+
+Very useful to compute ratios or normalized values.
+
+<br><br>
+
+6. group_by() Group data
+data %>% group_by(group_var)
+
+
+Must use before summarise() to calculate per-group statistics.
+
+<br><br>
+
+7. summarise() Summarize data
+data %>%
+  group_by(group_var) %>%
+  summarise(mean_var = mean(var, na.rm=TRUE),
+            sum_var = sum(var, na.rm=TRUE),
+            count = n())
+
+
+Commonly used with group_by() for per-group summaries.
+
+<br><br>
+
+8. arrange() Sort rows
+# Ascending
+data %>% arrange(var)
+
+# Descending
+data %>% arrange(desc(var))
+
+
+<br><br>
+
+9. slice_head() and slice_tail() Select top/bottom rows
+data %>% slice_head(n=5)   # first 5 rows
+data %>% slice_tail(n=5)   # last 5 rows
+
+
+Works well after arrange() to get top or bottom items.
+
+<br><br>
+
+10. Combining tools: Typical workflow
+data %>%
+  filter(condition) %>%           # Step 1: filter rows
+  mutate(new_col = var1/var2) %>%# Step 2: create new variable
+  group_by(group_var) %>%         # Step 3: group by a factor
+  summarise(avg_val = mean(new_col, na.rm=TRUE)) %>%  # Step 4: summarise
+  arrange(desc(avg_val))          # Step 5: sort descending

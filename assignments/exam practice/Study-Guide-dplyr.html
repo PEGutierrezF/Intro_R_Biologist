@@ -12,7 +12,7 @@
 <meta name="author" content="Pablo E. Gutiérrez-Fonseca" />
 
 
-<title>Exam Practice</title>
+<title>Study Guide: dplyr for Data Manipulation</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,144 +349,97 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Exam Practice</h1>
+<h1 class="title toc-ignore">Study Guide: dplyr for Data
+Manipulation</h1>
 <h4 class="author">Pablo E. Gutiérrez-Fonseca</h4>
-<h4 class="date">2025-Sep-30, 12:38 PM</h4>
+<h4 class="date">r format(Sys.time(), ‘%Y-%b-%d, %I:%M %p’)</h4>
 
 </div>
 
 
-<div id="load-libraries" class="section level3">
-<h3>Load libraries</h3>
-<pre class="r"><code>library(readxl)
-library(dplyr)</code></pre>
-</div>
-<div id="practice-data-manupulation-using-base-r" class="section level3">
-<h3>Practice data manupulation using Base R</h3>
-<p>The data in <strong>cereal.csv</strong> includes nutrition
-information collected from breakfast cereals. The data, which were
-provided by (Lock:2020?), were obtained from <a href="http://nutritionresource.com/" class="uri">http://nutritionresource.com/</a>.</p>
-<ul>
-<li>The attributes included in the data are:
-<ul>
-<li>name: Brand name of cereal</li>
-<li>company: Manufacturer (G=General Mills, K=Kellog’s or Q=Quaker)</li>
-<li>serving: Serving size (in cups)</li>
-<li>calories: Calories (per cup)</li>
-<li>fat: Fat (grams per cup)</li>
-<li>sodium: Sodium (mg per cup)</li>
-<li>carbs: Carbohydrates (grams per cup)</li>
-<li>fiber: Dietary Fiber (grams per cup)</li>
-<li>sugars: Sugars (grams per cup)</li>
-<li>protein: Protein (grams per cup)</li>
-</ul></li>
-</ul>
-<pre class="r"><code>cereal &lt;- read_excel(&quot;cereal.xlsx&quot;)
-head(cereal)</code></pre>
-<pre><code>## # A tibble: 6 × 10
-##   name          company serving calories   fat sodium carbs fiber sugars protein
-##   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 AppleJacks    K          1         117   0.6    143    27   0.5   15       1  
-## 2 Boo Berry     G          1         118   0.8    211    27   0.1   14       1  
-## 3 Cap&#39;n Crunch  Q          0.75      144   2.1    269    31   1.1   16       1.3
-## 4 Cinnamon Toa… G          0.75      169   4.4    408    32   1.7   13.3     2.7
-## 5 Cocoa Blasts  Q          1         130   1.2    135    29   0.8   16       1  
-## 6 Cocoa Puffs   G          1         117   1      171    26   0.8   14       1</code></pre>
-</div>
-<div id="five-question-1-pt-each" class="section level3">
-<h3>Five question (<strong>1 pt each</strong>):</h3>
+<p><br><br></p>
 <ol style="list-style-type: decimal">
-<li>Extract rows 1 to 10 from the cereal data frame.</li>
-<li>Create a new data frame called Kelloggs that only contains rows
-where company == “K”.</li>
-<li>From the cereal data, extract the names of all cereals that have
-more than 10 grams of sugar.</li>
-<li>Find the mean calories of all cereals in the dataset.</li>
-<li>Count how many cereals have fiber greater than or equal to 2
-grams.</li>
+<li>library() Load dplyr Required for all dplyr functions.</li>
 </ol>
-<p><br><br><br></p>
-</div>
-<div id="practice-data-manupulation-using-dplyr-and-ktable" class="section level3">
-<h3>Practice data manupulation using <strong>dplyr</strong> and
-<strong>ktable</strong></h3>
-<p>The data in EquationCitations.csv includes information on the number
-of equations and citations for evolutionary biology publications. The
-data were obtained from Fawcett and Higginson (2012) and the online
-supplement (<a href="https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx" class="uri">https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx</a>
-).</p>
-<ul>
-<li>The attributes included in the data are:</li>
-<li>journal: Journal in which the paper was published (The American
-Naturalist, Evolution, Proceedings of the Royal Society of London B:
-Biological Sciences)</li>
-<li>authors: Names of authors</li>
-<li>volume: Volume in which the paper was published</li>
-<li>startpage: Starting page of publication</li>
-<li>pages: Number of pages</li>
-<li>equations: Number of equations in total</li>
-<li>mainequations: Number of equations in main text</li>
-<li>appequations: Number of equations in appendix</li>
-<li>cites: Number of citations in total</li>
-<li>selfcites: Number of citations by the authors themselves</li>
-<li>othercites: Number of citations by other authors</li>
-<li>theocites: Number of citations by theoretical papers</li>
-<li>nontheocites: Number of citations by nontheoretical papers</li>
-</ul>
-<p><strong>Details:</strong> Fawcett and Higginson (2012) investigate
-how the number of equations in evolutionary biology papers affects
-citation counts. They found that papers with many mathematical equations
-receive fewer citations, especially from nontheoretical papers.</p>
-<p><strong>Source:</strong> Online supplements to Fawcett and Higginson
-(2012) <a href="https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx" class="uri">https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx</a></p>
-<p><strong>References:</strong> Fawcett, T.W. and Higginson, A.D.
-(2012). Heavy Use of Equations Impedes Communication among Biologists.
-PNAS – Proceedings of the National Academy of Sciences of the United
-States of America, 109, 11735–11739. <a href="doi:10.1073/pnas.1205259109" class="uri">doi:10.1073/pnas.1205259109</a></p>
-<pre class="r"><code>articles &lt;- read.csv(&quot;EquationCitations.csv&quot;)
-head(articles)</code></pre>
-<pre><code>##   rownames journal            authors volume startpage pages equations
-## 1        1   AmNat     Prodohl et al.    151         7    13         0
-## 2        2   AmNat           Mauricio    151        20     9         2
-## 3        3   AmNat      Thrall et al.    151        29    17        15
-## 4        4   AmNat      Watson et al.    151        46    13         7
-## 5        5   AmNat     Klein &amp; Nelson    151        59     9         0
-## 6        6   AmNat Blackburn &amp; Gaston    151        68    16         2
-##   mainequations appequations cites selfcites othercites theocites nontheocites
-## 1             0            0    37         4         33         8           22
-## 2             2            0   178         5        173        19          150
-## 3            15            0    25        10         15         8            6
-## 4             7            0   127        11        116        17           98
-## 5             0            0    43         8         35         5           28
-## 6             2            0    91         7         84        21           61</code></pre>
-</div>
-<div id="five-question-2-pts-each" class="section level3">
-<h3>Five question (<strong>2 pts each</strong>):</h3>
-<ol style="list-style-type: decimal">
-<li><p>Summarize by journal. Calculate the average number of equations
-per article in each journal. Display the results in a nicely formatted
-table. Hint: <code>group_by()</code> and
-<code>summarise()</code></p></li>
-<li><p><strong>Find the top 5 articles</strong> with the <strong>highest
-number of total cites</strong>. Show the authors, journal, and cites.
-Hint: <code>arrange(desc())</code>, <code>slice_head()</code>, and
-<code>select()</code></p></li>
-<li><p>Create a new variable eq_ratio = mainequations / (mainequations +
-appequations). Then, compute the <strong>mean</strong> eq_ratio
-<strong>per journal</strong> and display in a table. Hint:
-<code>mutate()</code>, <code>group_by()</code>, and
-<code>summarise()</code></p></li>
-<li><p>Theoretical vs. non-theoretical citations. For each
-<strong>journal</strong>, calculate the <strong>average proportion of
-theoretical citations</strong>. Hint: <code>mutate()</code>,
-<code>group_by()</code>, <code>summarise()</code></p></li>
-<li><p><strong>Filter and summarize short articles.</strong> Filter
-articles with <strong>fewer than 10 pages</strong>. For these, calculate
-the <strong>average number of equations</strong> and the
-<strong>average</strong> number of citations. Hint:
-<code>filter()</code> and <code>summarise()</code></p></li>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<p><br><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>%&gt;% Pipe operator # Chains commands data %&gt;% filter(condition)
+%&gt;% group_by(group_var) %&gt;% summarise(mean_value = mean(var))</li>
 </ol>
-<p><br><br><br></p>
+<p>Sends output of one function to the next. Essential for readable
+workflows.</p>
+<p><br><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>filter() Subset rows # Basic filtering data %&gt;% filter(variable
+&gt; 5)</li>
+</ol>
+<div id="multiple-conditions" class="section level1">
+<h1>Multiple conditions</h1>
+<p>data %&gt;% filter(variable &gt; 5 &amp; other_var == “A”)</p>
+<p>Use &amp;, |, and ! for logical combinations.</p>
+<p><br><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>select() Pick columns data %&gt;% select(col1, col2, col3)</li>
+</ol>
+</div>
+<div id="helpers" class="section level1">
+<h1>Helpers</h1>
+<p>data %&gt;% select(starts_with(“eq”)) # all columns starting with
+‘eq’ data %&gt;% select(everything()) # keep all columns</p>
+<p><br><br></p>
+<ol start="5" style="list-style-type: decimal">
+<li>mutate() Create or transform columns # Create new column data %&gt;%
+mutate(new_col = var1 / var2)</li>
+</ol>
+</div>
+<div id="multiple-columns" class="section level1">
+<h1>Multiple columns</h1>
+<p>data %&gt;% mutate(ratio = a / b, log_c = log(c))</p>
+<p>Very useful to compute ratios or normalized values.</p>
+<p><br><br></p>
+<ol start="6" style="list-style-type: decimal">
+<li>group_by() Group data data %&gt;% group_by(group_var)</li>
+</ol>
+<p>Must use before summarise() to calculate per-group statistics.</p>
+<p><br><br></p>
+<ol start="7" style="list-style-type: decimal">
+<li>summarise() Summarize data data %&gt;% group_by(group_var) %&gt;%
+summarise(mean_var = mean(var, na.rm=TRUE), sum_var = sum(var,
+na.rm=TRUE), count = n())</li>
+</ol>
+<p>Commonly used with group_by() for per-group summaries.</p>
+<p><br><br></p>
+<ol start="8" style="list-style-type: decimal">
+<li>arrange() Sort rows # Ascending data %&gt;% arrange(var)</li>
+</ol>
+</div>
+<div id="descending" class="section level1">
+<h1>Descending</h1>
+<p>data %&gt;% arrange(desc(var))</p>
+<p><br><br></p>
+<ol start="9" style="list-style-type: decimal">
+<li>slice_head() and slice_tail() Select top/bottom rows data %&gt;%
+slice_head(n=5) # first 5 rows data %&gt;% slice_tail(n=5) # last 5
+rows</li>
+</ol>
+<p>Works well after arrange() to get top or bottom items.</p>
+<p><br><br></p>
+<ol start="10" style="list-style-type: decimal">
+<li>Combining tools: Typical workflow data %&gt;% filter(condition)
+%&gt;% # Step 1: filter rows mutate(new_col = var1/var2) %&gt;%# Step 2:
+create new variable group_by(group_var) %&gt;% # Step 3: group by a
+factor summarise(avg_val = mean(new_col, na.rm=TRUE)) %&gt;% # Step 4:
+summarise arrange(desc(avg_val)) # Step 5: sort descending</li>
+</ol>
 </div>
 
 

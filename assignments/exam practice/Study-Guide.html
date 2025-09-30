@@ -351,7 +351,7 @@ display: none;
 
 <h1 class="title toc-ignore">Study Guide: Base R</h1>
 <h4 class="author">Pablo E. Gutiérrez-Fonseca</h4>
-<h4 class="date">2025-Sep-29, 02:33 PM</h4>
+<h4 class="date">2025-Sep-30, 12:45 PM</h4>
 
 </div>
 
@@ -440,6 +440,41 @@ mean(y)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   1.000   1.600   4.350   3.758   5.100   6.900</code></pre>
 <p><br><br></p>
+</div>
+<div id="subsetting-with-logical-conditions" class="section level4">
+<h4>12. Subsetting with logical conditions</h4>
+<pre class="r"><code># Extract rows 1 to 10 from a dataset
+iris[1:10, ]</code></pre>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1           5.1         3.5          1.4         0.2  setosa
+## 2           4.9         3.0          1.4         0.2  setosa
+## 3           4.7         3.2          1.3         0.2  setosa
+## 4           4.6         3.1          1.5         0.2  setosa
+## 5           5.0         3.6          1.4         0.2  setosa
+## 6           5.4         3.9          1.7         0.4  setosa
+## 7           4.6         3.4          1.4         0.3  setosa
+## 8           5.0         3.4          1.5         0.2  setosa
+## 9           4.4         2.9          1.4         0.2  setosa
+## 10          4.9         3.1          1.5         0.1  setosa</code></pre>
+<pre class="r"><code># Subset rows where Sepal.Length is greater than 7
+subset(iris, Sepal.Length &gt; 7)</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 103          7.1         3.0          5.9         2.1 virginica
+## 106          7.6         3.0          6.6         2.1 virginica
+## 108          7.3         2.9          6.3         1.8 virginica
+## 110          7.2         3.6          6.1         2.5 virginica
+## 118          7.7         3.8          6.7         2.2 virginica
+## 119          7.7         2.6          6.9         2.3 virginica
+## 123          7.7         2.8          6.7         2.0 virginica
+## 126          7.2         3.2          6.0         1.8 virginica
+## 130          7.2         3.0          5.8         1.6 virginica
+## 131          7.4         2.8          6.1         1.9 virginica
+## 132          7.9         3.8          6.4         2.0 virginica
+## 136          7.7         3.0          6.1         2.3 virginica</code></pre>
+<pre class="r"><code># Extract only the Species names where Petal.Width is less than 0.2
+iris$Species[iris$Petal.Width &lt; 0.2]</code></pre>
+<pre><code>## [1] setosa setosa setosa setosa setosa
+## Levels: setosa versicolor virginica</code></pre>
 </div>
 <div id="creating-objects-in-r" class="section level2">
 <h2>Creating Objects in R</h2>
