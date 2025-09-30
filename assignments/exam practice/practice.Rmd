@@ -34,7 +34,7 @@ head(cereal)
 ```
 <br> 
 
-#### Five question ():
+#### Five question (**2 pts**):
 
 1.  Extract rows 1 to 10 from the cereal data frame. (*Extraiga las filas 1 a 10 del marco de datos cereal.*)
 2.  Create a new data frame called Kelloggs that only contains rows where company == "K". (*Cree un nuevo marco de datos llamado Kelloggs que solo contenga las filas donde company == "K".*)
