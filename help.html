@@ -12,7 +12,7 @@
 <meta name="author" content="Pablo E. Gutiérrez-Fonseca" />
 
 
-<title>Exam Practice</title>
+<title>Remembering for work in RMardown</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -349,147 +349,27 @@ display: none;
 
 
 
-<h1 class="title toc-ignore">Exam Practice</h1>
+<h1 class="title toc-ignore">Remembering for work in RMardown</h1>
 <h4 class="author">Pablo E. Gutiérrez-Fonseca</h4>
-<h4 class="date">2025-Sep-30, 04:39 PM</h4>
+<h4 class="date">2025-Oct-01, 08:51 AM</h4>
 
 </div>
 
 
-<div id="load-libraries" class="section level3">
-<h3>Load libraries</h3>
-<pre class="r"><code>library(readxl)
-library(dplyr)</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.4.3</code></pre>
-</div>
-<div id="practice-data-manupulation-using-base-r" class="section level3">
-<h3>Practice data manupulation using Base R</h3>
-<p>The data in <strong>cereal.csv</strong> includes nutrition
-information collected from breakfast cereals. The data, which were
-provided by (Lock:2020?), were obtained from <a href="http://nutritionresource.com/" class="uri">http://nutritionresource.com/</a>.</p>
-<ul>
-<li>The attributes included in the data are:
-<ul>
-<li>name: Brand name of cereal</li>
-<li>company: Manufacturer (G=General Mills, K=Kellog’s or Q=Quaker)</li>
-<li>serving: Serving size (in cups)</li>
-<li>calories: Calories (per cup)</li>
-<li>fat: Fat (grams per cup)</li>
-<li>sodium: Sodium (mg per cup)</li>
-<li>carbs: Carbohydrates (grams per cup)</li>
-<li>fiber: Dietary Fiber (grams per cup)</li>
-<li>sugars: Sugars (grams per cup)</li>
-<li>protein: Protein (grams per cup)</li>
-</ul></li>
-</ul>
-<pre class="r"><code>cereal &lt;- read_excel(&quot;cereal.xlsx&quot;)
-head(cereal)</code></pre>
-<pre><code>## # A tibble: 6 × 10
-##   name          company serving calories   fat sodium carbs fiber sugars protein
-##   &lt;chr&gt;         &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-## 1 AppleJacks    K          1         117   0.6    143    27   0.5   15       1  
-## 2 Boo Berry     G          1         118   0.8    211    27   0.1   14       1  
-## 3 Cap&#39;n Crunch  Q          0.75      144   2.1    269    31   1.1   16       1.3
-## 4 Cinnamon Toa… G          0.75      169   4.4    408    32   1.7   13.3     2.7
-## 5 Cocoa Blasts  Q          1         130   1.2    135    29   0.8   16       1  
-## 6 Cocoa Puffs   G          1         117   1      171    26   0.8   14       1</code></pre>
-<p><br></p>
-<div id="five-question-2-pts" class="section level4">
-<h4>Five question (<strong>2 pts</strong>):</h4>
-<ol style="list-style-type: decimal">
-<li>Extract rows 1 to 10 from the cereal data frame. (<em>Extraiga las
-filas 1 a 10 del marco de datos cereal.</em>)</li>
-<li>Create a new data frame called Kelloggs that only contains rows
-where company == “K”. (<em>Cree un nuevo marco de datos llamado Kelloggs
-que solo contenga las filas donde company == “K”.</em>)</li>
-<li>From the cereal data, extract the names of all cereals that have
-more than 10 grams of sugar. (<em>Del conjunto de datos cereal, extraiga
-los nombres de todos los cereales que tienen más de 10 gramos de
-azúcar.</em>)</li>
-<li>Find the mean calories of all cereals in the dataset. (<em>Encuentre
-las calorías promedio de todos los cereales en el conjunto de
-datos.</em>)</li>
-<li>Count how many cereals have fiber greater than or equal to 2 grams
-(<em>Cuente cuántos cereales tienen fibra mayor o igual a 2
-gramos.</em>).</li>
-</ol>
-<pre class="r"><code># 1. Extract rows 1 to 10
-cereal[1:10, ]</code></pre>
-<pre><code>## # A tibble: 10 × 10
-##    name         company serving calories   fat sodium carbs fiber sugars protein
-##    &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1 AppleJacks   K          1         117   0.6    143    27   0.5   15       1  
-##  2 Boo Berry    G          1         118   0.8    211    27   0.1   14       1  
-##  3 Cap&#39;n Crunch Q          0.75      144   2.1    269    31   1.1   16       1.3
-##  4 Cinnamon To… G          0.75      169   4.4    408    32   1.7   13.3     2.7
-##  5 Cocoa Blasts Q          1         130   1.2    135    29   0.8   16       1  
-##  6 Cocoa Puffs  G          1         117   1      171    26   0.8   14       1  
-##  7 Cookie Crisp G          1         117   0.9    178    26   0.5   13       1  
-##  8 Corn Flakes  K          1         101   0.1    202    24   0.8    3       2  
-##  9 Corn Pops    K          1         117   0.2    120    28   0.3   15       1  
-## 10 Crispix      K          1         113   0.3    229    26   0.1    3       2</code></pre>
-<pre class="r"><code># 2. Create new data frame with only Kelloggs cereals
-Kelloggs &lt;- cereal[cereal$company == &quot;K&quot;, ]
-Kelloggs</code></pre>
-<pre><code>## # A tibble: 11 × 10
-##    name         company serving calories   fat sodium carbs fiber sugars protein
-##    &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
-##  1 AppleJacks   K          1         117   0.6    143    27   0.5     15     1  
-##  2 Corn Flakes  K          1         101   0.1    202    24   0.8      3     2  
-##  3 Corn Pops    K          1         117   0.2    120    28   0.3     15     1  
-##  4 Crispix      K          1         113   0.3    229    26   0.1      3     2  
-##  5 Froot Loops  K          1         118   0.9    150    26   0.8     12     2  
-##  6 Frosted Min… K          1         175   0.8      5    41   5       10     5  
-##  7 Product 19   K          1         100   0.4    207    25   1        4     2  
-##  8 Raisin Bran  K          1         195   1.6    362    47   7.3     20     5  
-##  9 Rice Krispi… K          0.75      160   1.7    252    35   0       12     1.3
-## 10 Smart Start  K          1         182   0.7    275    43   2.8     14     4  
-## 11 Special K    K          1         117   0.4    224    22   0.8      4     7</code></pre>
-<pre class="r"><code># 3. Names of cereals with more than 10 grams of sugar
-cereal$name[cereal$sugars &gt; 10]</code></pre>
-<pre><code>##  [1] &quot;AppleJacks&quot;            &quot;Boo Berry&quot;             &quot;Cap&#39;n Crunch&quot;         
-##  [4] &quot;Cinnamon Toast Crunch&quot; &quot;Cocoa Blasts&quot;          &quot;Cocoa Puffs&quot;          
-##  [7] &quot;Cookie Crisp&quot;          &quot;Corn Pops&quot;             &quot;Froot Loops&quot;          
-## [10] &quot;Golden Grahams&quot;        &quot;Honey Nut Clusters&quot;    &quot;Honey Nut Heaven&quot;     
-## [13] &quot;Lucky Charms&quot;          &quot;Raisin Bran&quot;           &quot;Reese&#39;s Puffs&quot;        
-## [16] &quot;Rice Krispie Treats&quot;   &quot;Smart Start&quot;</code></pre>
-<pre class="r"><code># 4. Mean calories of all cereals
-mean(cereal$calories)</code></pre>
-<pre><code>## [1] 133.8333</code></pre>
-<pre class="r"><code># 5. Count cereals with fiber &gt;= 2 grams
-length(cereal$fiber[cereal$fiber &gt;= 2])</code></pre>
-<pre><code>## [1] 10</code></pre>
-<pre class="r"><code># (alternative: sum(cereal$fiber &gt;= 2))</code></pre>
 <p><br><br></p>
-<p><strong>English</strong> In the cereal dataset, the first ten rows
-include cereals such as [names of some cereals from the first 10 rows],
-showing a range of values for calories, sugar, and fiber. Filtering for
-cereals from the company Kellogg’s gives a subset containing brands like
-[examples of Kellogg’s cereals], while focusing on cereals with more
-than 10 grams of sugar identifies products such as [names of high-sugar
-cereals]. The mean calories of all cereals in the dataset is
-approximately [mean calorie value], providing a general idea of the
-energy content of these products. Finally, counting cereals with at
-least 2 grams of fiber shows that [number of cereals with ≥2g of fiber]
-cereals meet a minimum dietary fiber content. This analysis helps to
-better understand the nutritional characteristics of the different
-cereals in the dataset.</p>
-<p><strong>Espanol</strong> En el conjunto de datos cereal, las primeras
-diez filas incluyen cereales como [nombre de algunos cereales de las
-primeras 10 filas], mostrando un rango de valores en calorías, azúcar y
-fibra. Al filtrar los cereales de la empresa Kellogg’s, se obtiene un
-subconjunto que contiene marcas como [ejemplo de cereales Kellogg’s],
-mientras que al enfocarnos en los cereales con más de 10 gramos de
-azúcar, encontramos productos como [nombres de cereales con alto
-contenido de azúcar]. El promedio de calorías de todos los cereales en
-el dataset es de aproximadamente [valor promedio de calorías], lo que
-proporciona una idea general del contenido energético de los productos.
-Finalmente, al contar los cereales con al menos 2 gramos de fibra, se
-identifican [número de cereales con ≥2g de fibra] cereales, indicando
-cuántos cumplen con un contenido mínimo de fibra dietética. Este
-análisis permite comprender mejor las características nutricionales de
-los diferentes cereales del conjunto de datos.</p>
-<p><br><br><br></p>
+<div id="checklist-útil-para-cuando-trabajen-en-r" class="section level1">
+<h1>Checklist útil para cuando trabajen en R</h1>
+<div id="esto-les-puede-ahorrar-tiempo-y-frustración-antes-de-pedirme-ayuda" class="section level3">
+<h3>(esto les puede ahorrar tiempo y frustración antes de pedirme
+ayuda)</h3>
+<p>✔️ Revisen que todas las comillas estén cerradas al cargar archivos
+.csv, .txt o .xlsx.</p>
+<p>✔️ Confirmen que el Working Directory esté correctamente
+configurado.</p>
+<p>✔️ Asegúrense de que su script de R y los datos estén en la misma
+carpeta.</p>
+<p>✔️ Chequeen que todos los paréntesis, corchetes y llaves estén
+cerrados.</p>
 </div>
 </div>
 

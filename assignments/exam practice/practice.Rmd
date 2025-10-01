@@ -42,7 +42,7 @@ head(cereal)
 4.  Find the mean calories of all cereals in the dataset. (*Encuentre las calorías promedio de todos los cereales en el conjunto de datos.*)
 5.  Count how many cereals have fiber greater than or equal to 2 grams (*Cuente cuántos cereales tienen fibra mayor o igual a 2 gramos.*).
 
-```{r, include=FALSE}
+```{r}
 # 1. Extract rows 1 to 10
 cereal[1:10, ]
 
