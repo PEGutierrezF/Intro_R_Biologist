@@ -30,6 +30,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 <br>
 
 ## Tips and helpful reminders
-### [Tips and Tricks](C:/Users/Pablo Gutiérrez/OneDrive - University of Vermont/Curriculum/07_ Cursos/intro_r_biologists_pegf/Quiz and Exams and more/tips to work.html)
+### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
+
 <br><br>
 
