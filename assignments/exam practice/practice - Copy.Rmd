@@ -141,3 +141,62 @@ articles %>%
 
 ```
 <br><br><br>
+
+### Practice data manupulation using **dplyr** and **ktable**
+
+The data in EquationCitations.csv includes information on the number of equations and citations for evolutionary biology publications. The data were obtained from Fawcett and Higginson (2012) and the online supplement (<https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx> ).
+
+-   The attributes included in the data are:
+-   journal: Journal in which the paper was published (The American Naturalist, Evolution, Proceedings of the Royal Society of London B: Biological Sciences)
+-   authors: Names of authors
+-   volume: Volume in which the paper was published
+-   startpage: Starting page of publication
+-   pages: Number of pages
+-   equations: Number of equations in total
+-   mainequations: Number of equations in main text
+-   appequations: Number of equations in appendix
+-   cites: Number of citations in total
+-   selfcites: Number of citations by the authors themselves
+-   othercites: Number of citations by other authors
+-   theocites: Number of citations by theoretical papers
+-   nontheocites: Number of citations by nontheoretical papers
+
+**Details:** Fawcett and Higginson (2012) investigate how the number of equations in evolutionary biology papers affects citation counts. They found that papers with many mathematical equations receive fewer citations, especially from nontheoretical papers.
+
+**Source:** Online supplements to Fawcett and Higginson (2012) <https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx>
+
+**References:** Fawcett, T.W. and Higginson, A.D. (2012). Heavy Use of Equations Impedes Communication among Biologists. PNAS – Proceedings of the National Academy of Sciences of the United States of America, 109, 11735–11739. <doi:10.1073/pnas.1205259109>
+
+```{r}
+articles <- read.csv("EquationCitations.csv")
+head(articles)
+```
+
+### Question (**10 pts**):
+
+The journal Proceedings of the National Academy of Sciences has asked you to revisit the data from Fawcett and Higginson (2012) on the use of equations in evolutionary biology papers. They are particularly interested in two things:
+
+1. On average, how many equations per article are published in each journal? (Hint: use group_by() and summarise())
+
+2. For each journal, calculate the average proportion of theoretical citations relative to total citations. (Hint: create a new column with mutate(theo_ratio = theocites / cites), then group_by() and summarise())
+
+```{r}
+library(dplyr)
+
+# 1. Average number of equations per article in each journal
+articles %>%
+  group_by(journal) %>%
+  summarise(avg_equations = 
+              mean(equations, na.rm = TRUE))
+
+# 2. Average proportion of theoretical citations relative to total citations, per journal
+articles %>%
+  mutate(theo_ratio = theocites / cites) %>%
+  group_by(journal) %>%
+  summarise(avg_theo_ratio = mean(theo_ratio, na.rm = TRUE))
+ 
+```
+
+#### Potential findings:  
+
+My findings showed that, on average, the number of equations per article varied among journals. In particular, The American Naturalist, Evolution, and Proceedings of the Royal Society B showed differences, with the average ranging from ______ (Am. Nat.) to ______ (Evolution) to ______ (Proc. B) equations per article. In terms of citations, the proportion of theoretical citations relative to total citations also varied by journal. On average, articles in The American Naturalist had a mean theoretical citation ratio of _____, those in Evolution had _____, and those in Proceedings B had _____.

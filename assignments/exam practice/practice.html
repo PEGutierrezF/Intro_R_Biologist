@@ -351,7 +351,7 @@ display: none;
 
 <h1 class="title toc-ignore">Exam Practice</h1>
 <h4 class="author">Pablo E. Gutiérrez-Fonseca</h4>
-<h4 class="date">2025-Oct-01, 12:04 PM</h4>
+<h4 class="date">2025-Oct-02, 09:23 AM</h4>
 
 </div>
 
@@ -360,6 +360,7 @@ display: none;
 <h3>Load libraries</h3>
 <pre class="r"><code>library(readxl)
 library(dplyr)</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.4.3</code></pre>
 </div>
 <div id="practice-data-manupulation-using-base-r" class="section level3">
 <h3>Practice data manupulation using Base R</h3>
@@ -442,6 +443,87 @@ cuántos cumplen con un contenido mínimo de fibra dietética. Este
 análisis permite comprender mejor las características nutricionales de
 los diferentes cereales del conjunto de datos.</p>
 <p><br><br><br></p>
+</div>
+</div>
+<div id="practice-data-manupulation-using-dplyr-and-ktable" class="section level3">
+<h3>Practice data manupulation using <strong>dplyr</strong> and
+<strong>ktable</strong></h3>
+<p>The data in EquationCitations.csv includes information on the number
+of equations and citations for evolutionary biology publications. The
+data were obtained from Fawcett and Higginson (2012) and the online
+supplement (<a href="https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx" class="uri">https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx</a>
+).</p>
+<ul>
+<li>The attributes included in the data are:</li>
+<li>journal: Journal in which the paper was published (The American
+Naturalist, Evolution, Proceedings of the Royal Society of London B:
+Biological Sciences)</li>
+<li>authors: Names of authors</li>
+<li>volume: Volume in which the paper was published</li>
+<li>startpage: Starting page of publication</li>
+<li>pages: Number of pages</li>
+<li>equations: Number of equations in total</li>
+<li>mainequations: Number of equations in main text</li>
+<li>appequations: Number of equations in appendix</li>
+<li>cites: Number of citations in total</li>
+<li>selfcites: Number of citations by the authors themselves</li>
+<li>othercites: Number of citations by other authors</li>
+<li>theocites: Number of citations by theoretical papers</li>
+<li>nontheocites: Number of citations by nontheoretical papers</li>
+</ul>
+<p><strong>Details:</strong> Fawcett and Higginson (2012) investigate
+how the number of equations in evolutionary biology papers affects
+citation counts. They found that papers with many mathematical equations
+receive fewer citations, especially from nontheoretical papers.</p>
+<p><strong>Source:</strong> Online supplements to Fawcett and Higginson
+(2012) <a href="https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx" class="uri">https://www.pnas.org/doi/suppl/10.1073/pnas.1205259109/suppl_file/sd01.xlsx</a></p>
+<p><strong>References:</strong> Fawcett, T.W. and Higginson, A.D.
+(2012). Heavy Use of Equations Impedes Communication among Biologists.
+PNAS – Proceedings of the National Academy of Sciences of the United
+States of America, 109, 11735–11739. <a href="doi:10.1073/pnas.1205259109" class="uri">doi:10.1073/pnas.1205259109</a> <br><br></p>
+<pre class="r"><code>articles &lt;- read.csv(&quot;EquationCitations.csv&quot;)
+head(articles)</code></pre>
+<pre><code>##   rownames journal            authors volume startpage pages equations
+## 1        1   AmNat     Prodohl et al.    151         7    13         0
+## 2        2   AmNat           Mauricio    151        20     9         2
+## 3        3   AmNat      Thrall et al.    151        29    17        15
+## 4        4   AmNat      Watson et al.    151        46    13         7
+## 5        5   AmNat     Klein &amp; Nelson    151        59     9         0
+## 6        6   AmNat Blackburn &amp; Gaston    151        68    16         2
+##   mainequations appequations cites selfcites othercites theocites nontheocites
+## 1             0            0    37         4         33         8           22
+## 2             2            0   178         5        173        19          150
+## 3            15            0    25        10         15         8            6
+## 4             7            0   127        11        116        17           98
+## 5             0            0    43         8         35         5           28
+## 6             2            0    91         7         84        21           61</code></pre>
+<p><br><br></p>
+</div>
+<div id="question-10-pts" class="section level3">
+<h3>Question (<strong>10 pts</strong>):</h3>
+<p>The journal Proceedings of the National Academy of Sciences has asked
+you to revisit the data from Fawcett and Higginson (2012) on the use of
+equations in evolutionary biology papers. They are particularly
+interested in two things:</p>
+<ol style="list-style-type: decimal">
+<li><p>On average, how many equations per article are published in each
+journal? (Hint: use group_by() and summarise())</p></li>
+<li><p>For each journal, calculate the average proportion of theoretical
+citations relative to total citations. (Hint: create a new column with
+mutate(theo_ratio = theocites / cites), then group_by() and summarise())
+<br><br></p></li>
+</ol>
+<div id="potential-findings" class="section level4">
+<h4><strong>Potential findings:</strong></h4>
+<p>My findings showed that, on average, the number of equations per
+article varied among journals. In particular, The American Naturalist,
+Evolution, and Proceedings of the Royal Society B showed differences,
+with the average ranging from ______ (Am. Nat.) to ______ (Evolution) to
+______ (Proc. B) equations per article. In terms of citations, the
+proportion of theoretical citations relative to total citations also
+varied by journal. On average, articles in The American Naturalist had a
+mean theoretical citation ratio of _____, those in Evolution had _____,
+and those in Proceedings B had _____. <br><br></p>
 </div>
 </div>
 
