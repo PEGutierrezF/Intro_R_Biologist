@@ -196,7 +196,8 @@ articles %>%
   summarise(avg_theo_ratio = mean(theo_ratio, na.rm = TRUE))
  
 ```
+<br><br>
 
-#### Potential findings:  
-
+#### Potential findings:<br> 
 My findings showed that, on average, the number of equations per article varied among journals. In particular, The American Naturalist, Evolution, and Proceedings of the Royal Society B showed differences, with the average ranging from ______ (Am. Nat.) to ______ (Evolution) to ______ (Proc. B) equations per article. In terms of citations, the proportion of theoretical citations relative to total citations also varied by journal. On average, articles in The American Naturalist had a mean theoretical citation ratio of _____, those in Evolution had _____, and those in Proceedings B had _____.
+<br><br><br><br>
