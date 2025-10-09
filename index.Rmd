@@ -28,7 +28,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [dplyr](assignments/exam practice/Study-Guide-dplyr.html)
 
 ## Midterm Exam
-### [Midterm Exam (Fall 2025)](assignments/midterm/midterm_exam.html)
+### [Midterm Exam (Fall 2025)](1assignments/midterm/midterm_exam.html)
 ### [practice](assignments/exam practice/practice.html)
 <br>
 
