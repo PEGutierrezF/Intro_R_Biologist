@@ -40,3 +40,5 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
 <br><br>
 
+## Additional Resources
+### [Anova](https://pegutierrezf.github.io/TropicalFreshwaterEcology/pages/Lectures/Appl.Stats.in.R/ANOVA.html#1)
