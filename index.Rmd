@@ -22,6 +22,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [RTutorial 2](assignments/assignments_2/assignments2.html)
 ### [RTutorial 3](assignments/assignment_3/assignment3.html)
 ### [RTutorial 4](assignments/assignment_4/assignment_4.html)
+### [RTutorial 5](assignments/assignment_5/assignment_5.html)
 <br>
 
 ## Study Guide
