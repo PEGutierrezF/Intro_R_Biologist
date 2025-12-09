@@ -1,0 +1,77 @@
+---
+title: "Study Guide: ggplot2: Introduction to the Grammar of Graphics"
+subtitle: ''
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+---
+
+<br><br>
+
+#### 1. Load ggplot2
+```{r, eval=F}
+library(ggplot2)
+```
+<br><br>
+
+#### 2. Basic structure of a ggplot
+Every plot starts with the same pattern:
+```{r, eval=F}
+ggplot(data, aes(x, y)) +
+  geom_point()
+```
+<br><br>
+
+#### 3. Essential geoms()
+```{r eval=F}
+3.1 geom_point() # Scatterplot
+3.2 geom_line() # Line plot
+3.3 geom_histogram(binwidth = 5) # Histogram
+3.4 geom_boxplot() # Boxplot
+3.5 geom_bar() # Bar chart
+```
+<br><br>
+
+#### 4. Aesthetics: color, size, shape
+```{r, eval=F}
+ggplot(data, aes(x, y, color = group)) +
+  geom_point(size = 3, shape = 19)
+```
+<br><br>
+
+#### 5. `labs()`  Titles, axes, and labels
+```{r, eval=F}
++ labs(title = "My Plot",
+       x = "X Axis",
+       y = "Y Axis")
+```
+<br><br>
+
+
+#### 6. `themes()` Style options
+```{r, eval=F}
++ theme_bw()
++ theme_minimal()
++ theme_classic()
+```
+<br><br>
+
+#### 7. `facet_wrap()` Multipanel plots
+```{r, eval=F}
+ggplot(data, aes(x, y)) +
+  geom_point() +
+  facet_wrap(~ species)
+```
+<br><br>
+
+#### 8. Axes control: scales
+```{r, eval=F}
++ scale_x_continuous(limits = c(0, 100))
++ scale_y_continuous(breaks = seq(0, 10, 2))
+```
+<br><br>
+
+#### 9. Saving figures
+```{r, eval=F}
+ggsave("ggplot_figure.png", width = 6, height = 4)
+```
+<br><br>
