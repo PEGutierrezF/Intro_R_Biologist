@@ -28,6 +28,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ## Study Guide
 ### [Base R](assignments/exam practice/Study-Guide.html)
 ### [dplyr](assignments/exam practice/Study-Guide-dplyr.html)
+<br>
 
 ## Midterm Exam
 ### [Midterm Exam (Fall 2025)](assignments/midterm/midterm_exam.html)
@@ -41,8 +42,10 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
 <br>
 
-## Additional Resources
-### [Anova](https://pegutierrezf.github.io/TropicalFreshwaterEcology/pages/Lectures/Appl.Stats.in.R/ANOVA.html#1)
+## Lectures
+### [Data visualization basics](classes\Module 7 Data Manipulation\Data-Manipulation.html)
+<br>
+
+
+### ['Ethics' in data science](Curriculum/07_ Cursos/intro_r_biologists_pegf/Module 12 Ethics in data science/Ethics in data science.html)
 <br><br>
-
-
