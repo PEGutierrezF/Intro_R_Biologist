@@ -7,6 +7,12 @@ date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 
 <br><br>
 
+### **Recordatorio / Warning**
+- This study guide does not replace class instruction. It is intended to summarize the most important concepts only. Everything presented in class slides may be included in assessments.
+- Esta guía de estudio no sustituye lo visto en clase. Solo pretende resumir los conceptos más importantes. Todo lo que se encuentra en las presentaciones de clase puede ser evaluado.
+
+<br><br>
+
 #### 1. Load ggplot2
 ```{r, eval=F}
 library(ggplot2)
