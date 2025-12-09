@@ -16,6 +16,9 @@ Bienvenidos a todos. En esta página encontrarán los prompts para los R Tutoria
 
 ### Inglés:  
 Welcome everyone. On this page, you will find the prompts for the R Tutorials that we will work on during class.
+<br><br>
+
+<hr style="border: 1px solid #ccc;">
 
 ## R Tutorials Prompts:
 ### [RTutorial 1](assignments/assignments_1/homework1.html)
@@ -25,16 +28,21 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [RTutorial 5](assignments/assignment_5/assignment_5.html)
 <br>
 
+<hr style="border: 1px solid #ccc;">
+
 ## Study Guide (MidTerm)
 ### [Base R](assignments/exam practice/Study-Guide.html)
 ### [dplyr](assignments/exam practice/Study-Guide-dplyr.html)
 <br>
 
-## Study Guide (Fina Exam)
+<hr style="border: 1px solid #ccc;">
+
+## Study Guide (Midterm Exam)
 ### [Base R](assignments/exam practice/Study-Guide.html)
 ### [dplyr](assignments/exam practice/Study-Guide-dplyr.html)
 <br>
 
+<hr style="border: 1px solid #ccc;">
 
 ## Midterm Exam
 ### [Midterm Exam (Fall 2025)](assignments/midterm/midterm_exam.html)
@@ -44,11 +52,19 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [practice](assignments/exam practice/practice.html)
 <br>
 
+<hr style="border: 1px solid #ccc;">
+
 ## Tips and helpful reminders
 ### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
 <br>
 
-## Lectures for Final Exam
+<hr style="border: 1px solid #ccc;">
+
+## Study Guide (**Fina Exam**)
+
+<hr style="border: 1px solid #ccc;">
+
+## Lectures for **Final Exam**
 ### [Module 9 plots in Base R](classes\Module 9 plots in Base R\Plots_in_Base_R.html)
 ### [Module 10 Plotting with ggplot2](classes\Module 10 Plotting with ggplot2\Introduction to ggplot2().html)
 ### [Module 11 ggplot2 and Statistics](classes\Module 11 ggplot2 and Statistics\ggplot_quarto.html)
