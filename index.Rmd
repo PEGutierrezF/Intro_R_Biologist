@@ -37,13 +37,6 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 <hr style="border: 1px solid #ccc;">
 
-## Study Guide (Midterm Exam)
-### [Base R](assignments/exam practice/Study-Guide.html)
-### [dplyr](assignments/exam practice/Study-Guide-dplyr.html)
-<br>
-
-<hr style="border: 1px solid #ccc;">
-
 ## Midterm Exam
 ### [Midterm Exam (Fall 2025)](assignments/midterm/midterm_exam.html)
 ```{r include=F}
@@ -61,6 +54,8 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 <hr style="border: 1px solid #ccc;">
 
 ## Study Guide (**Fina Exam**)
+### [Plots in Base R](study guide\final exam\Base-R.html)
+<br>
 
 <hr style="border: 1px solid #ccc;">
 

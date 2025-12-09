@@ -1,0 +1,82 @@
+---
+title: "Study Guide: Base R – Basic Plots"
+subtitle: ''
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+---
+
+<br><br>
+
+#### 1. plot(): Basic plotting function
+Creates scatterplots, line plots, or combined plots.
+```{r eval=FALSE}
+plot(x, y)          # scatterplot
+plot(x, y, type="l") # line plot
+plot(x, y, type="b") # points + lines
+```
+<br><br>
+
+#### 2. Common graphical parameters
+Modify labels, color, size, and axes.
+```{r eval=FALSE}
+plot(x, y,
+     main = "Title",
+     xlab = "X axis",
+     ylab = "Y axis",
+     col = "blue",
+     pch = 19,       # point style
+     cex = 1.2)      # point size
+```
+<br><br>
+
+#### 3. hist(): Histograms
+Shows distribution of a numeric variable.
+```{r eval=FALSE}
+hist(x)
+hist(x, breaks = 20, col = "gray")
+```
+<br><br>
+
+#### 4. boxplot(): Distribution and group comparison
+```{r eval=FALSE}
+boxplot(x)
+boxplot(values ~ group)
+```
+<br><br>
+
+#### 5. barplot(): Simple bar charts
+```{r eval=FALSE}
+barplot(counts)
+```
+<br><br>
+
+#### 6. Add elements to a plot
+- Useful for annotations or regression lines.
+```{r eval=FALSE}
+boxplot(x)
+boxplot(values ~ group)
+```
+<br><br>
+
+
+#### 7. Add elements to a plot
+- Useful for annotations or regression lines.
+```{r eval=FALSE}
+abline(h = 5)              # horizontal line
+abline(v = 10)             # vertical line
+abline(lm(y ~ x))          # regression line
+
+points(x2, y2, col="red", pch=19)
+text(3, 10, "Label here")
+```
+<br><br>
+
+
+#### 8. Saving plots
+```{r eval=FALSE}
+png("base_plot.png", width = 800, height = 600)
+plot(x, y)
+dev.off()
+```
+<br><br>
+
