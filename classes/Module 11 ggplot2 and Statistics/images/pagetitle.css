@@ -1,0 +1,57 @@
+/* =========================================================
+   PORTADA / TITLE PAGE - Reveal.js (estructura moderna Quarto)
+   ========================================================= */
+
+/* Contenedor principal del título */
+#title-slide {
+  background-color: transparent;
+  text-align: center;
+  padding: 40px 0;
+}
+
+/* ======================
+   TÍTULO PRINCIPAL
+   ====================== */
+#title-slide h1.title {
+  color: black;          /* #005EB8 */
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 0.6em;
+}
+
+/* ======================
+   AUTOR
+   ====================== */
+#title-slide .quarto-title-author-name {
+  color: black;          /* Naranja */
+  font-size: 1.0em;
+  font-weight: 600;
+  margin: 0.2em 0;
+  padding-top: 0.8em;
+  padding-left: 0em;
+  padding-right: 0em;
+  width: 100%;
+}
+
+/* ======================
+   INSTITUCIÓN
+   ====================== */
+#title-slide .quarto-title-affiliation {
+  color: black;          /* Verde */
+  font-size: 0.8em;
+  margin: 0.1em 0 0.3em 0;
+  
+}
+
+/* ======================
+   FECHA
+   ====================== */
+#title-slide p.date {
+  color: black;         /* #005EB8 */
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-top: 0.8em;
+  padding-top: 0.8em;
+  padding-left: 0em;
+  padding-right: 0em;
+}

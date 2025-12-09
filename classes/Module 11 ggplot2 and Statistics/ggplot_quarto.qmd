@@ -1,0 +1,253 @@
+---
+title: "Introduction to data visualization with `ggplot2()`"
+author: "Pablo E. Gutiérrez-Fonseca, PhD"
+institute: "University of Puerto Rico"
+date: last-modified
+date-format: full
+format:
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
+    logo: images/logo.png
+    footer: <https://pegutierrezf.github.io/TropicalFreshwaterEcology/>
+    css:
+      - images/logo.css
+      - images/pagetitle.css
+      - images/slide.css
+    html:
+     embed-resources: true
+    chalkboard: true
+    title-slide-attributes:
+      data-background-image: images/.png
+      data-background-size: 5% 
+      data-background-position: 900px 850px   # x y en px
+      data-background-opacity: "0.8" 
+    include-after: |
+      <script>
+        // Cuando la presentación se carga
+        Reveal.on('ready', event => {
+          // Si estamos en la primera slide (índice horizontal 0)
+          if(event.indexh === 0) {
+            const logo = document.querySelector('.slide-logo');
+            if (logo) logo.style.display = 'none';
+          }
+        });
+
+        // Cada vez que cambia de slide
+        Reveal.on('slidechanged', event => {
+          const logo = document.querySelector('.slide-logo');
+          if (!logo) return;
+
+          // Primera slide → ocultar logo
+          if(event.indexh === 0) {
+            logo.style.display = 'none';
+          } 
+          // Otras slides → mostrar logo
+          else {
+            logo.style.display = 'block';
+          }
+        });
+      </script>
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#| label: "setup"
+#| include: false
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(dplyr)
+library(readr)
+library(lessR)
+library(ggplot2)
+library(ggpubr)
+library(ggpmisc)
+library(ggbeeswarm)
+library(broom)
+library(cowplot)
+library(patchwork)
+library(palmerpenguins)
+library(car)
+library(ggforce) # for geom_circle
+library(RVAideMemoire) #shapiro.test
+library(DiagrammeR)
+#knitr::opts_chunk$set(dpi= 100)
+library(countdown)
+library(knitr)
+library(kableExtra)
+xaringanExtra::use_panelset()
+xaringanExtra::use_scribble()
+xaringanExtra::use_search(show_icon = FALSE, position= "bottom-left") # Search
+xaringanExtra::use_progress_bar(color = "#0051BA", location = "bottom", 
+                                height = "4px")
+xaringanExtra::use_clipboard() # Copy Code 
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presentation
+```
+
+## Loading the dataset
+```{r, echo=TRUE}
+msleep <- read.csv("data/msleep.csv")
+head(msleep)
+```
+
+## Basic scatterplot with regression line
+- Some data
+```{r}
+#| output-location: column
+ggplot(msleep)
+```
+
+## Basic scatterplot with regression line
+- A set of variable mappings
+```{r}
+#| output-location: column
+ggplot(msleep, 
+       aes(x = log(bodywt), 
+           y = sleep_total,  
+           color = vore))
+```
+
+
+## Basic scatterplot with regression line
+- A geom with arguments, or multiple geoms with arguments connected by +
+
+```{r}
+#| output-location: column
+ggplot(msleep, 
+       aes(x = log(bodywt), 
+           y = sleep_total,  
+           color = vore)) +
+  geom_point()
+```
+
+
+## Basic scatterplot with regression line
+- Add line of best fit
+
+```{r}
+#| output-location: column
+ggplot(msleep, 
+       aes(x = log(bodywt), 
+           y = sleep_total,  
+           color = vore)) +
+  geom_point() +
+  geom_smooth(method = "lm", 
+              se = FALSE) 
+```
+
+
+## Basic scatterplot with regression line
+- Color by diet type (vore)
+
+```{r}
+#| output-location: column
+ggplot(msleep, 
+       aes(x = log(bodywt), 
+           y = sleep_total,  
+           color = vore)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+    scale_color_manual(
+    values = c(
+      "herbi" = "green",
+      "carni" = "red",
+      "omni"  = "blue",
+      "insecti" = "orange",
+      "unknown" = "gray"
+    )
+  )
+```
+
+
+## Basic scatterplot with regression line
+- Define a formula for the regression equation
+
+```{r}
+#| output-location: column
+#| fig-width: 10
+#| fig-height: 10 
+my.formula = y ~ x
+ggplot(msleep, 
+       aes(x = log(bodywt), 
+           y = sleep_total,  
+           color = vore)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  stat_poly_eq(formula = my.formula,
+               parse = TRUE, 
+               label.y = "top",
+               label.x = "left", 
+               use_label(c("eq", "R2", "P"))) + 
+    facet_wrap(. ~ vore, 
+             ncol = 2,   
+             scales = "free") +
+  theme_bw(16)
+```
+
+## Basic scatterplot with regression line
+- Define a formula for the regression equation
+
+```{r}
+#| output-location: column
+#| fig-width: 10
+#| fig-height: 10 
+my.formula = y ~ x
+ggplot(msleep, 
+       aes(x = log(bodywt), 
+           y = sleep_total,  
+           color = vore)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  stat_poly_eq(formula = my.formula,
+               parse = TRUE, 
+               label.y = "top",
+               label.x = "left", 
+               use_label(c("eq", "R2", "P"))) + 
+    facet_grid(vore ~ order, 
+             scales = "free") +
+  theme_bw(16)
+```
+
+
+
+## Basic scatterplot with regression line
+- A geom with arguments, or multiple geoms with arguments connected by +
+
+```{r}
+#| output-location: column
+msleep2 <- msleep %>%
+  mutate(logbodywt = log10(bodywt)) 
+ggscatter(msleep2,
+          x = "logbodywt", 
+          y = "sleep_total",
+          add = "reg.line",
+          conf.int = TRUE,
+          cor.coef = TRUE,
+          cor.method = "pearson",
+          xlab = "Log10 Body Weight",
+          ylab = "Total Sleep (hours)")
+```
+
+
+## Basic scatterplot with regression line
+
+```{r}
+#| output-location: column
+#| fig-width: 8.5
+#| fig-height: 8 
+msleep2 <- msleep %>%
+  mutate(logbodywt = log10(bodywt)) 
+ggstatsplot::ggscatterstats(msleep2,
+          x = "logbodywt", 
+          y = "sleep_total",
+          add = "reg.line",
+          conf.int = TRUE,
+          cor.coef = TRUE,
+          cor.method = "pearson",
+          xlab = "Log10 Body Weight",
+          ylab = "Total Sleep (hours)")
+```
+

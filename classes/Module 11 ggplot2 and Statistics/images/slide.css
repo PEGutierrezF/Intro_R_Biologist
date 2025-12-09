@@ -1,0 +1,114 @@
+/* =========================================================
+   ENCABEZADOS Y ESTILOS PERSONALIZADOS PARA REVEAL.JS
+   (No se aplica a la portada / title slide)
+   ========================================================= */
+
+/* h1 - Heading 1 */
+.reveal section:not(:first-of-type) h1 {
+    background-color: transparent;      
+    color: #005EB8;               
+    padding: 10px;                
+    border-radius: 5px;           
+    margin: 0;                    
+    font-family: 'Arial', sans-serif;  
+    font-size: 1.3em;
+}
+
+/* h2 - Heading 2 */
+.reveal section:not(:first-of-type) h2 {
+    background-color: white;      
+    color: #005EB8;               
+    padding: 10px;                
+    border-radius: 5px;           
+    margin: 0;                    
+    font-family: 'Arial', sans-serif;  
+    font-size: 1.2em;
+}
+
+/* h3 - Heading 3 */
+.reveal section:not(:first-of-type) h3 {
+    background-color: white;      
+    color: red;               
+    padding: 10px;                
+    border-radius: 5px;           
+    margin: 0;                    
+    font-family: 'Arial', sans-serif;  
+    font-size: 0.8em;
+}
+
+/* h4 - Heading 4 */
+.reveal section:not(:first-of-type) h4 {
+    background-color: white;      
+    color: #005EB8;               
+    padding: 10px;                
+    border-radius: 5px;           
+    margin: 0;                    
+    font-family: 'Arial', sans-serif;  
+    font-size: 1em;
+}
+
+/* Efectos hover / Hover effects */
+.reveal section:not(:first-of-type) h1:hover,
+.reveal section:not(:first-of-type) h2:hover,
+.reveal section:not(:first-of-type) h3:hover,
+.reveal section:not(:first-of-type) h4:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+    transform: translateY(-2px);               
+    transition: all 0.2s ease-in-out;          
+}
+
+/* =========================================================
+   TEXTO NORMAL Y LISTAS / BODY TEXT AND LISTS
+   ========================================================= */
+
+/* Texto normal (párrafos) */
+.reveal section:not(:first-of-type) p {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.0em;
+    line-height: 1.0em;
+    color: #333333;
+    margin: 0.5em 0;
+}
+
+/* Listas desordenadas y ordenadas */
+.reveal section:not(:first-of-type) ul,
+.reveal section:not(:first-of-type) ol {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9em;
+    color: #333333;
+    line-height: 1.4em;
+}
+
+/* Ítems de listas y fragments */
+.reveal section:not(:first-of-type) li {
+    margin: 0.3em 0;
+}
+
+/* =========================================================
+   UTILIDADES DE TEXTO / TEXT UTILITIES
+   ========================================================= */
+
+/* Llamados destacados / Larger callouts */
+.large-callout {
+    font-size: 1.5em;
+}
+
+/* Texto grande / Large text */
+.large-text {
+    font-size: 60px;
+}
+
+/* Texto mediano / Medium text */
+.medium-text {
+    font-size: 40px;
+}
+
+/* Texto pequeño / Small text */
+.small-text {
+    font-size: 20px;
+}
+
+/* Texto atenuado / Muted text */
+.highlight-muted {
+    color: #6c757d;
+}
