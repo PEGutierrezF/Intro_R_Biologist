@@ -56,7 +56,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ## Study Guide (**Fina Exam**)
 ### [Plots in Base R](study guide\final exam\Base-R.html)
 ### [Plots ggplot2](study guide\final exam\ggplot--.html)
-### [Basic Stats]()
+### [Basic Stats](study guide\final exam\Basic-Statistical-Analysis.html)
 <br>
 
 <hr style="border: 1px solid #ccc;">
@@ -67,5 +67,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Module 11 ggplot2 and Statistics](classes\Module 11 ggplot2 and Statistics\ggplot_quarto.html)
 ### [Module 12 Basic Stats](classes\Module 6 Basic Statistics I\Basic_Stats_I.html)
 ### [Module 13 Ethics in data science](classes\Module 12 Ethics in data science\Ethics in data science.html)
-<br>
+<br><br>
+
+
 

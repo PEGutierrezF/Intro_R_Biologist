@@ -1,0 +1,115 @@
+---
+title: "Study Guide: Basic Statistical Analysis"
+subtitle: ''
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+---
+
+<br><br>
+
+### **Recordatorio / Warning**
+- This study guide does not replace class instruction. It is intended to summarize the most important concepts only. Everything presented in class slides may be included in assessments.
+- Esta guía de estudio no sustituye lo visto en clase. Solo pretende resumir los conceptos más importantes. Todo lo que se encuentra en las presentaciones de clase puede ser evaluado.
+
+<br><br>
+
+#### **1. t-tests**
+- Purpose: Determine if there is a statistically significant difference between the means of two groups.
+<br>
+- Types:
+  - Independent t-test: Groups are unrelated (e.g., treated vs. untreated plots).
+  - Dependent (paired) t-test: Groups are related (e.g., before/after measurements on the same subjects).
+<br>
+- Key assumptions:
+  - Continuous response variable.
+  - Normally distributed data.
+  - Equal variance (for standard t-test).
+<br>
+- Interpretation:
+  - p-value: If < 0.05, reject null hypothesis → significant difference between group means.
+  - Direction: Look at mean values to see which group is higher/lower.
+<br><br>
+
+#### **2. Correlation**
+- Purpose: Measures the relationship between two continuous variables.
+<br>
+- Types:
+  - Pearson: Assumes normal distribution, linear relationship.
+  - Spearman / Kendall: Non-parametric, does not require normality.
+<br>
+- Key concepts:
+  - Strength: Weak, moderate, strong (based on absolute value of r).
+  - Direction: Positive (both increase together) or negative (one increases, the other decreases).
+  - Significance: Based on p-value.
+<br>
+- Coefficient of Determination (r²):
+  - Indicates how much variation in one variable is explained by the other.
+  - r² = proportion of shared variance.
+<br>
+- Correlation Coefficient vs. Coefficient of Determination
+  - Correlation Coefficient (r): Measures strength and direction of linear relationship.
+  - Coefficient of Determination (r²): Proportion of variance explained.
+<br><br>
+
+#### **3. Linear Regression**
+- Purpose: Predict one variable (dependent) from another(s) (independent).
+<br>
+- Simple Linear Regression: One independent variable.
+Equation:
+$$y_i = \underbrace{\beta_0}_{\text{Intercept}} + \underbrace{\beta_1}_{\text{Slope}} x_i + \underbrace{\epsilon_i}_{\text{Error}}$$
+- Where:
+  - $Y$ is the dependent variable.
+  - $X$ is the independent variable.
+  - $\beta_0$ is the intercept.
+  - $\beta_1$ is the slope of the line.
+  - $\epsilon$ is the error term.
+  
+<br>
+- Multiple Linear Regression: Two or more independent variables.
+Equation:
+$$
+Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p + \epsilon
+$$
+
+- Where:
+  - $Y$ is the dependent variable.
+  - $X_1, X_2, \dots, X_p$ are the independent variables.
+  - $\beta_0$ is the intercept.
+  - $\beta_1, \beta_2, \dots, \beta_p$ are the coefficients (slopes) for each predictor.
+  - $\epsilon$ is the error term.
+  
+<br>
+- Assumptions:
+  - Linear relationship.
+  - No multicollinearity.
+  - Homoscedasticity (constant variance of errors).
+  - Normally distributed residuals.
+  - No autocorrelation.
+<br>
+- Interpretation:
+  - Slope (β1): How much Y changes per unit change in X.
+  - Intercept (β0): Value of Y when X = 0.
+  - R²: How well the model explains the data.
+  - p-value: Tests significance of relationship.
+<br><br>
+
+#### **4. One-way ANOVA**
+- Purpose: Compare means across more than two groups.
+<br>
+- Hypotheses:
+  - H0: All group means are equal.
+  - HA: At least one group mean is different.
+<br>
+- Assumptions:
+  - Groups are independent.
+  - Residuals are normally distributed.
+  - Equal variance across groups.
+<br>
+- How it works:
+  - F-statistic = Between-group variance ÷ Within-group variance.
+  - Larger F → more evidence against H0.
+<br>
+- Post-hoc test:
+  - Needed if ANOVA p-value < 0.05.
+  - Identifies which specific groups differ.
+<br><br><br><br>
