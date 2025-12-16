@@ -67,6 +67,14 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Module 11 ggplot2 and Statistics](classes\Module 11 ggplot2 and Statistics\ggplot_quarto.html)
 ### [Module 12 Basic Stats](classes\Module 6 Basic Statistics I\Basic_Stats_I.html)
 ### [Module 13 Ethics in data science](classes\Module 12 Ethics in data science\Ethics in data science.html)
+<br>
+
+<hr style="border: 1px solid #ccc;">
+
+
+## Final Exam
+### [Midterm Exam (Fall 2025)](assignments/final_exam/final_exam.html)
+
 <br><br>
 
 
