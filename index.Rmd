@@ -73,7 +73,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 
 ## Final Exam
-### [Midterm Exam (Fall 2025)](assignments/final_exam/final_exam.html)
+### [Final Exam (Fall 2025)](assignments/final_exam/final_exam.html)
 
 <br><br>
 
