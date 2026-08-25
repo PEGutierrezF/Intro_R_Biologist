@@ -22,7 +22,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 <hr style="border: 1px solid #ccc;">
 ## Lectures:
-### [Module 1 Course Intro, R, Rstudio  & sintax](classes\Module 1 Course Intro, R, Rstudio  & sintax\Course_Introduction.html)
+### [Module 1: Course Intro, R, RStudio & Syntax](classes/Module%201%20Course%20Intro,%20R,%20Rstudio%20%20%26%20sintax/Course_Introduction.html)
 ### [Module 9 plots in Base R](classes\Module 9 plots in Base R\Plots_in_Base_R.html)
 
 
