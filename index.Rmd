@@ -16,14 +16,14 @@ Bienvenidos a todos. En esta página encontrarán los prompts para los R Tutoria
 
 ### Inglés:  
 Welcome everyone. On this page, you will find the prompts for the R Tutorials that we will work on during class.
-<br><br>
+<br><br><br>
 
 
 
 <hr style="border: 1px solid #ccc;">
 ## Lectures:
-### [Module 1: Course Intro, R, RStudio & Syntax](classes/Module%201%20Course%20Intro,%20R,%20Rstudio%20%20%26%20sintax/Course_Introduction.html)
-### [Module 9 plots in Base R](classes\Module 9 plots in Base R\Plots_in_Base_R.html)
+### [Module 1 Course Intro, R, RStudio & Syntax](classes/Module 1 Course Intro, R, Rstudio and sintax/Course_Introduction.html)
+<br>
 
 
 <hr style="border: 1px solid #ccc;">
