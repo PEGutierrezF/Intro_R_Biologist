@@ -18,6 +18,22 @@ Bienvenidos a todos. En esta página encontrarán los prompts para los R Tutoria
 Welcome everyone. On this page, you will find the prompts for the R Tutorials that we will work on during class.
 <br><br>
 
+
+
+<hr style="border: 1px solid #ccc;">
+## Lectures:
+Module 1: [Course Intro, R, Rstudio  & sintax](classes\Module 1 Course Intro, R, Rstudio  & sintax\Course Introduction.html)
+<br><br><br>
+
+
+
+<hr style="border: 1px solid #ccc;">
+## Tips and helpful reminders
+### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
+<br>
+
+<hr style="border: 1px solid #ccc;">
+
 <!--
 <hr style="border: 1px solid #ccc;">
 
@@ -48,13 +64,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [practice](assignments/exam practice/practice.html)
 <br>
 
-<hr style="border: 1px solid #ccc;">
 
-## Tips and helpful reminders
-### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
-<br>
-
-<hr style="border: 1px solid #ccc;">
 
 ## Study Guide (**Fina Exam**)
 ### [Plots in Base R](study guide\final exam\Base-R.html)
