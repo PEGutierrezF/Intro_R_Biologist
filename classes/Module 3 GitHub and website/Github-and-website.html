@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Github and website creation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pablo E. Gutiérrez-Fonseca, PhD" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js-8.11.1/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="libs/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"eda9b2feda6d4cbab9f029955ec4acb8","expires":1}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
+    <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <script src="libs/viz-1.8.2/viz.js"></script>
+    <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="libs/grViz-binding-1.0.11/grViz.js"></script>
+    <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
+    <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Github and website creation
+]
+.author[
+### Pablo E. Gutiérrez-Fonseca, PhD
+]
+.institute[
+### <br>
+]
+.date[
+### BIOL 4990 – Fall 2026 <br> 2026-Aug-01 (updated: 2026-Sep-10)
+]
+
+---
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 4px;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+this is cool 
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;center&gt;
+&lt;img src="fig/octocat.gif" width="50%" /&gt;
+&lt;center&gt;
+
+---
+exclude: true
+
+https://happygitwithr.com/
+
+---
+# Flowchart
+- Send your Rtutorial throught your personal website.
+- You can use the following flowchart to understand the process of creating your personal website and connecting it to GitHub.
+- The flowchart illustrates the steps from creating a GitHub account to pushing changes from RStudio to your GitHub repository.
+
+---
+# Flowchart
+- Before, defining concepts:
+&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+    - **Git:** A version control system that allows you to track changes in your code and collaborate with others.
+    - <svg aria-label="GitHub" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><title>GitHub</title><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> **GitHub:** A web-based platform that uses Git for version control and collaboration, allowing you to host your code repositories online. Other similar platforms include GitLab and Bitbucket.
+        - <svg aria-label="GitHub" role="img" viewBox="0 0 496 512" style="height:1em;width:0.97em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><title>GitHub</title><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg> GitHub is like a social network for developers, where you can share your code, collaborate with others, and showcase your projects.
+    
+---
+# Flowchart
+- Steps to create a personal website using R Markdown and GitHub:
+    1. **Create a GitHub account:** Sign up for a free account on GitHub to host your code repositories.
+    2. **Create a project in RStudio:** Open RStudio and create a new project that will be linked to your GitHub repository.
+    3. **Push changes to GitHub:** After making changes to your project in RStudio, you can push those changes to your GitHub repository to keep it updated.
+    
+---
+# Flowchart
+- The flowchart below shows the basic steps to create a personal website using R Markdown and GitHub.
+
+&lt;center&gt;
+<div class="grViz html-widget html-fill-item" id="htmlwidget-757a94815630cdeaca07" style="width:20%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-757a94815630cdeaca07">{"x":{"diagram":"\ndigraph flowchart {\n  graph [rankdir = TB]\n\n  node [shape = rectangle, style=filled, fillcolor=lightblue]\n  \n  A [label = \"My webpages\"]\n  B [label = \"GitHub\" ]\n  C [label = \"RStudio\"]\n\n  A -> B\n  A -> C\n  \n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+
+---
+
+# Flowchart
+
+&lt;center&gt;
+<div class="grViz html-widget html-fill-item" id="htmlwidget-ae7e3127039bdf201205" style="width:50%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-ae7e3127039bdf201205">{"x":{"diagram":"\ndigraph flowchart {\n  graph [rankdir = TB]\n\n  node [shape = rectangle, style=filled, fillcolor=lightblue]\n  \n  A [label = \"My webpages\"]\n  B [label = \"Github\", fillcolor = lightblue]\n  C [label = \"RStudio\", fillcolor = white]\n  \n  D [label = \"Github Account\"]\n  E [label = \"Create repository\"]\n  F [label = \"Clone repository\"]\n  \n  G [label = \"Create project\", fillcolor = white]\n\n  A -> B\n  A -> C\n  \n  B -> D\n  D -> E\n  E -> F \n  \n  C -> G [label = \"url from Clone repository\"] \n\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+
+
+---
+# Flowchart
+
+&lt;center&gt;
+<div class="grViz html-widget html-fill-item" id="htmlwidget-9e58332c35c028f16cf8" style="width:50%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-9e58332c35c028f16cf8">{"x":{"diagram":"\ndigraph flowchart {\n  graph [rankdir = TB]\n\n  node [shape = rectangle, style=filled, fillcolor=lightblue]\n  \n  A [label = \"My webpages\"]\n  B [label = \"Github\"]\n  C [label = \"RStudio\"]\n  \n  D [label = \"Github Account\", fillcolor = white]\n  E [label = \"Create repository\", fillcolor = white]\n  F [label = \"Clone repository\", fillcolor = white]\n  \n  G [label = \"Create project\"]\n  H [label = \"Save project\"]\n  I [label = \"Your new project is ready!\"]\n\n  A -> B\n  A -> C\n  \n  B -> D\n  D -> E\n  E -> F \n  \n  C -> G [label = \"url from Clone repository\"] \n  G -> H\n  H -> I\n\n  // Flecha curva externa\n  I:w -> B:w [label = \"Push changes\", constraint = false, color = gray, style = dashed, minlen=4]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+
+---
+# Create an account in GitHub
+
+---
+# Create an account in GitHub
+.pull-left[
+- Create and account in .link-style2[[GitHub](https://github.com/)]
+]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/profile.png" width="120%" /&gt;
+]
+
+
+---
+# Create a repository
+.pull-left[
+- Create a `Repository` for this course.
+    - `New`
+    - Create a new repository
+    - add a name
+    - Click `public`
+    - `Add a README file`
+    - Add a .gitignore file
+        - `R`
+    - Add a license
+        - `MIT`
+    - Click `Create repository`
+    - Add a description (optional)
+]
+
+.pull-right[
+]
+
+
+---
+# Create a repository
+.pull-left[
+- Create a `Repository` for this course.
+    - `New`
+    - Create a new repository
+    - add a name
+    - Click `public`
+    - `Add a README file`
+    - Add a .gitignore file
+        - `R`
+    - Add a license
+        - `MIT`
+    - Click `Create repository`
+    - Add a description (optional)
+]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/repository.png" width="90%" /&gt;
+]
+
+---
+# Create a repository
+.pull-left[
+- Create a `Repository` for this course.
+    - `New`
+    - Create a new repository
+    - add a name
+    - Click `public`
+    - `Add a README file`
+    - Add a .gitignore file
+        - `R`
+    - Add a license
+        - `MIT`
+    - Click `Create repository`
+    - Add a description (optional)
+]
+
+.pull-right[
+&lt;img src="fig/create_repository.png" width="90%" /&gt;
+]
+
+
+---
+# Clone the repository
+
+.pull-left[
+- Clone the repository to your computer
+    - Click on `Code`
+    - Copy the URL
+
+]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/copy_code.png" width="90%" /&gt;
+]
+
+---
+# Clone the repository
+
+.pull-left[
+- Clone the repository to your computer
+    - Click on `Code`
+    - Copy the URL
+
+]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/copy_code_I.png" width="90%" /&gt;
+]
+
+
+---
+# Flowchart
+
+&lt;center&gt;
+<div class="grViz html-widget html-fill-item" id="htmlwidget-4aa6410a8d026931bdfe" style="width:50%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-4aa6410a8d026931bdfe">{"x":{"diagram":"\ndigraph flowchart {\n  graph [rankdir = TB]\n\n  node [shape = rectangle, style=filled, fillcolor=lightblue]\n  \n  A [label = \"My webpages\"]\n  B [label = \"Github\", fillcolor = white]\n  C [label = \"RStudio\"]\n  \n  D [label = \"Github Account\", fillcolor = white]\n  E [label = \"Create repository\", fillcolor = white]\n  F [label = \"Clone repository\", fillcolor = white]\n  \n  G [label = \"Create project\"]\n  H [label = \"Save project\"]\n  I [label = \"Your new project is ready!\"]\n\n  A -> B\n  A -> C\n  \n  B -> D\n  D -> E\n  E -> F \n  \n  C -> G [label = \"url from Clone repository\"] \n  G -> H\n  H -> I\n\n  // Flecha curva externa\n  I:w -> B:w [label = \"Push changes\", constraint = false, color = gray, style = dashed, minlen=4]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+
+---
+# Create a project in RStudio in your computer
+
+1. Open RStudio on your computer.
+2. In the top menu, go to `File` &gt; `New Project....`
+3. A window will pop up. Select the option:
+    - `Version Control` &gt; `Git`.
+4. Paste the Git repository URL in the provided field.
+5. Choose the directory where you'd like to store your project.
+6. Click `Create Project` to initialize your RStudio project connected to Git.
+
+---
+# Create a RMarkdown for your personal website
+**Step 1:** Create a new R Markdown file
+.pull-left[
+1. Open RStudio on your computer.
+2. In the top menu, go to `File` &gt; `New File....`
+3. A window will pop up. Select the option:
+    - `R Markdown`
+4. A new window will pop up. 
+    - Add titile
+    - Default output format
+        - Select `HTML`
+    - Click `OK`
+]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website1.png" width="120%" /&gt;
+
+]
+
+
+---
+# Create a RMarkdown for your personal website
+**Step 2:** Create a new R Markdown file
+.pull-left[
+1. Open RStudio on your computer.
+2. In the top menu, go to `File` &gt; `New File....`
+3. A window will pop up. Select the option:
+    - `R Markdown`
+4. A new window will pop up. 
+    - Add titile
+    - Default output format
+        - Select `HTML`
+    - Click `OK`
+]
+
+.pull-right[
+- Now you have a new R Markdown file with the following template code:
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website2.png" width="120%" /&gt;
+]
+
+---
+# Create a RMarkdown for your personal website
+**Step 3:** Edit the R Markdown file
+.pull-left[
+1. Change the title to your name and surname.
+2. Change the subtitle to your current position (e.g., PhD student, Postdoc, etc.).
+3. Change the author to your name and surname.
+4. Change the date to the current date.
+5. Output:
+    Add the following lines:
+        prettydoc:html_pretty
+            theme = cayman
+            highlight = github
+]
+
+.pull-right[
+- **Note:** Indentation and spacing are important in YAML headers.
+&lt;br&gt;&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website3.png" width="120%" /&gt;
+]
+
+---
+# Create a RMarkdown for your personal website
+**Step 4:** Knit the R Markdown file to create the HTML file
+.pull-left[
+1. Save the file as `index.Rmd` in your project folder.
+2. In the top menu, go to `File` &gt; `Save As...`
+3. A window will pop up. 
+    - Select the project folder you created.
+    - Name the file `index.Rmd`.
+    - Click `Save`.
+4. In the top menu, go to `File` &gt; `Knit Document`.
+5. A new HTML file will be created in your project folder with the name `index.html`.
+]
+
+.pull-right[
+]
+
+---
+# Create a RMarkdown for your personal website
+**Step 4:** Knit the R Markdown file to create the HTML file
+.pull-left[
+1. Save the file as `index.Rmd` in your project folder.  
+2. In the top menu, go to `File` &gt; `Save As...`  
+3. A window will pop up.  
+    - Select the project folder you created.  
+    - Name the file `index.Rmd`.  
+    - Click `Save`.  
+4. In the top menu, go to `File` &gt; `Knit Document`.  
+5. A new HTML file will be created in your project folder with the name `index.html`.  
+]
+
+.pull-right[
+&lt;ol start="6"&gt;
+&lt;li&gt;After knitting, you should see the index.html file in your project folder.&lt;/li&gt;
+&lt;li&gt;Make sure both index.Rmd and index.html files are the only files in your project folder.&lt;/li&gt;
+&lt;/ol&gt;
+]
+
+
+---
+# Flowchart
+
+&lt;center&gt;
+<div class="grViz html-widget html-fill-item" id="htmlwidget-0018703d63cdc08b8156" style="width:50%;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-0018703d63cdc08b8156">{"x":{"diagram":"\ndigraph flowchart {\n  graph [rankdir = TB]\n\n  node [shape = rectangle, style=filled, fillcolor=lightblue]\n  \n  A [label = \"My webpages\"]\n  B [label = \"Github\"]\n  C [label = \"RStudio\", fillcolor = white]\n  \n  D [label = \"Github Account\", fillcolor = white]\n  E [label = \"Create repository\", fillcolor = white]\n  F [label = \"Clone repository\", fillcolor = white]\n  \n  G [label = \"Create project\", fillcolor = white]\n  H [label = \"Save project\", fillcolor = white]\n  I [label = \"Your new project is ready!\"]\n\n  A -> B\n  A -> C\n  \n  B -> D\n  D -> E\n  E -> F \n  \n  C -> G [label = \"url from Clone repository\"] \n  G -> H\n  H -> I\n\n  // Flecha curva externa\n  I:w -> B:w [label = \"Push changes\", constraint = false, color = red, style = dashed, minlen=4]\n}\n","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+
+---
+# Connect your project to GitHub
+
+---
+# Connect your project to GitHub
+1. To connect your RStudio project to GitHub, you need to enable the version control interface in RStudio and set up Git.
+  - Download and install Git on your computer if you haven't done so already. You can download it from the official Git website: https://git-scm.com/downloads.
+
+---
+# Connect your project to GitHub
+2. Open RStudio on your computer.
+- Go to `Tools`
+- Click `Global options..`
+- Click on `Git/SVN`
+- Select `Enable version control interface for RStudio projects`
+- Select `Git executable`
+  - Select the path to the `Git` on your computer.
+        - `C:\Program Files\Git\bin\git.exe)`
+  - If you installed Git via Homebrew, the path will be:
+        - `/usr/local/bin/git`
+- Click `OK`
+- **Restart RStudio**
+
+---
+#Connect your project to GitHub (using Git Bash)
+- Open Git Bash (installed with Git).
+- Run:
+    - `which git`
+- This shows the path to the Git executable on your computer. 
+    - For example, it might be something like:
+        - `C:\Program Files\Git\bin\git.exe` (on Windows)
+        - `/usr/local/bin/git` (on Mac if installed via Homebrew)
+- Copy this path and paste it in RStudio:
+`Tools → Global Options → Git/SVN → Git executable`
+- Click `OK` and **Restart RStudio**.
+
+- **Note: Both procedures are equivalent — the goal is just to tell RStudio where Git is installed.**
+
+---
+# Next is tell to Git who you are  (step 1)
+1. Open `Terminal (not RStudio)` and run these commands:
+
+```markdown
+# Set your name (this will appear in your commits)
+git config --global user.name "Tu Nombre"
+
+# Set your email (must match your GitHub account email)
+git config --global user.email "tucorreo@example.com"
+```
+
+---
+# Next is tell to Git who you are (step 2)
+1. Open `Terminal (not RStudio)` and run these commands:
+
+```markdown
+# Set your name (this will appear in your commits)
+git config --global user.name "Tu Nombre"
+
+# Set your email (must match your GitHub account email)
+git config --global user.email "tucorreo@example.com"
+```
+&lt;center&gt;
+&lt;img src="fig/terminal.png" width="40%" /&gt;
+&lt;/center&gt;
+
+---
+# Next is tell to Git who you are  (step 2.1)
+- How to open **Terminal** on your computer:
+    - **On Mac:**
+        - Press Command (⌘) + Space to open Spotlight Search, type Terminal, and press Enter.
+        - Or go to Applications → Utilities → Terminal.
+    - **On Windows:**
+        - Open the Start Menu, type Git Bash (installed with Git), and press Enter.
+    
+    
+---
+# Next is tell to Git who you are  (step 3)
+- Still in **Terminal**, check that Git saved your info: 
+
+``` r
+git config --global --list
+```
+
+- You should see your name and email listed.
+
+``` r
+user.name= Tu Nombre
+user.email= tucorreo@example.com
+```
+
+---
+# Push your changes to GitHub
+- In RStudio, go to the `Git` tab in the top right panel.
+- You should see the files listed.
+- Check the boxes next to the files you want to commit.
+- Write a commit message in the `Commit message` box (e.g., "Initial commit").
+- Click the `Commit` button to commit your changes.
+- Click the `Push` button to push your changes to GitHub.
+- Your changes should now be live on GitHub!
+- but...
+
+
+---
+# If you get an error 403…
+
+&lt;center&gt;
+&lt;img src="fig/sheldom.gif" width="25%" /&gt;
+&lt;center&gt;
+
+---
+# If you get an error 403…
+- This error happens when trying to push to GitHub with incorrect authentication.
+
+- GitHub **no longer accepts account passwords for HTTPS connections.**
+
+- Instead, you must use a **Personal Access Token (PAT).**
+    
+
+---
+# If you get an error 403…
+- This usually happens because GitHub no longer accepts passwords for HTTPS connections. Instead, you need to use a **Personal Access Token (PAT)**.
+&lt;br&gt;
+- To create a PAT:
+  1. Go to your GitHub account `settings`.
+  2. Click on `Developer settings` &gt; `Personal access tokens` &gt; `Tokens (classic)`.
+  3. Click on `Generate new token`.
+  4. Select the scopes you need (for basic usage, you can select `repo` and `read:user`).
+  5. Click `Generate token`.
+  6. Copy the generated token and store it securely (you won't be able to see it again).
+
+---
+# If you get an error 403…
+- When prompted for your password during Git operations, use the **PAT (Personal Access Token)** instead of your GitHub password.
+
+- Use your **GitHub username** when asked for the username.
+
+---
+# Let's create your personal website
+
+
+---
+# Let's create your personal website 
+**Step 1:** Push your index.Rmd and index.html files to GitHub
+
+.pull-left[
+1. **In RStudio**, go to the `Git` tab in the top right panel.
+2. You should see the `index.Rmd` and `index.html` files listed.
+3. Check the boxes next to the files you want to commit.
+4. Write a commit message in the `Commit message` box (e.g., "Initial commit of personal website").
+5. Click the `Commit` button to commit your changes.
+]
+
+.pull-right[
+&lt;ol start="6"&gt;
+  &lt;li&gt; Click the Push button to push your changes to GitHub.&lt;/li&gt;
+  &lt;li&gt; Your personal website is now live on GitHub!&lt;/li&gt;
+  &lt;li&gt; You can share the link to your personal website with others.&lt;/li&gt;
+  &lt;li&gt; You can continue to edit and update your personal website by modifying the index.Rmd file and pushing the changes to GitHub.&lt;/li&gt;
+&lt;/ol&gt;
+]
+
+---
+# Let's create your personal website 
+**Step 2:** Visit your personal website
+.pull-left[
+1. Open your web browser and go to your **GitHub repository**.
+2. Click on the `Settings` tab in your repository.
+3. Scroll down to the `Pages` section.
+4. Under `Your site is live at`, you will see 'Visit site` button.
+5. Make sure the source is set to `main` branch and `/ (root)`.
+    - Wait until you see this message: "Your site is ready to be published at ..."
+ 
+]
+
+.pull-right[
+&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/branch.png" width="120%" /&gt;
+]
+
+---
+# Let's create your personal website 
+**Step 2:** Visit your personal website
+.pull-left[
+1. Open your web browser and go to your **GitHub repository**.
+2. Click on the `Settings` tab in your repository.
+3. Scroll down to the `Pages` section.
+4. Under `Your site is live at`, you will see 'Visit site` button.
+5. Make sure the source is set to `main` branch and `/ (root)`.
+6. Click on the `Visit site` button to open your personal website.
+]
+
+.pull-right[
+&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website4.png" width="120%" /&gt;
+]
+
+---
+# Edit your `index.Rmd` file
+.pull-left[
+1. Open the `index.Rmd` file in RStudio.
+2. Add a new section with your name and a brief introduction about yourself.
+3. You can use Markdown syntax to format your text, add headings, lists, links, and images.
+  - Save an image in your folder and use the following syntax to add it:
+    ```markdown
+    &lt;img src="fig/your_image.png" width="550" height="320"/&gt;
+    ```
+]
+.pull-right[
+&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website5.png" width="120%" /&gt;
+]
+
+---
+# Include Rtutorials in your personal website
+**Step 1:** Create a Markdown file for each homework assignment.
+.pull-left[
+1. In RStudio, go to `File` &gt; `New File` &gt; `R Markdown`.
+2. Name the file `assignment1.Rmd`, `assignment2.Rmd`, etc.
+3. Add the YAML header at the top of the file:
+    - `title: "Assignment 1"`
+    - `author: "Your Name"`
+    - `date: "``"`
+4. Add the content of the assignment in Markdown format.
+5. Save the file in your project folder.
+6. Knit the file to create the HTML file.
+]
+.pull-right[
+&lt;br&gt;&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website6.png" width="120%" /&gt;
+]
+
+---
+# Include Rtutorials in your personal website
+**Step 2:** Add a link to the assignment in the `index.Rmd` file.
+.pull-left[
+1. Open the `index.Rmd` file in RStudio.
+2. Add a new section for the assignments.
+3. Use the following syntax to add a link to the assignment:
+```markdown
+R Tutorials Prompts:
+[HomeWork 1](assignments/assignments_1/assigment1.html)
+```
+4. knit the `index.Rmd` file to update the personal website.
+]
+.pull-right[
+&lt;br&gt; &lt;!-- adds vertical space --&gt;
+&lt;img src="fig/website7.png" width="120%" /&gt;
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightLanguage": "r",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(css/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 60px;
+  height: 78px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
