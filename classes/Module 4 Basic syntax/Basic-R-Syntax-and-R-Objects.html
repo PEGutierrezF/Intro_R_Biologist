@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Basic R Syntax and R Objects</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pablo E. Gutiérrez-Fonseca, PhD" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js-8.11.1/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="libs/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xd51b9203c854984bc17e328c42e6814","expires":1}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
+    <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
+    <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Basic R Syntax and R Objects
+]
+.author[
+### Pablo E. Gutiérrez-Fonseca, PhD
+]
+.institute[
+### <br>
+]
+.date[
+### BIOL 4990 – Fall 2025 <br> 2025-Jan-01 (updated: 2026-Sep-15)
+]
+
+---
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 4px;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+# What we just covered
+- We looked at the YAML header, the part at the top of every .Rmd file. You now know:
+- It's where you define things like title, author, date, output format, etc.
+- It looks like this:
+
+
+``` r
+---
+title: "Untitled"
+author: "name"
+date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
+output: html_document
+---
+```
+
+
+---
+# The Three Main Elements of R Markdown
+There are three essential components in any `.Rmd` file:
+1. YAML header (you've seen this)
+2. Markdown text, where you write your narrative
+3. Code chunks, where your R code lives and runs
+
+---
+# Code Ccunks in R Markdown
+- Code chunks are the engine of your R Markdown document. They are where all your R code runs, generating figures, tables, summaries, models, and more. 
+
+---
+# Anatomy of a code chunk
+Every code chunk is enclosed in three backticks `(```)` and curly braces `{}` like this:
+
+&lt;center&gt;
+&lt;img src="fig/chunks.png" width="60%" /&gt;
+&lt;center&gt;
+
+- It is inside the `{}` that you define how the chunk behaves — whether the code runs, whether it’s shown, and whether the output is displayed.
+
+
+---
+# Code chunk options
+
+| Option                           | What it does                                      |
+|----------------------------------|---------------------------------------------------|
+| `eval = FALSE`                   | Don't run the code at all                         |
+| `echo = FALSE`                   | Run the code, but don’t show the code             |
+| `include = FALSE`               | Run the code but don’t show code **or** output    |
+| `message = FALSE`, `warning = FALSE` | Suppress messages and warnings from the output |
+
+---
+# Knitting
+- Knitting is the process of converting your `.Rmd` file into a final document, like HTML, PDF, or Word.
+
+---
+# New content starts here
+
+---
+# How cite R?
+
+``` r
+citation()
+```
+
+```
+## To cite R in publications use:
+## 
+##   R Core Team (2025). _R: A Language and Environment for Statistical
+##   Computing_. R Foundation for Statistical Computing, Vienna, Austria.
+##   &lt;https://www.R-project.org/&gt;.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {R: A Language and Environment for Statistical Computing},
+##     author = {{R Core Team}},
+##     organization = {R Foundation for Statistical Computing},
+##     address = {Vienna, Austria},
+##     year = {2025},
+##     url = {https://www.R-project.org/},
+##   }
+## 
+## We have invested a lot of time and effort in creating R, please cite it
+## when using it for data analysis. See also 'citation("pkgname")' for
+## citing R packages.
+```
+
+---
+# Install packages
+- Packages are collections of R functions, data, and compiled code that extend R's capabilities.
+
+- You only need to install packages once per R installation.
+
+
+``` r
+install.packages("dplyr") # dplyr for data manipulation
+install.packages("ggplot2") # ggplot2 for data visualization
+# install.packages(c("dplyr", "ggplot2")) # Install multiple packages at once
+```
+
+---
+# Load packages
+- After installing a package, you need to load it into your R session every time you start R.
+- This is done using the `library()` function.
+
+
+``` r
+library(dplyr) # Load dplyr for data manipulation
+library(ggplot2) # Load ggplot2 for data visualization
+```
+
+---
+# Cite specific packages?
+
+``` r
+citation("dplyr")
+```
+
+```
+## To cite package 'dplyr' in publications use:
+## 
+##   Wickham H, François R, Henry L, Müller K, Vaughan D (2023). _dplyr: A
+##   Grammar of Data Manipulation_. doi:10.32614/CRAN.package.dplyr
+##   &lt;https://doi.org/10.32614/CRAN.package.dplyr&gt;, R package version
+##   1.1.4, &lt;https://CRAN.R-project.org/package=dplyr&gt;.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Manual{,
+##     title = {dplyr: A Grammar of Data Manipulation},
+##     author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller and Davis Vaughan},
+##     year = {2023},
+##     note = {R package version 1.1.4},
+##     url = {https://CRAN.R-project.org/package=dplyr},
+##     doi = {10.32614/CRAN.package.dplyr},
+##   }
+```
+
+---
+# Cite specific packages?
+
+``` r
+citation("ggplot2")
+```
+
+```
+## To cite ggplot2 in publications, please use
+## 
+##   H. Wickham. ggplot2: Elegant Graphics for Data Analysis.
+##   Springer-Verlag New York, 2016.
+## 
+## A BibTeX entry for LaTeX users is
+## 
+##   @Book{,
+##     author = {Hadley Wickham},
+##     title = {ggplot2: Elegant Graphics for Data Analysis},
+##     publisher = {Springer-Verlag New York},
+##     year = {2016},
+##     isbn = {978-3-319-24277-4},
+##     url = {https://ggplot2.tidyverse.org},
+##   }
+```
+
+---
+# Help in R
+- R has extensive built-in help files for functions and packages.
+- You can access help using the `?` operator or the `help()` function.
+
+
+``` r
+?lm # Help for the lm() function
+```
+
+---
+# Atomic elements of R
+- **Atomic vectors** are the most basic data structures in R. They can hold elements of a single type (e.g., all numeric, all character, etc.).
+
+- The most basic data types in R are:
+  - Numeric: Numbers (e.g., 1, 2.5, -3)
+  - Character: Text strings (e.g., "Hello", "R is fun")
+  - Logical: Boolean values (TRUE or FALSE)
+  - Integer: Whole numbers (e.g., 1L, 2L)
+  - Complex: Complex numbers (e.g., 1+2i)
+  
+---
+# Symbols in R
+- `&lt;-` : Assignment operator, used to assign values to variables. (`Alt + -` or `Option + -` to insert)
+- `#` : Comment symbol, used to add comments in the code.
+- `==` : Equality operator, used to compare two values.
+- `=` : Assignment operator, can also be used to assign values to variables (less common in R).
+- `+, -, *, /` : Arithmetic operators for addition, subtraction, multiplication, and division.
+- `&gt;, &lt;, &gt;=, &lt;=` : Relational operators for comparisons.
+- `&amp;` : Logical AND operator.
+- `~` : model formula operator, used in statistical modeling.
+- `$` : Used to access elements of a list or data frame.
+- `:` : Sequence operator, used to create sequences of numbers.
+- `c()` : Combine function, used to create vectors. 
+- `()` : Parentheses, used to group expressions and control order of operations.
+
+---
+# Equality
+- We can use the symbol `==` to test if two values are equal.
+
+``` r
+'HELLO'=='GOOBYE'
+```
+
+```
+## [1] FALSE
+```
+
+- 
+
+``` r
+5==5
+```
+
+```
+## [1] TRUE
+```
+
+---
+# Inequality
+- We can use the symbol `!=` to test if two values are not equal.
+
+- 
+
+``` r
+'HELLO'!='GOOBYE'
+```
+
+```
+## [1] TRUE
+```
+
+- 
+
+``` r
+5!=5
+```
+
+```
+## [1] FALSE
+```
+
+---
+# Greater than / Less than 
+- We can use the symbols `&gt;` (greater than) and `&lt;` (less than) to compare values.
+
+``` r
+5&gt;6
+```
+
+```
+## [1] FALSE
+```
+
+
+---
+# Objects in R
+- At the heart of almost everything you will do (or ever likely to do) in R is the concept that everything in R is an object. 
+
+- These objects can be almost anything, from a single number or character string (like a word) to highly complex structures like the output of a plot, a summary of your statistical analysis or a set of R commands that perform a specific task. 
+- Understanding how you create objects and assign values to objects is key to understanding R.
+
+---
+# Creating objects in R
+
+- You create an object in R by assigning a value to a name using the assignment operator `&lt;-` (or `=`).
+- Shortcuts: Alt + - (Windows) or Option + - (Mac) to insert `&lt;-`.
+
+``` r
+my_obj &lt;- 48
+my_obj
+```
+
+```
+## [1] 48
+```
+
+--
+
+
+``` r
+48 -&gt; my_obj1
+my_obj1
+```
+
+```
+## [1] 48
+```
+
+---
+# Creating objects in R
+
+``` r
+my_obj2 &lt;- "R is cool"
+my_obj2
+```
+
+```
+## [1] "R is cool"
+```
+
+---
+# Simple math in R
+- R can be used as a calculator. You can perform basic arithmetic operations directly in the console or in code chunks.
+
+``` r
+5 + 5
+```
+
+```
+## [1] 10
+```
+
+---
+# Simple math in R
+
+``` r
+sqrt(16) # Square root
+```
+
+```
+## [1] 4
+```
+
+``` r
+abs(-5)  # Absolute value
+```
+
+```
+## [1] 5
+```
+
+``` r
+log(10)  # Natural logarithm
+```
+
+```
+## [1] 2.302585
+```
+
+``` r
+exp(2)   # Exponential function
+```
+
+```
+## [1] 7.389056
+```
+
+---
+# Using variables in calculations
+- You can use variables (objects) in calculations just like you would with numbers.
+
+``` r
+var1 &lt;- 10
+var2 &lt;- 20
+var3 &lt;- var1 + var2
+var3
+```
+
+```
+## [1] 30
+```
+
+---
+# Checking object types
+- We can check the type of an object using the `class()` function.
+
+``` r
+class(var3)
+```
+
+```
+## [1] "numeric"
+```
+
+``` r
+class(my_obj2)
+```
+
+```
+## [1] "character"
+```
+
+
+``` r
+is.character(my_obj2)
+```
+
+```
+## [1] TRUE
+```
+
+
+---
+# Dates and times in R 
+
+``` r
+x &lt;- Sys.time() # Assign the current date and time to x
+x
+```
+
+```
+## [1] "2026-09-15 13:50:16 -04"
+```
+
+``` r
+class(x) # Check the class of x
+```
+
+```
+## [1] "POSIXct" "POSIXt"
+```
+
+---
+# Data set
+- Load the data into memory
+
+``` r
+data(penguins)
+```
+
+--
+
+&lt;br&gt;
+
+- Specify the data vector for body mass
+
+``` r
+penguins$body_mass
+```
+
+```
+## NULL
+```
+
+---
+# Data set
+
+- Specify the entire second column in the data table
+
+``` r
+penguins[,2]
+```
+
+```
+## # A tibble: 344 × 1
+##    island   
+##    &lt;fct&gt;    
+##  1 Torgersen
+##  2 Torgersen
+##  3 Torgersen
+##  4 Torgersen
+##  5 Torgersen
+##  6 Torgersen
+##  7 Torgersen
+##  8 Torgersen
+##  9 Torgersen
+## 10 Torgersen
+## # ℹ 334 more rows
+```
+
+---
+# Data set
+
+- Specify the 15th row of the first column in the data table
+
+``` r
+penguins[15,1]
+```
+
+```
+## # A tibble: 1 × 1
+##   species
+##   &lt;fct&gt;  
+## 1 Adelie
+```
+
+---
+# Data set
+
+- Specify the second to 10th row of the first column as a vector
+
+``` r
+penguins[2:10,1]
+```
+
+```
+## # A tibble: 9 × 1
+##   species
+##   &lt;fct&gt;  
+## 1 Adelie 
+## 2 Adelie 
+## 3 Adelie 
+## 4 Adelie 
+## 5 Adelie 
+## 6 Adelie 
+## 7 Adelie 
+## 8 Adelie 
+## 9 Adelie
+```
+
+---
+# Data set
+- Specify the second to fifteenth elements of the island vector
+
+``` r
+penguins$island[2:15]
+```
+
+```
+##  [1] Torgersen Torgersen Torgersen Torgersen Torgersen Torgersen Torgersen
+##  [8] Torgersen Torgersen Torgersen Torgersen Torgersen Torgersen Torgersen
+## Levels: Biscoe Dream Torgersen
+```
+
+---
+# Individual summary statistics
+
+---
+# Individual summary statistics
+
+- Numerical variables
+
+``` r
+mean(penguins$body_mass_g, na.rm = TRUE)
+```
+
+```
+## [1] 4201.754
+```
+
+``` r
+median(penguins$body_mass_g, na.rm = TRUE)
+```
+
+```
+## [1] 4050
+```
+
+
+---
+# Individual summary statistics
+
+- Categorical variable
+  - Counts of observations in each category
+
+``` r
+table(penguins$island)
+```
+
+```
+## 
+##    Biscoe     Dream Torgersen 
+##       168       124        52
+```
+
+
+---
+# Individual summary statistics
+
+- Categorical variable
+  - Proportions of observations in each category
+
+``` r
+prop.table(table(penguins$island))
+```
+
+```
+## 
+##    Biscoe     Dream Torgersen 
+## 0.4883721 0.3604651 0.1511628
+```
+
+---
+# Sets of statistics
+
+--
+- Base R functions
+
+``` r
+summary(penguins)
+```
+
+```
+##       species          island    bill_length_mm  bill_depth_mm  
+##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+##  Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+##                                  Mean   :43.92   Mean   :17.15  
+##                                  3rd Qu.:48.50   3rd Qu.:18.70  
+##                                  Max.   :59.60   Max.   :21.50  
+##                                  NA's   :2       NA's   :2      
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197.0     Median :4050   NA's  : 11   Median :2008  
+##  Mean   :200.9     Mean   :4202                Mean   :2008  
+##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+##  Max.   :231.0     Max.   :6300                Max.   :2009  
+##  NA's   :2         NA's   :2
+```
+
+---
+# Sets of statistics
+
+- Base R functions
+
+``` r
+summary(penguins$body_mass_g)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##    2700    3550    4050    4202    4750    6300       2
+```
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightLanguage": "r",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(css/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 60px;
+  height: 78px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

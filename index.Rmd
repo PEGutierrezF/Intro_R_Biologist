@@ -28,6 +28,11 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### Module 2: [Markdown](classes/Module 2 Markdown/Basic-Sintax-and-Markdown.html)
 
 ### Module 3: [Github and website creation](classes/Module 3 GitHub and website/Github-and-website.html)
+
+### Module 4: [Basic R Syntax and R Objects](classes/MModule 4 Basic syntax/Basic-R-Syntax-and-R-Objects.html)
+
+### [Data](classes/MModule 4 Basic syntax/penguins.csv)
+
 <br>
 
 <hr style="border: 1px solid #ccc;">
