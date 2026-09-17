@@ -10,6 +10,9 @@ date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 - This assignment consists of 10 questions, each worth **10 points**.  
 (Esta tarea consta de 10 preguntas, cada una vale **10 puntos**.)
 
+- Complete the assignment using an **R Markdown (.Rmd) document**. Include the **date and time** when you started or completed the assignment in the **YAML header**.
+(Completa la tarea utilizando un documento **R Markdown (.Rmd)**. Incluye la **fecha y hora** en que comenzaste o terminaste la tarea en el encabezado YAML.)
+
 - Write your answers in R code chunks whenever applicable.  
 (Escribe tus respuestas en chunks de R cuando sea aplicable.)
 
@@ -86,18 +89,11 @@ library(dplyr)
 
 <br><br>
 
-#### **Help files**
-**Q10.** Use R's help system to find out what the function `mean()` does. (Usa el sistema de ayuda de R para averiguar qué hace la función `mean()`.)
+#### **Creating and analyzing a vector**
+Q10. Create a numeric vector called grades containing the values 80, 90, 75, 95, and 85. Then, use the mean() function to calculate the average grade and store the result in an object called average. Print the result.`mean()`.) 
+(Crea un vector numérico llamado grades que contenga los valores 80, 90, 75, 95 y 85. Luego, utiliza la función mean() para calcular el promedio y guarda el resultado en un objeto llamado average. Muestra el resultado en pantalla.)
 
 <br><br><br><br><br><br><br><br>
-
-
-Q11
-Suma 5+10
-```{r}
-5+10
-```
-
 
 
 
