@@ -74,7 +74,7 @@ There are three essential components in any `.Rmd` file:
 3. Code chunks, where your R code lives and runs
 
 ---
-# Code Ccunks in R Markdown
+# Code Chunks in R Markdown
 - Code chunks are the engine of your R Markdown document. They are where all your R code runs, generating figures, tables, summaries, models, and more. 
 
 ---
@@ -182,39 +182,6 @@ citation("ggplot2")
 - `c()` : Combine function, used to create vectors. 
 - `()` : Parentheses, used to group expressions and control order of operations.
 
----
-# Equality
-- We can use the symbol `==` to test if two values are equal.
-```{r}
-'HELLO'=='GOOBYE'
-```
-
-- 
-```{r}
-5==5
-```
-
----
-# Inequality
-- We can use the symbol `!=` to test if two values are not equal.
-
-- 
-```{r}
-'HELLO'!='GOOBYE'
-```
-
-- 
-```{r}
-5!=5
-```
-
----
-# Greater than / Less than 
-- We can use the symbols `>` (greater than) and `<` (less than) to compare values.
-```{r}
-5>6
-```
-
 
 ---
 # Objects in R
@@ -249,51 +216,7 @@ my_obj2
 ```
 
 ---
-# Simple math in R
-- R can be used as a calculator. You can perform basic arithmetic operations directly in the console or in code chunks.
-```{r}
-5 + 5
-```
-
----
-# Simple math in R
-```{r}
-sqrt(16) # Square root
-abs(-5)  # Absolute value
-log(10)  # Natural logarithm
-exp(2)   # Exponential function
-```
-
----
-# Using variables in calculations
-- You can use variables (objects) in calculations just like you would with numbers.
-```{r}
-var1 <- 10
-var2 <- 20
-var3 <- var1 + var2
-var3
-```
-
----
-# Checking object types
-- We can check the type of an object using the `class()` function.
-```{r}
-class(var3)
-class(my_obj2)
-```
-
-```{r}
-is.character(my_obj2)
-```
-
-
----
-# Dates and times in R 
-```{r}
-x <- Sys.time() # Assign the current date and time to x
-x
-class(x) # Check the class of x
-```
+# Data set
 
 ---
 # Data set
@@ -390,5 +313,50 @@ summary(penguins)
 ```{r}
 summary(penguins$body_mass_g)
 
+```
+
+---
+# R Functions
+
+
+---
+# R Functions
+- You can write your own functions to perform repetitive operations using a single command.
+
+- A function has three main components:
+
+```{r}
+my_function <- function(input) {
+  Body
+  return(output)
+}
+```
+
+- Function name: The name you will use to call your function.
+- Input: The value(s) that the user provides to the function.
+- Body: The operation that the function performs.
+- Output: The result returned by the function using return().
+
+---
+# R Functions
+```{r}
+fahrenheit_to_celsius <- function(temp_F) {
+  temp_C <- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}
+```
+
+--
+<center>
+```{r, echo=FALSE, fig.cap="", out.width = '80%'}
+knitr::include_graphics("fig/temperature.png")
+```
+<center>
+
+---
+# R Functions
+
+```{r}
+fahrenheit_to_celsius(32)
 ```
 

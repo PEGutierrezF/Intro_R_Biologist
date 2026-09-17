@@ -22,7 +22,7 @@
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xd51b9203c854984bc17e328c42e6814","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"c917180f77144a8db12aeae7006d9b07","expires":1}</script>
     <script src="libs/himalaya-1.1.0/himalaya.js"></script>
     <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -45,7 +45,7 @@ class: center, middle, inverse, title-slide
 ### <br>
 ]
 .date[
-### BIOL 4990 – Fall 2025 <br> 2025-Jan-01 (updated: 2026-Sep-15)
+### BIOL 4990 – Fall 2025 <br> 2025-Jan-01 (updated: 2026-Sep-17)
 ]
 
 ---
@@ -97,7 +97,7 @@ There are three essential components in any `.Rmd` file:
 3. Code chunks, where your R code lives and runs
 
 ---
-# Code Ccunks in R Markdown
+# Code Chunks in R Markdown
 - Code chunks are the engine of your R Markdown document. They are where all your R code runs, generating figures, tables, summaries, models, and more. 
 
 ---
@@ -270,64 +270,6 @@ citation("ggplot2")
 - `c()` : Combine function, used to create vectors. 
 - `()` : Parentheses, used to group expressions and control order of operations.
 
----
-# Equality
-- We can use the symbol `==` to test if two values are equal.
-
-``` r
-'HELLO'=='GOOBYE'
-```
-
-```
-## [1] FALSE
-```
-
-- 
-
-``` r
-5==5
-```
-
-```
-## [1] TRUE
-```
-
----
-# Inequality
-- We can use the symbol `!=` to test if two values are not equal.
-
-- 
-
-``` r
-'HELLO'!='GOOBYE'
-```
-
-```
-## [1] TRUE
-```
-
-- 
-
-``` r
-5!=5
-```
-
-```
-## [1] FALSE
-```
-
----
-# Greater than / Less than 
-- We can use the symbols `&gt;` (greater than) and `&lt;` (less than) to compare values.
-
-``` r
-5&gt;6
-```
-
-```
-## [1] FALSE
-```
-
 
 ---
 # Objects in R
@@ -376,116 +318,7 @@ my_obj2
 ```
 
 ---
-# Simple math in R
-- R can be used as a calculator. You can perform basic arithmetic operations directly in the console or in code chunks.
-
-``` r
-5 + 5
-```
-
-```
-## [1] 10
-```
-
----
-# Simple math in R
-
-``` r
-sqrt(16) # Square root
-```
-
-```
-## [1] 4
-```
-
-``` r
-abs(-5)  # Absolute value
-```
-
-```
-## [1] 5
-```
-
-``` r
-log(10)  # Natural logarithm
-```
-
-```
-## [1] 2.302585
-```
-
-``` r
-exp(2)   # Exponential function
-```
-
-```
-## [1] 7.389056
-```
-
----
-# Using variables in calculations
-- You can use variables (objects) in calculations just like you would with numbers.
-
-``` r
-var1 &lt;- 10
-var2 &lt;- 20
-var3 &lt;- var1 + var2
-var3
-```
-
-```
-## [1] 30
-```
-
----
-# Checking object types
-- We can check the type of an object using the `class()` function.
-
-``` r
-class(var3)
-```
-
-```
-## [1] "numeric"
-```
-
-``` r
-class(my_obj2)
-```
-
-```
-## [1] "character"
-```
-
-
-``` r
-is.character(my_obj2)
-```
-
-```
-## [1] TRUE
-```
-
-
----
-# Dates and times in R 
-
-``` r
-x &lt;- Sys.time() # Assign the current date and time to x
-x
-```
-
-```
-## [1] "2026-09-15 13:50:16 -04"
-```
-
-``` r
-class(x) # Check the class of x
-```
-
-```
-## [1] "POSIXct" "POSIXt"
-```
+# Data set
 
 ---
 # Data set
@@ -688,6 +521,56 @@ summary(penguins$body_mass_g)
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
 ##    2700    3550    4050    4202    4750    6300       2
+```
+
+---
+# R Functions
+
+
+---
+# R Functions
+- You can write your own functions to perform repetitive operations using a single command.
+
+- A function has three main components:
+
+
+``` r
+my_function &lt;- function(input) {
+  Body
+  return(output)
+}
+```
+
+- Function name: The name you will use to call your function.
+- Input: The value(s) that the user provides to the function.
+- Body: The operation that the function performs.
+- Output: The result returned by the function using return().
+
+---
+# R Functions
+
+``` r
+fahrenheit_to_celsius &lt;- function(temp_F) {
+  temp_C &lt;- (temp_F - 32) * 5 / 9
+  return(temp_C)
+}
+```
+
+--
+&lt;center&gt;
+&lt;img src="fig/temperature.png" width="80%" /&gt;
+&lt;center&gt;
+
+---
+# R Functions
+
+
+``` r
+fahrenheit_to_celsius(32)
+```
+
+```
+## [1] 0
 ```
 
     </textarea>
