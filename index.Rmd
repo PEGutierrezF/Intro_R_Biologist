@@ -38,6 +38,9 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 <hr style="border: 1px solid #ccc;">
 ## Tips and helpful reminders
 ### [Tips and Tricks](assignments/tips to work/tips-to-work.html)
+
+### [Shortcuts](assignments/tips to work/Shortcuts.html)
+<br>
 <br>
 <br>
 
