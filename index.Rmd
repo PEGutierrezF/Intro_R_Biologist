@@ -31,7 +31,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 ### Module 4: [Basic R Syntax and R Objects](classes/Module 4 Basic syntax/Basic-R-Syntax-and-R-Objects.html)
 
-### [Data](classes/MModule 4 Basic syntax/penguins.csv)
+### [Data](classes/Module 4 Basic syntax/storms.csv)
 
 <br>
 
