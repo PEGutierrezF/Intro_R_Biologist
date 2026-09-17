@@ -47,7 +47,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 ## R Tutorials Prompts:
 
-### [RTutorial 1](assignments/assignments_1/assignments1.html)
+### [RTutorial 1](assignments/assignment_1/assignments1.html)
 
 <!--
 ### [RTutorial 2](assignments/assignments_2/assignments2.html)
