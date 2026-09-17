@@ -1,5 +1,5 @@
 ---
-title: "Assigment 1"
+title: "Assignment 1"
 subtitle: ''
 author: "Pablo E. Gutiérrez-Fonseca"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
@@ -26,6 +26,9 @@ date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 Do not copy output screenshots unless requested.  
 (Entrega la tarea en tus páginas personales usando el **archivo HTML** generado/kniteado desde el `.Rmd`.  
 No copies capturas de pantalla del resultado a menos que se indique.)
+
+- You have until tomorrow, Friday, September 18, at 11:59 PM to submit the assignment. (Tienen hasta mañana, viernes 18 de septiembre, a las 11:59 p. m. para enviar la tarea.)
+
 
 <br><br><br>
 
