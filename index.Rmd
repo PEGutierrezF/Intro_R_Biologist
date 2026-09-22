@@ -33,6 +33,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 ### [Data](classes/Module 4 Basic syntax/storms.csv)
 
+### Module 5: [dplyr](classes/Module 5 dplyr/Data-Manipulation.html)
 <br>
 
 <hr style="border: 1px solid #ccc;">
