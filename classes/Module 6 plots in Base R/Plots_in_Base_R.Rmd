@@ -4,8 +4,8 @@ box-plot and panels"
 subtitle: ""
 author: "Pablo E. Guti\u00E9rrez-Fonseca, PhD"
 institute: "<br>"
-date: "BIOL-4994 & BIOL-4991 | BIOL-6994 & BIOL-6997 <br> Fall 2025 <br>
-2025-Aug-01 (updated: `r format(Sys.Date(), '%Y-%b-%d')`)"
+date: "BIOL-4994 & BIOL-4991 | BIOL-6994 & BIOL-6997 <br> Fall 2026 <br>
+2026-Aug-01 (updated: `r format(Sys.Date(), '%Y-%b-%d')`)"
 output:
   xaringan::moon_reader:
     lib_dir: libs

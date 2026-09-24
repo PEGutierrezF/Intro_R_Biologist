@@ -4,7 +4,7 @@
     <title>dot-plot, bar-plot, line-charts, box-plot and panels</title>
     <meta charset="utf-8" />
     <meta name="author" content="Pablo E. Gutiérrez-Fonseca, PhD" />
-    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.31/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
     <script src="libs/panelset-0.3.0/panelset.js"></script>
@@ -22,13 +22,13 @@
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x3b4aadf04bd47cc8daa972859edab5e","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"a884725be6344217beecd832a258656e","expires":1}</script>
     <script src="libs/himalaya-1.1.0/himalaya.js"></script>
     <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
     <script src="libs/editable-0.2.6/editable.js"></script>
-    <link href="libs/countdown-0.4.0/countdown.css" rel="stylesheet" />
-    <script src="libs/countdown-0.4.0/countdown.js"></script>
+    <link href="libs/countdown-0.6.0/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown-0.6.0/countdown.js"></script>
     <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
     <script src="libs/d3-3.3.8/d3.min.js"></script>
     <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
@@ -36,7 +36,7 @@
     <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
     <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
     <script src="libs/chromatography-0.1/chromatography.js"></script>
-    <script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
+    <script src="libs/DiagrammeR-binding-1.0.12/DiagrammeR.js"></script>
     <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
     <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
     <link rel="stylesheet" href="css/custom.css" type="text/css" />
@@ -55,7 +55,7 @@ class: center, middle, inverse, title-slide
 ### <br>
 ]
 .date[
-### BIOL-4994 &amp; BIOL-4991 | BIOL-6994 &amp; BIOL-6997 <br> Fall 2025 <br> 2025-Aug-01 (updated: 2025-Dec-09)
+### BIOL-4994 &amp; BIOL-4991 | BIOL-6994 &amp; BIOL-6997 <br> Fall 2026 <br> 2026-Aug-01 (updated: 2026-Sep-24)
 ]
 
 ---
@@ -90,10 +90,7 @@ class: center, middle, inverse, title-slide
 ---
 exclude: true
 https://pkg.garrickadenbuie.com/countdown/#1
-<div class="countdown" id="timer_63193a9b" data-warn-when="30" data-update-every="1" tabindex="0" style="right:33%;bottom:0%;">
-<div class="countdown-controls"><button class="countdown-bump-down">&minus;</button><button class="countdown-bump-up">&plus;</button></div>
-<code class="countdown-time"><span class="countdown-digits minutes">01</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
-</div>
+<countdown-timer class="countdown" id="timer_88176c66" minutes="1" seconds="0" warn-when="30" update-every="1" tabindex="0" style="right:33%;bottom:0%;"></countdown-timer>
 
 https://bookdown.org/jgscott/DSGI/plots.html
 
@@ -132,7 +129,7 @@ https://bookdown.org/jgscott/DSGI/plots.html
 # Plots
 
 &lt;center&gt;
-&lt;img src="figs/GraphFlow.png" width="45%" /&gt;
+&lt;img src="figs/GraphFlow.png" alt="" width="45%" /&gt;
 &lt;/center&gt;
 
 ---
@@ -159,8 +156,8 @@ https://bookdown.org/jgscott/DSGI/plots.html
 
 .center[
 
-<div id="htmlwidget-f663d771e5d909c833df" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-f663d771e5d909c833df">{"x":{"diagram":"graph TB\n    A[Quantitative data] --> |measuring| Continuous\n    A[Quantitative data] --> |counting| Discrete"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d00f03b8a67c28b23209" style="width:100%;height:100%;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d00f03b8a67c28b23209">{"x":{"diagram":"graph TB\n    A[Quantitative data] --> |measuring| Continuous\n    A[Quantitative data] --> |counting| Discrete"},"evals":[],"jsHooks":[]}</script>
 ]
 ]
 
@@ -201,7 +198,7 @@ In a bar chart, values are represented by the length of bars, each corresponding
         
 .pull-left[
 &lt;center&gt;
-&lt;img src="figs/bar-chart.png" width="80%" /&gt;
+&lt;img src="figs/bar-chart.png" alt="" width="80%" /&gt;
 &lt;/center&gt;
 ]
 
@@ -527,7 +524,7 @@ abline(lm(dbp ~ chol, data = coronary), col = "red", lwd = 2,lty = 2)
 ]
 
 .pull-right[
-&lt;img src="figs/line-chart.png" width="80%" /&gt;
+&lt;img src="figs/line-chart.png" alt="" width="80%" /&gt;
 &lt;center&gt;
 ]
 
