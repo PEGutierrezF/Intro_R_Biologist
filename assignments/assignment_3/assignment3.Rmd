@@ -6,8 +6,8 @@ date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 ---
 
 ### Deadline / Fecha de entrega
-**Deadline:** Friday, Sept 19, 2025; 11:59 PM.  
-**Fecha de entrega:** Viernes, 19 de septiembre de 2025; 11:59 PM.
+**Deadline:** Friday, Sept 25, 2026; 11:59 PM.  
+**Fecha de entrega:** Viernes, 25 de septiembre de 2026; 11:59 PM.
 
 ### Instructions / Instrucciones generales
 

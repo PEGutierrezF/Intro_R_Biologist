@@ -4,7 +4,7 @@
     <title>Data Manipulation: dplyr</title>
     <meta charset="utf-8" />
     <meta name="author" content="Pablo E. Gutiérrez-Fonseca, PhD" />
-    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
     <script src="libs/panelset-0.3.0/panelset.js"></script>
@@ -22,7 +22,7 @@
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x59d71b30e0d462fac603d8baa336a79","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"c9a4a7af8f3547a6b29c52f15095099b","expires":1}</script>
     <script src="libs/himalaya-1.1.0/himalaya.js"></script>
     <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -45,7 +45,7 @@ class: center, middle, inverse, title-slide
 ### <br>
 ]
 .date[
-### BIOL-4994 &amp; BIOL-4991 | BIOL-6994 &amp; BIOL-6997 <br> Fall 2026 <br> 2026-Aug-01 (updated: 2026-Sep-22)
+### BIOL-4994 &amp; BIOL-4991 | BIOL-6994 &amp; BIOL-6997 <br> Fall 2026 <br> 2026-Aug-01 (updated: 2026-Sep-24)
 ]
 
 ---
@@ -1251,16 +1251,16 @@ starwars %&gt;% sample_n(10)
 ## # A tibble: 10 × 14
 ##    Character       height  mass hair_color skin_color eye_color birth_year sex  
 ##    &lt;chr&gt;            &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;
-##  1 Ratts Tyerel        79    15 none       grey, blue unknown           NA male 
-##  2 Biggs Darkligh…    183    84 black      light      brown             24 male 
-##  3 Barriss Offee      166    50 black      yellow     blue              40 fema…
-##  4 Taun We            213    NA none       grey       black             NA fema…
-##  5 Bossk              190   113 none       green      red               53 male 
-##  6 Palpatine          170    75 grey       pale       yellow            82 male 
-##  7 Cliegg Lars        183    NA brown      fair       blue              82 male 
-##  8 Rey                 NA    NA brown      light      hazel             NA fema…
-##  9 Yarael Poof        264    NA none       white      yellow            NA male 
-## 10 R2-D2               96    32 &lt;NA&gt;       white, bl… red               33 none 
+##  1 Jar Jar Binks      196    66 none       orange     orange            52 male 
+##  2 Dud Bolt            94    45 none       blue, grey yellow            NA male 
+##  3 Owen Lars          178   120 brown, gr… light      blue              52 male 
+##  4 Darth Maul         175    80 none       red        yellow            54 male 
+##  5 Jango Fett         183    79 black      tan        brown             66 male 
+##  6 Watto              137    NA black      blue, grey yellow            NA male 
+##  7 Grievous           216   159 none       brown, wh… green, y…         NA male 
+##  8 Shmi Skywalker     163    NA black      fair       brown             72 fema…
+##  9 Jek Tono Porki…    180   110 brown      fair       blue              NA &lt;NA&gt; 
+## 10 Leia Organa        150    49 brown      light      brown             19 fema…
 ## # ℹ 6 more variables: gender &lt;chr&gt;, homeworld &lt;chr&gt;, species &lt;chr&gt;,
 ## #   films &lt;list&gt;, vehicles &lt;list&gt;, starships &lt;list&gt;
 ```
