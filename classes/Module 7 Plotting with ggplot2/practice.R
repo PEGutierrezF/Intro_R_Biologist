@@ -29,6 +29,8 @@ head(tvshows)
 ggplot(data = tvshows)
 
 # Create a ggplot canvas specifying the x variable (GRP)
+# Gross Rating Points
+# PE = Predicted engagement, measures how closely viewers are paying attention to the show
 ggplot(data = tvshows,
        mapping = aes(x = GRP))
 
