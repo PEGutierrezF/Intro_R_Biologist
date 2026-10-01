@@ -40,6 +40,8 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Data](classes/Module 6 plots in Base R/data/coronary.xlsx)
 
 ### Module 7: [Advanced Plotting: ggplot2()](classes/Module 7 Plotting with ggplot2/Introduction to ggplot2().html)
+### [Data_tyre](classes/Module 7 Plotting with ggplot2/data/tyre.csv)
+### [Data_books](classes/Module 7 Plotting with ggplot2/data/books.csv)
 <br>
 
 <hr style="border: 1px solid #ccc;">
