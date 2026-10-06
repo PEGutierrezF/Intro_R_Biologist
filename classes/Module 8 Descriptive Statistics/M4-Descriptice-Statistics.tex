@@ -1,0 +1,1622 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Boadilla}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{graphicx}
+\logo{\ifnum\thepage>1\hfill\includegraphics[width=1cm]{logo}\fi}
+\titlegraphic{\includegraphics[width=3cm]{logo}}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Descriptive Statistics},
+  pdfauthor={Pablo E. Gutierrez-Fonseca},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Descriptive Statistics}
+\author{Pablo E. Gutierrez-Fonseca}
+\date{Fall 2024}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Why describe data?}
+\phantomsection\label{why-describe-data}
+\begin{itemize}
+\tightlist
+\item
+  Determine if our sample reflects the population of interest.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify outliers.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Obtain metrics necessary for inferential tests.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Understand the distribution of our data values (i.e., test for
+  normality).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify the type of statistical test to run.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data description and visualization}
+\phantomsection\label{data-description-and-visualization}
+\begin{itemize}
+\tightlist
+\item
+  We can examine our data and run statistical tests to see if the
+  distribution approximates a normal curve.\\
+\item
+  Typically, we start by visualizing our data.
+\end{itemize}
+
+\includegraphics{M4-Descriptice-Statistics_files/figure-beamer/unnamed-chunk-1-1.pdf}
+\end{frame}
+
+\begin{frame}{Histogram basic}
+\phantomsection\label{histogram-basic}
+\begin{itemize}
+\tightlist
+\item
+  Continuous data are most commonly visualized using Histograms.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Histograms display the distribution of data by grouping values into
+  intervals or bins, allowing for an understanding of the frequency and
+  spread of the data.
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{fig/Histogram} 
+
+}
+
+\end{figure}
+\end{frame}
+
+\begin{frame}{Box and Whisker Basics}
+\phantomsection\label{box-and-whisker-basics}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  Box plots are used to visualize the distribution of continuous data,
+  showing the \textbf{median}, \textbf{interquartile range (IQR)}, and
+  \textbf{potential outliers}.
+\item
+  The \textbf{box} represents the middle 50\% of the data (from the
+  first quartile \(Q1\) to the third quartile \(Q3\)).
+\item
+  The \textbf{line inside the box} shows the median (50th percentile).
+\item
+  \textbf{Whiskers} extend from the box to the smallest and largest
+  values within 1.5 times the IQR from \(Q1\) and \(Q3\).
+\item
+  \textbf{Data points outside the whiskers} are considered potential
+  outliers. ~
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.5\linewidth]{fig/box} 
+
+}
+
+\end{figure}
+\end{frame}
+
+\begin{frame}{Metrics to Describe data distribution.}
+\phantomsection\label{metrics-to-describe-data-distribution.}
+\begin{itemize}
+\item
+  Data and their associated distributions can be described in four
+  primary way:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Central Tendency (mean, median, mode)
+  \item
+    Variability (standard deviation, variance, quantiles)
+  \item
+    Skew
+  \item
+    Kurtosis (Peakedness)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Metrics to Describe data distribution.}
+\phantomsection\label{metrics-to-describe-data-distribution.-1}
+\begin{itemize}
+\item
+  Data and their associated distributions can be described in four
+  primary way:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Central Tendency (mean, median, mode)}
+  \item
+    Variability (standard deviation, variance, quantiles)
+  \item
+    Skew
+  \item
+    Kurtosis (Peakedness)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central tendency}
+\phantomsection\label{central-tendency}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Mean \(\left( \frac{\sum X}{n} \right)\)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Most often used measure of central tendency.
+  \item
+    Works well with normal and relatively normal curves.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Median (50th Percentile)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No formula. Rank order observations then find the middle.
+  \item
+    The second most used measure of central tendency.
+  \item
+    Works best with highly skewed populations.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Mode (Most Frequent Score)}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Least used measure of central tendency.
+  \item
+    Works best for highly irregular and multimodal distributions.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central tendency: Mean}
+\phantomsection\label{central-tendency-mean}
+\begin{itemize}
+\tightlist
+\item
+  \(\left( \bar{X} = \frac{\sum X}{n} \right)\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    where \(X\) represents individual data points and \(n\) is the
+    number of observations.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Sample mean is the measure of central tendency that best represents
+  the population mean.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Mean is \textbf{very} sensitive to extreme scores that can ``skew'' or
+  distort findings.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central tendency: Median}
+\phantomsection\label{central-tendency-median}
+\begin{itemize}
+\tightlist
+\item
+  Percentiles are used to define the percent of cases equal to and below
+  a certain point on a distribution.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The median \textbf{is the 50th percentile}, meaning \emph{half of
+    all observations fall at or below this value}.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  But lots of other percentiles are also important.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{A little about Percentiles}
+\phantomsection\label{a-little-about-percentiles}
+\begin{itemize}
+\tightlist
+\item
+  Quartiles (i.e., divide data into four equal parts: 25\%, 50\%, 75\%)
+  are a common percentile used to represent the value below which.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    25\% (Q1 or first quartile)\\
+  \item
+    75\% (Q3 or third quartile)
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{fig/quartiles} \end{figure}
+\end{frame}
+
+\begin{frame}{When to use What}
+\phantomsection\label{when-to-use-what}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  Use the \textbf{Mode} when the data are categorical:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Mode}: is the value that occurs most frequently in your
+    data.\\
+  \item
+    This is because having the same value occur for measurements with
+    many significant digits is highly unlikely.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the \textbf{Median} when you have extreme scores:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Median}: is simply the value that falls in the middle of all
+    your data.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the \textbf{Mean} the rest of the time.\\
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.25\linewidth]{fig/CnetralTendency} \end{figure}
+\end{frame}
+
+\begin{frame}{Metrics to Describe data distribution.}
+\phantomsection\label{metrics-to-describe-data-distribution.-2}
+\begin{itemize}
+\item
+  Data and their associated distributions can be described in four
+  primary way:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Central Tendency (mean, median, mode)
+  \item
+    \textbf{Variability (standard deviation, variance, quantiles)}
+  \item
+    Skew
+  \item
+    Kurtosis (Peakedness)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variability}
+\phantomsection\label{variability}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{fig/variability} \end{figure}
+\end{frame}
+
+\begin{frame}{Variability: Standard Deviation}
+\phantomsection\label{variability-standard-deviation}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Standard Deviation} measures how spread out the numbers in a
+  dataset are around the mean.
+\end{itemize}
+
+\begin{itemize}
+\item
+  The sample standard deviation \(s\) is calculated as:
+  \[s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}}\]
+\item
+  \(s\): The \textbf{sample standard deviation}, which measures the
+  spread or variability of the data points around the sample mean
+  \(\bar{x}\).
+\item
+  \(n\): The \textbf{sample size}, or the number of observations in the
+  dataset.
+\item
+  \(x_i\): Each individual data point in the sample.
+\item
+  \(\bar{x}\): The \textbf{sample mean}, or the average of the sample
+  data.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variability}
+\phantomsection\label{variability-1}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Variance} measures the average of the squared differences from
+  the mean, indicating how spread out the data points are.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The variance \(\sigma^2\) is calculated as:
+  \[s^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1}\]
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Variance is always larger than the Standard Deviation (SD)}
+  because variance is the square of SD. For example, if the SD is 3, the
+  variance will be \(3^2 = 9\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variability: Range}
+\phantomsection\label{variability-range}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Range} is the difference between the largest and smallest
+  values in a dataset, providing a measure of the spread or dispersion
+  of the data.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The range is calculated as:
+  \[\text{Range} = \text{max}(x) - \text{min}(x)\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Percentiles are useful for spread too}
+\phantomsection\label{percentiles-are-useful-for-spread-too}
+\begin{itemize}
+\item
+  You can use percentiles to get a feel for how spread out the data is
+  and where most of your observations are contained:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Inter-quartile range (IQR) = Q3 - Q1
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{fig/iqr} \end{figure}
+\end{frame}
+
+\begin{frame}{Identifying outliers}
+\phantomsection\label{identifying-outliers}
+\begin{itemize}
+\tightlist
+\item
+  An outlier is an observation that lies outside the overall pattern of
+  a distribution (Moore and McCabe 1999).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Usually, the presence of an outlier indicates some sort of problem.
+  (e.g.~an error in measurement or sample selection).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  But they may also be an indicator of novel data or identification of
+  unique and exciting observations.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Identifying outliers}
+\phantomsection\label{identifying-outliers-1}
+\begin{itemize}
+\tightlist
+\item
+  The first and third quantiles (Q1 and Q3) are often calculated to
+  identify outliers.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  One method for systematically identifying outliers uses:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Q1 - (1.5 * the inter-quartile range)
+  \item
+    Q3 + (1.5 * the inter-quartile range)
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Others identify outliers as any values below the 0.5th or above the
+  99.5th percentile.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When to use What}
+\phantomsection\label{when-to-use-what-1}
+\begin{itemize}
+\tightlist
+\item
+  Use the \textbf{Standard deviation (SD)} in most cases.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    SD quantifies how far, on average, each observation is from the
+    mean.
+  \item
+    The larger the SD, the more highly variable your data.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Use \textbf{range (R)} when describing predictive models.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    R is simply the maximum minus the minimum value in your data set
+  \item
+    R is important when modeling or making predictions, since your
+    algorithms are valid only over the range of values used to calibrate
+    your predictive model
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Use the \textbf{IQR} to identify and test potential outliers in your
+  data.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Metrics to Describe data distribution.}
+\phantomsection\label{metrics-to-describe-data-distribution.-3}
+\begin{itemize}
+\item
+  Data and their associated distributions can be described in four
+  primary way:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Central Tendency (mean, median, mode)
+  \item
+    Variability (standard deviation, variance, quantiles)
+  \item
+    \textbf{Skew}
+  \item
+    Kurtosis (Peakedness)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Skewness}
+\phantomsection\label{skewness}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Skewness}: This metric quantifies how balanced (symmetrical)
+  your distribution curve is.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{fig/skewness} \end{figure}
+\end{frame}
+
+\begin{frame}{Skewness}
+\phantomsection\label{skewness-1}
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{normal distribution} will have its mean and median values
+  located somewhere near the center of its range.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{fig/skewness} \end{figure}
+\end{frame}
+
+\begin{frame}{Skewness}
+\phantomsection\label{skewness-2}
+\begin{itemize}
+\tightlist
+\item
+  Skew of this peak away from center is common when extreme values pull
+  the median away from the mean.
+
+  \begin{figure}
+  \includegraphics[width=0.8\linewidth]{M4-Descriptice-Statistics_files/figure-beamer/unnamed-chunk-13-1} \end{figure}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Skewness}
+\phantomsection\label{skewness-3}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Positive Skew}: the ``slide'' takes you in a positive
+  direction.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The mean is bigger than the median (which is why the slide is being
+    pulled to higher values).
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Negative Skew}: the ``slide'' takes you in a negative
+  direction.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The mean is smaller than the median (which is why the slide is being
+    pulled to lower values).
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{fig/skewness} \end{figure}
+\end{frame}
+
+\begin{frame}{Calculating Skew}
+\phantomsection\label{calculating-skew}
+\begin{itemize}
+\tightlist
+\item
+  Negative value = Negative Skew.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Positive value = Positive Skew
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Zero = Normal distribution
+\end{itemize}
+
+\[\text{Skewness} = \frac{3(\bar{x} - \text{Median})}{\text{SD}}\]
+
+\begin{itemize}
+\tightlist
+\item
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\bar{x}\) is the \textbf{sample mean}, representing the average of
+    all data points.
+  \item
+    \textbf{Median} is the middle value in a dataset when sorted in
+    ascending or descending order.
+  \item
+    \textbf{SD} (Standard Deviation) measures the spread of the data
+    points around the mean.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Skewness: Significant?}
+\phantomsection\label{skewness-significant}
+\begin{itemize}
+\item
+  To determine if this deviation from zero in the skew statistic is
+  likely a significant departure from normality, compare it to the
+  \textbf{standard error of skew (ses)}.
+\item
+  If the skew you have calculated is more than \textbf{2 times the ses},
+  then you likely have significant skew, which means you have
+  \textbf{non normal data} and should consider a nonparametric test for
+  your statistical analyses
+\end{itemize}
+
+\[
+\begin{array}{cc}
+ses = \sqrt{\frac{6}{n}} & \hspace{1cm} \text{Skewness} = \frac{3(\bar{x} - \text{Median})}{\text{SD}}
+\end{array}
+\]
+\end{frame}
+
+\begin{frame}{Metrics to Describe data distribution.}
+\phantomsection\label{metrics-to-describe-data-distribution.-4}
+\begin{itemize}
+\item
+  Data and their associated distributions can be described in four
+  primary way:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Central Tendency (mean, median, mode)
+  \item
+    Variability (standard deviation, variance, quantiles)
+  \item
+    Skew
+  \item
+    \textbf{Kurtosis (Peakedness)}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Kurtosis}
+\phantomsection\label{kurtosis}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Kurtosis} is simply a measure of how pointy or flat the peak
+  of your distribution curve is.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Any deviation from a bell shape, with the peak either too flat
+  (platykurtic) or too peaked (leptokurtic), suggests that your data are
+  not normally distributed.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{fig/kurtosis} \end{figure}
+\end{frame}
+
+\begin{frame}{Kurtosis}
+\phantomsection\label{kurtosis-1}
+\begin{itemize}
+\tightlist
+\item
+  Positive values = Leptokurtic.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Zero = Mesokurtic = normal (bell-shaped).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Negative values = Platykurtic.
+\end{itemize}
+
+\[
+\text{Kurtosis} = \frac{\sum(\left( \frac{x_i - \bar{x}}{\text{SD}} \right)^4 - 3)}{n}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(x_i\) represents each individual data point.
+  \item
+    \(\bar{x}\) is the \textbf{sample mean}, the average of all data
+    points.
+  \item
+    \textbf{SD} (Standard Deviation) is the measure of how spread out
+    the data points are from the mean.
+  \item
+    \(n\) is the number of data points in the sample.
+  \item
+    The subtraction of 3 is to adjust for the kurtosis of a normal
+    distribution, which has a kurtosis of 3.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Kurtosis: Significant?}
+\phantomsection\label{kurtosis-significant}
+\begin{itemize}
+\item
+  To determine if this deviation from zero in the kurtosis statistic is
+  likely a significant departure from normality, compare it to the
+  \textbf{standard error of kurtosis (sek)}.
+\item
+  If the kurtosis you have calculated is more than \textbf{twice the
+  sek}, you likely have \textbf{non normal data} and should consider a
+  nonparametric test for your statistical analyses.
+\end{itemize}
+
+\[
+\begin{array}{cc}
+sek = \sqrt{\frac{24}{n}} & \hspace{2cm} \text{Kurtosis} = \frac{\sum \left( \frac{x_i - \bar{x}}{\text{SD}} \right)^4 - 3}{n}
+\end{array}
+\]
+\end{frame}
+
+\begin{frame}{Some Visual Examples}
+\phantomsection\label{some-visual-examples}
+\begin{itemize}
+\item
+  How can climate change?
+\item
+  Change in \textbf{central tendency}.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{fig/climate1} \end{figure}
+\end{frame}
+
+\begin{frame}{Some Visual Examples}
+\phantomsection\label{some-visual-examples-1}
+\begin{itemize}
+\tightlist
+\item
+  How can climate change?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Change in \textbf{spread and shape}.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{fig/climate2} \end{figure}
+\end{frame}
+
+\begin{frame}{Some Visual Examples}
+\phantomsection\label{some-visual-examples-2}
+\begin{itemize}
+\tightlist
+\item
+  How can climate change?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Change in \textbf{both}.
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{fig/climate3} \end{figure}
+\end{frame}
+
+\begin{frame}{Data Distributions}
+\phantomsection\label{data-distributions}
+\end{frame}
+
+\begin{frame}{Data Distributions}
+\phantomsection\label{data-distributions-1}
+\begin{itemize}
+\item
+  There are various types of data distributions, each with its own
+  unique properties and implications.
+\item
+  \textbf{In nature, most data are normally distributed}.
+\item
+  The central limit theorem (CLT) states that the distribution of sample
+  means approximates a normal distribution as the sample size gets
+  larger, regardless of the population's distribution.
+\end{itemize}
+
+\[
+\bar{X}_n \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+\]
+
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  The sample mean \(\bar{X}_n\) will follow a normal distribution with
+  mean \(\mu\) and standard deviation \(\frac{\sigma}{\sqrt{n}}\). As
+  the sample size \(n\) increases, the standard deviation
+  \(\frac{\sigma}{\sqrt{n}}\) decreases, making the sample mean a more
+  accurate estimate of the population mean \(\mu\).\\
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Why do we care if our data is normal?}
+\phantomsection\label{why-do-we-care-if-our-data-is-normal}
+\begin{itemize}
+\tightlist
+\item
+  The math ``under the hood'' of many analyses \textbf{expects that data
+  is normally distributed} - if it isn't, you'll still get an answer,
+  but it won't actually be saying what you think it is saying.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Why do we care about \textbf{skew} and \textbf{kurtosis}?}
+\phantomsection\label{why-do-we-care-about-skew-and-kurtosis}
+\begin{itemize}
+\tightlist
+\item
+  Because many statistical analyses assume a normal distribution of the
+  data, testing for normality must always be a precursor to any
+  analysis.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\tightlist
+\item
+  Normally Distributed Data is:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Unimodal (one mode)\\
+  \item
+    Symmetrical (no SKEW)\\
+  \item
+    Bell Shaped (no KURTOSIS)\\
+  \item
+    Mean, Mode and Median are all centered\\
+  \item
+    Asymptotic (tails never reach 0)\\
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\includegraphics{M4-Descriptice-Statistics_files/figure-beamer/unnamed-chunk-24-1.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Why do we care about \textbf{skew} and
+\textbf{kurtosis}?}
+\phantomsection\label{why-do-we-care-about-skew-and-kurtosis-1}
+\begin{itemize}
+\tightlist
+\item
+  We can examine all of these different descriptors individually, but
+  the easiest and most complete way to test for normality is to test the
+  \textbf{goodness of fit} for a normal distribution.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Generate data from }
+\CommentTok{\# a normal distribution}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{,}\AttributeTok{mean=}\DecValTok{0}\NormalTok{,}\AttributeTok{sd=}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# Shapiro{-}Wilk normality test}
+\FunctionTok{shapiro.test}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data
+## W = 0.99388, p-value = 0.9349
+\end{verbatim}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Why do we care about \textbf{skew} and
+\textbf{kurtosis}?}
+\phantomsection\label{why-do-we-care-about-skew-and-kurtosis-2}
+\begin{itemize}
+\tightlist
+\item
+  We can examine all of these different descriptors individually, but
+  the easiest and most complete way to test for normality is to test the
+  \textbf{goodness of fit} for a normal distribution.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Generate data from }
+\CommentTok{\# a normal distribution}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{,}\AttributeTok{mean=}\DecValTok{0}\NormalTok{,}\AttributeTok{sd=}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# Shapiro{-}Wilk normality test}
+\FunctionTok{shapiro.test}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data
+## W = 0.99388, p-value = 0.9349
+\end{verbatim}
+
+\normalsize
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\small
+
+\begin{itemize}
+\item
+  Interpretate shapiro.tets:
+
+  \begin{itemize}
+  \item
+    Null hypothesis (H\textsubscript{0}): The data is normally
+    distributed
+  \item
+    Alternative hypothesis (H\textsubscript{1}): The data is not
+    normally distributed.
+  \end{itemize}
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Why do we care about \textbf{skew} and
+\textbf{kurtosis}?}
+\phantomsection\label{why-do-we-care-about-skew-and-kurtosis-3}
+\begin{itemize}
+\tightlist
+\item
+  We can examine all of these different descriptors individually, but
+  the easiest and most complete way to test for normality is to test the
+  \textbf{goodness of fit} for a normal distribution.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\tiny
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Generate data from }
+\CommentTok{\# a normal distribution}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{,}\AttributeTok{mean=}\DecValTok{0}\NormalTok{,}\AttributeTok{sd=}\DecValTok{1}\NormalTok{)}
+\CommentTok{\# Shapiro{-}Wilk normality test}
+\FunctionTok{shapiro.test}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  data
+## W = 0.99388, p-value = 0.9349
+\end{verbatim}
+
+\normalsize
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\small
+
+\begin{itemize}
+\item
+  Interpretate shapiro.tets:
+
+  \begin{itemize}
+  \item
+    Null hypothesis (H\textsubscript{0}): The data is normally
+    distributed
+  \item
+    Alternative hypothesis (H\textsubscript{1}): The data is not
+    normally distributed.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\item
+  \textbf{Larger p-value (p \textgreater{} 0.05)}: Fail to reject the
+  null hypothesis; the data is likely normally distributed.
+\item
+  \textbf{Smaller p-value (p \textless{} 0.05)}: Reject the null
+  hypothesis; the data is not normally distributed. \normalsize
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What to do about non-normal data?}
+\phantomsection\label{what-to-do-about-non-normal-data}
+\begin{itemize}
+\item
+  Once you discover that your data is non-normal you have several
+  options:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Analyze and potentially remove outliers
+  \item
+    Transform the data mathematically
+  \item
+    Conduct non-parametric analyses
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Outliers?}
+\phantomsection\label{outliers}
+\begin{itemize}
+\tightlist
+\item
+  How to find outliers:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Outlier box plots (visual) use the IQR * 1.5 threshold.
+  \item
+    \textbf{IQR}: \(Q_3 - Q_1\)
+  \item
+    \textbf{Lower Threshold}: \(Q_1 - (1.5 * \text{IQR})\)
+  \item
+    \textbf{Upper Threshold}: \(Q_3 + (1.5 * \text{IQR})\)
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  These can help identify potential outliers but \textbf{do not justify
+  their removal}.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Sometimes outliers are \textbf{real, correct (although extreme)
+  observations} that we are truly interested in.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  We can only remove outliers if we know the data is \textbf{incorrect}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Working with non-normal Data.}
+\phantomsection\label{working-with-non-normal-data.}
+\begin{itemize}
+\tightlist
+\item
+  Transformations:
+
+  \begin{itemize}
+  \item
+    To transform your data, apply a mathematical function to each
+    observation, then use these numbers in your statistical test.
+  \item
+    There are an infinite number of transformations you could use, but
+    it is better to use one common to our field.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Working with non-normal Data.}
+\phantomsection\label{working-with-non-normal-data.-1}
+\begin{itemize}
+\tightlist
+\item
+  Non-normal data happens. Especially with counts, percents, rare
+  events.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{itemize}
+\tightlist
+\item
+  Common transformations in our field:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    square-root:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      for moderate skew.\\
+    \end{itemize}
+  \item
+    log:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      for positively skewed data.\\
+    \end{itemize}
+  \item
+    Inverse:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      for severe skew.\\
+    \end{itemize}
+  \item
+    Rank\\
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{fig/transformation} 
+
+}
+
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Square root Transformation}
+\phantomsection\label{square-root-transformation}
+\begin{itemize}
+\item
+  \textbf{Square-root transformation}: This consists of taking the
+  square root of each observation.
+\item
+  In R use: \textbf{sqrt(X)}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{36}\NormalTok{, }\DecValTok{49}\NormalTok{, }\DecValTok{64}\NormalTok{, }\DecValTok{81}\NormalTok{, }\DecValTok{100}\NormalTok{)}
+\CommentTok{\# Apply square{-}root transformation}
+\NormalTok{sqrt\_data }\OtherTok{\textless{}{-}} \FunctionTok{sqrt}\NormalTok{(data)}
+\CommentTok{\# Goodness of fit test}
+\FunctionTok{shapiro.test}\NormalTok{(sqrt\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  sqrt_data
+## W = 0.97016, p-value = 0.8924
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Square root Transformation}
+\phantomsection\label{square-root-transformation-1}
+\begin{itemize}
+\tightlist
+\item
+  If you apply a square root to a continuous variable that contains
+  \textbf{values negative values, decimals and values above 1}, you are
+  treating some numbers differently than others.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  So a constant must be added to move the minimum value of the
+  distribution to 1.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Log Transformation}
+\phantomsection\label{log-transformation}
+\begin{itemize}
+\item
+  Many variables in biology have log-normal distributions.
+\item
+  In R use: \textbf{log(X)}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sample data (e.g., positive values)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{100}\NormalTok{, }\DecValTok{1000}\NormalTok{, }\DecValTok{10000}\NormalTok{, }\DecValTok{100000}\NormalTok{)}
+\CommentTok{\# Apply log transformation (log base 10)}
+\NormalTok{log\_data }\OtherTok{\textless{}{-}} \FunctionTok{log10}\NormalTok{(data)}
+\CommentTok{\# Goodness of fit test}
+\FunctionTok{shapiro.test}\NormalTok{(log\_data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  log_data
+## W = 0.98189, p-value = 0.9606
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Log Transformation}
+\phantomsection\label{log-transformation-1}
+\begin{itemize}
+\tightlist
+\item
+  The logarithm of any \textbf{negative number is undefined and log
+  functions treat decimals differently than numbers \textgreater1}.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  So a constant must be added to move the minimum value of the
+  distribution to 1.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Inverse transformation}
+\phantomsection\label{inverse-transformation}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Inverse transformation}: This consists of taking the inverse
+  \(X^{-1}\) of a number.
+\item
+  In R use: \texttt{1/X} or \texttt{X\^{}-1}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Sample data (e.g., positive values)}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{16}\NormalTok{, }\DecValTok{32}\NormalTok{, }\DecValTok{64}\NormalTok{)}
+\CommentTok{\# Apply inverse transformation (reciprocal)}
+\NormalTok{inverse\_data }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{/}\NormalTok{ data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  Tends to make big numbers small and small numbers big a constant must
+  be added to move the minimum value of the distribution to 1
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reflecting Transformations}
+\phantomsection\label{reflecting-transformations}
+\begin{itemize}
+\tightlist
+\item
+  Each of these transformations can be adjusted for negative skew by
+  taking the reflection.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  To reflect a value, multiply data by -1, and then add a constant to
+  bring the minimum value back above 1.0.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  For example:
+
+  \begin{itemize}
+  \item
+    sqrt(x) for positively skewed data,
+  \item
+    sqrt((x*-1) + c) for negatively skewed data
+  \item
+    log10(x) for positively skewed data,
+  \item
+    log10(x*-1 + c) for negatively skewed data
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Rank Transform}
+\phantomsection\label{rank-transform}
+\begin{itemize}
+\tightlist
+\item
+  Rank transformation requires sorting your data and then creating a new
+  column where each observation is assigned a rank.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  For tied values, assign the average rank.
+\item
+  Perform all subsequent analyses on the ranked data instead of the
+  original values.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transformation Rules to Live By}
+\phantomsection\label{transformation-rules-to-live-by}
+\begin{itemize}
+\item
+  Transformations work by altering the relative distances between data
+  points.
+\item
+  If done correctly, all data points remain in the same relative order
+  as prior to transformation.
+\item
+  However, this might be undesirable if the original variables were
+  meant to be substantively interpretable.
+\item
+  Therefore\ldots{}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Transformation Rules to Live By}
+\phantomsection\label{transformation-rules-to-live-by-1}
+\begin{itemize}
+\tightlist
+\item
+  Don't mess with your data unless you have to.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Are there true outliers? Remove and retest.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  If you have to mess with it, make sure you know what you are doing.
+  Try different transformations to see which is best.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Include these details in your methods.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Back transform to original units for reports of central tendency and
+  variability.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Sometimes transformations don't work, don't panic, you will just get
+  to run \textbf{nonparametric tests}.
+\end{itemize}
+\end{frame}
+
+\end{document}
