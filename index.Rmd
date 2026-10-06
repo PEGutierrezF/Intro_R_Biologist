@@ -44,6 +44,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Data_books](classes/Module 7 Plotting with ggplot2/data/books.csv)
 
 ### Module 8: [Descriptive Statistics](classes/Module 8 Descriptive Statistics/M4-Descriptice-Statistics-xaraingan.html)
+### [Fish data](classes/Module 8 Descriptive Statistics/fish_data.csv)
 <br>
 
 <hr style="border: 1px solid #ccc;">
