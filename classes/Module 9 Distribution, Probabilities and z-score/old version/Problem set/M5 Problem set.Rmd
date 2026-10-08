@@ -1,0 +1,142 @@
+---
+title: "M5 Problem Set Distributions, Probability and z-score for TAs"
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+output: pdf_document
+---
+
+**R practice.<br />**
+<br />  
+<br /> 
+
+```{r message=FALSE}
+library(BSDA)
+library(tidyverse)
+library(lessR)
+library(readxl)
+```
+
+```{r}
+#open up our data
+sleeping <- read_xlsx("Sleeping_Mammals1.xlsx")
+```
+
+1. Based on the data, mammals spend most of their time in which type of sleep phase (dreaming or non-dreaming)?
+
+```{r}
+#pivot gives us more summary statistics, for Non-Dreaming sleep:
+pivot(sleeping, c(IQR, skew, kurtosis, mean, sd, var), NonDreaming)
+#and dreaming sleep.
+pivot(sleeping, c(IQR, skew, kurtosis, mean, sd, var), Dreaming)
+
+```
+
+2. Which type of sleep phase has the highest variability across the species included here (dreaming or non-dreaming)?
+
+3. What is the p-value for the goodness of fit test for the Dreaming variable (NOTE..just enter the number (no letters, symbols, equal signs etc).also be careful of decimal places.
+```{r}
+shapiro.test(sleeping$Dreaming)
+```
+
+4. Based on this goodness of fit test, is the dreaming variable normally distributed? (You can check out this page if you are wondering.
+NO
+
+5. What is the p-value for the goodness of fit test for the non-Dreaming variable (NOTE..just enter the number (no letters, symbols, equal signs etc).also be careful of decimal places.
+
+```{r}
+shapiro.test(sleeping$NonDreaming)
+```
+
+6. Based on this goodness of fit test, is the non-Dreaming variable normally distributed? (You can check out this page if you are wondering.
+YES
+
+8. From the table, enter the associated z-score for small class for 'baboon'.
+```{r}
+# Filter small mammals
+small_mammals <- subset(sleeping, Mammalian_Size_Group == "small")
+
+# Extract Baboon's NonDreaming sleep value
+baboon_value <- sleeping[sleeping$Species == "Baboon", "NonDreaming"]
+
+# Compute mean and standard deviation for small mammals
+mean_small <- mean(small_mammals$NonDreaming, na.rm = TRUE)
+sd_small <- sd(small_mammals$NonDreaming, na.rm = TRUE)
+
+# Compute z-score for Baboon's NonDreaming sleep within small mammals
+z_score_baboon <- (baboon_value - mean_small) / sd_small
+
+# Print the result
+print(z_score_baboon)
+```
+
+
+13. Based on your knowledge that higher (absolute value) zscores are more unusual for a given group's distribution, which class would you assign baboon to (small or large)? (hint compare baboon's z scores for the small and large group..which group does the species z score fit "best" with...ie for which group is that species z score less extreme?
+
+```{r}
+# Filter large mammals
+large_mammals <- subset(sleeping, Mammalian_Size_Group == "large")
+
+# Compute z-score for large mammals (using the same method as for small)
+mean_large <- mean(large_mammals$NonDreaming, na.rm = TRUE)
+sd_large <- sd(large_mammals$NonDreaming, na.rm = TRUE)
+
+z_score_baboon_large <- (baboon_value - mean_large) / sd_large
+
+# Calculate absolute values of the z-scores
+abs_z_score_small <- abs(z_score_baboon)
+abs_z_score_large <- abs(z_score_baboon_large)
+
+# Compare which z-score is less extreme
+if (abs_z_score_small < abs_z_score_large) {
+  group_assigned <- "small"
+} else {
+  group_assigned <- "large"
+}
+
+# Print the result
+print(paste("Baboon is assigned to the", group_assigned, "group."))
+
+```
+
+16.  Based on your knowledge that higher (absolute value) zscores are more unusual for a given group's distribution, which class would you assign roe deer to (small or large)? (hint compare roe deer's z scores for the small and large group..which group does the species z score fit "best" with...ie for which group is that species z score less extreme?
+
+```{r}
+
+```
+
+
+17. Identify the upper z-score that represents &lt; 1% TOTAL chance of occurring.&nbsp; This doesn't require any calculations, just the determination of the z-score from the normal probability table (or R function).&nbsp;
+```{r}
+lower_z_score <- qnorm(1-0.01)
+print(lower_z_score)
+```
+
+
+18 Identify the lower z-score that represents < 1% TOTAL chance of occurring.&nbsp; This doesn't require any calculations, just the determination of the z-score from the normal probability table (or R function).
+```{r}
+lower_z_score <- qnorm(0.01)
+print(lower_z_score)
+```
+
+19. What is the actual nondreaming value associated with the upper z score identified in the question above?
+```{r}
+# Calculate the mean and standard deviation, excluding NA values
+mean_small <- mean(sleeping$NonDreaming, na.rm = TRUE)
+sd_small <- sd(sleeping$NonDreaming, na.rm = TRUE)
+
+# Calculate the NonDreaming value for the upper z-score (2.33)
+z_score_upper <- 2.33
+value_upper <- mean_small + z_score_upper * sd_small
+
+# Print the result
+print(value_upper)
+```
+
+20.  How much non-dreaming sleep would a mammal need to sleep to be in the top 5% of sleepy mammals?
+```{r}
+# Calculate the 95th percentile value for NonDreaming sleep
+percentile_95 <- qnorm(0.95, mean = mean_small, sd = sd_small)
+# Print the result
+print(percentile_95)
+```
+

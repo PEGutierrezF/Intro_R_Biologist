@@ -1,0 +1,1583 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\usetheme[]{Boadilla}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{graphicx}
+\logo{\ifnum\thepage>1\hfill\includegraphics[width=1cm]{logo}\fi}
+\titlegraphic{\includegraphics[width=3cm]{logo}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Hypothesis Testing, Probability and Distributions},
+  pdfauthor={Pablo E. Gutierrez-Fonseca},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Hypothesis Testing, Probability and Distributions}
+\author{Pablo E. Gutierrez-Fonseca}
+\date{Fall 2024}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Normal distribution: Introduction}
+\phantomsection\label{normal-distribution-introduction}
+\begin{itemize}
+\tightlist
+\item
+  Why did we focus on normality?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{normal distribution} is a key tool for determining the
+  probability of a given value occurring in a population that follows
+  this distribution.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  It allows us to make inferences about a population by calculating how
+  likely it is for data to fall within certain ranges.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Many statistical tests assume data follows a \textbf{normal
+  distribution}, which helps in determining \textbf{significance} and
+  making reliable conclusions.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Normal distribution: Introduction}
+\phantomsection\label{normal-distribution-introduction-1}
+\begin{itemize}
+\tightlist
+\item
+  The normal distribution has two parameters: the mean (\(\mu\)) and the
+  standard deviation (\(\sigma\)).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  If a \textbf{variable x} follows a normal distribution with a specific
+  mean (\(\mu\)) and standard deviation (\(\sigma\)), we write this as:
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\includegraphics[width=0.5\linewidth]{M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-1-1}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\vspace{2cm}
+
+\[
+x \sim N(\mu, \sigma)
+\]
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Converting to Standard Normal Distribution}
+\phantomsection\label{converting-to-standard-normal-distribution}
+\begin{itemize}
+\tightlist
+\item
+  To simplify comparisons between different normal distributions, we
+  often convert values to the \textbf{standard normal distribution}.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The standard normal distribution has a \(\mu\) = \(0\) and a
+  \(\sigma\) = \(1\).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Any normal distribution can be converted into the standard normal
+  distribution by using the \textbf{z-score} formula:
+  \(z = \frac{x - \mu}{\sigma}\)
+\end{itemize}
+
+\includegraphics[width=0.5\linewidth]{M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-2-1}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing, Probability and Distributions}
+\phantomsection\label{hypothesis-testing-probability-and-distributions}
+\begin{itemize}
+\tightlist
+\item
+  Hypothesis Testing
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Null and alternative hypothesis
+  \item
+    Test statistic
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{gray}{Probability and Distributions}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{gray}{z-score}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing: Null and alternative hypothesis}
+\phantomsection\label{hypothesis-testing-null-and-alternative-hypothesis}
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{null hypothesis} (denoted by \(H_0\)) is a statement of the
+  status quo, one of \textbf{no difference or no effect}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If the null hypothesis is not rejected, no changes will be made.
+  \end{itemize}
+\end{itemize}
+
+\centering
+
+\(H_0\): \(\mu = \mu_0\)\\
+
+\vspace{1cm}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing: Null and alternative hypothesis}
+\phantomsection\label{hypothesis-testing-null-and-alternative-hypothesis-1}
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{null hypothesis} (denoted by \(H_0\)) is a statement of the
+  status quo, one of \textbf{no difference or no effect}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    If the null hypothesis is not rejected, no changes will be made.
+  \end{itemize}
+\end{itemize}
+
+\centering
+
+\(H_0\): \(\mu = \mu_0\)\\
+
+\vspace{1cm}
+
+\begin{itemize}
+\item
+  An \textbf{alternative hypothesis} (denoted by \(H_1\)) is one in
+  which \textbf{some difference or effect is expected}.
+\item
+  One sided alternative hypothesis:
+\end{itemize}
+
+\centering
+
+\(H_1\): \(\mu < \mu_0\) or \(H_1\): \(\mu > \mu_0\)\\
+
+\begin{itemize}
+\tightlist
+\item
+  Two sided alternative hypothesis:
+\end{itemize}
+
+\centering
+
+\(H_1\): \(\mu \neq \mu_0\)\\
+\end{frame}
+
+\begin{frame}{Hypothesis Testing: Test statistic}
+\phantomsection\label{hypothesis-testing-test-statistic}
+\begin{itemize}
+\tightlist
+\item
+  All inferential tests use a formula that calculates a \textbf{test
+  statistic}, quantifying the relationship or difference you are
+  testing.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\small
+
+\begin{itemize}
+\item
+  Independent t-test:
+  \[t = \frac{\bar{X_1} - \bar{X_2}}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}\]
+
+  \begin{itemize}
+  \item
+    Dependent t-test \[t = \frac{\bar{D}}{\frac{s_D}{\sqrt{n}}}\]
+  \item
+    One sample z-test
+    \[z = \frac{\bar{X} - \mu}{\frac{\sigma}{\sqrt{n}}}\] \small  
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\small
+
+\begin{itemize}
+\item
+  F-test (ANOVA) \[F = \frac{MST}{MSE}\]
+\item
+  Pearson correlation
+  \[r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}\]\\
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing: Test statistic}
+\phantomsection\label{hypothesis-testing-test-statistic-1}
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{normal distribution curve} allows us to calculate the
+  \textbf{probability} of obtaining a \textbf{test statistic} as extreme
+  as the one observed, assuming the \textbf{Null Hypothesis is true}.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{test statistic} is a value used in making a decision about
+  the null hypothesis, and is found by converting the sample statistic
+  to a score with the assumption that the null hypothesis is true
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/test-statistic-curve-1.pdf}}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing: Test statistic}
+\phantomsection\label{hypothesis-testing-test-statistic-2}
+\begin{itemize}
+\tightlist
+\item
+  If the \textbf{probability} (i.e., \emph{the area under the curve}) of
+  obtaining such an extreme test statistic is less than our chosen
+  significance level (\emph{usually 0.05}), we consider the result to be
+  \textbf{statistically significant}.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  In such cases, we may \textbf{reject the Null Hypothesis}, suggesting
+  there is evidence for a difference or effect.
+  \pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-8-1.pdf}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing: Test statistic}
+\phantomsection\label{hypothesis-testing-test-statistic-3}
+\begin{itemize}
+\tightlist
+\item
+  Another way to think about this:
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  If the \textbf{probability that our data fits the null distribution
+  (i.e., the null hypothesis is true) is less than 5\%}, we conclude
+  that the data \textbf{does not fit the null}.
+\item
+  This indicates a significant deviation from what we would expect by
+  chance.
+\item
+  We then \textbf{reject the null hypothesis}.
+\item
+  The result is considered \textbf{statistically significant}.\\
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{figs/plot1} 
+
+}
+
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing, Probability and Distributions}
+\phantomsection\label{hypothesis-testing-probability-and-distributions-1}
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{gray}{Hypothesis Testing}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Probability and Distributions
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{gray}{z-score}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Before: p-value, significance and alfa level}
+\phantomsection\label{before-p-value-significance-and-alfa-level}
+\end{frame}
+
+\begin{frame}{Why p-value of less than \textbf{0.05}?}
+\phantomsection\label{why-p-value-of-less-than-0.05}
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+``It is usual and convenient for experimenters to take 5\% as a standard
+level of significance, in the sense that they are prepared to ignore all
+results which fail to reach this standard, and, by this means, to
+eliminate from further discussion the greater part of the fluctuations
+which chance causes have introduced into their experimental results.''
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  Ronald Aylmer Fisher (1890-1962)
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{figs/fisher} \end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What is a P-Value?}
+\phantomsection\label{what-is-a-p-value}
+\begin{itemize}
+\tightlist
+\item
+  The \textbf{p-value} (or probability value) is the probability of
+  getting a value of the \textbf{test statistic} that is \textbf{at
+  least as extreme} as the one representing the sample data, assuming
+  that the null hypothesis is true
+\end{itemize}
+
+\begin{itemize}
+\item
+  Interpretation:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A small p-value indicates that the observed result is unlikely under
+    the null hypothesis, suggesting evidence against it.\\
+  \item
+    A large p-value suggests that the observed result is consistent with
+    the null hypothesis.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Critical Region}
+\phantomsection\label{critical-region}
+\begin{itemize}
+\tightlist
+\item
+  The critical region (or rejection region) is the set of all values of
+  the test statistic that cause us to reject the null hypothesis.
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.4\linewidth]{figs/criticalregion} 
+
+}
+
+\end{figure}
+
+\begin{itemize}
+\tightlist
+\item
+  Acceptance and rejection regions in case of a two-tailed test with 5\%
+  significance level.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{What is Significance?}
+\phantomsection\label{what-is-significance}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  A statistical result is \textbf{significant} if it is \textbf{unlikely
+  to have occurred by chance}.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Despite natural variability in the population, the probability of
+  observing a value this extreme due to random variability is
+  \textbf{low} (though not impossible).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  We use probabilities (\textbf{p-values}) and an \textbf{alpha
+  threshold (commonly 0.05)} to determine whether a result is
+  significant.
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\vspace{1.5cm}
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{figs/plot2} 
+
+}
+
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{What is Significance?}
+\phantomsection\label{what-is-significance-1}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  Significance refers to the risk of rejecting the null hypothesis when
+  it is actually true.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  It tells us the probability that our result happened by chance alone.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  A p-value of 0.05 (5\%) means there's a 5\% chance the result is due
+  to random chance.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  A p-value of 0.01 (1\%) means there's a 1\% chance the result happened
+  by chance. \tiny
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A p-value of 0.01 indicates a low chance (1\%) of the result
+    occurring by chance, reflecting a more rigorous threshold for
+    significance.\\
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\vspace{1.5cm}
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{figs/significance} 
+
+}
+
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Focus - Types of Error}
+\phantomsection\label{focus---types-of-error}
+\end{frame}
+
+\begin{frame}{Focus - Types of Error}
+\phantomsection\label{focus---types-of-error-1}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1890}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3963}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4146}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Scenario
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Null Hypothesis is True
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Null Hypothesis is False
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\textbf{Reject Null Hypothesis} & \textbf{Type I Error}: Incorrectly
+rejecting the null hypothesis. & \textbf{Correct Decision}: Correctly
+rejecting the null hypothesis. \\
+\textbf{Fail to Reject Null Hypothesis} & \textbf{Correct Decision}:
+Correctly not rejecting the null hypothesis. & \textbf{Type II Error}:
+Incorrectly failing to reject the null hypothesis. \\
+\bottomrule\noalign{}
+\end{longtable}
+\end{frame}
+
+\begin{frame}{Focus - Types of Error}
+\phantomsection\label{focus---types-of-error-2}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.1890}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3963}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4146}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Scenario
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Null Hypothesis is True
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Null Hypothesis is False
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\textbf{Reject Null Hypothesis} & \textbf{Type I Error}: Incorrectly
+rejecting the null hypothesis. & \textbf{Correct Decision}: Correctly
+rejecting the null hypothesis. \\
+\textbf{Fail to Reject Null Hypothesis} & \textbf{Correct Decision}:
+Correctly not rejecting the null hypothesis. & \textbf{Type II Error}:
+Incorrectly failing to reject the null hypothesis. \\
+\bottomrule\noalign{}
+\end{longtable}
+
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  Failing to reject the null hypothesis means our data didn't show a
+  significant effect. \textbf{It doesn't prove the null hypothesis is
+  true}; it just means we didn't find strong evidence against it.\\
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Focus - Types of Error}
+\phantomsection\label{focus---types-of-error-3}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Explanation}:
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Type I Error}: False positive.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We conclude there is an effect or difference when there is none.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Type II Error}: False negative.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We fail to detect an effect or difference when one exists.
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Correct Decisions}: Accurately concluding the presence or
+  absence of an effect or difference based on the truth of the null
+  hypothesis.
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{figs/pregnant} 
+
+}
+
+\end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Calculating Significance}
+\phantomsection\label{calculating-significance}
+\begin{itemize}
+\tightlist
+\item
+  To quantify a probability, you first need to calculate a \textbf{test
+  statistic} and locate it on the normal probability curve.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The normal curve acts as a statistical translator.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It helps you standardize your test statistic to a common scale.
+  \item
+    This standardized value is then used to determine the probability of
+    obtaining such a result in a standard normal population.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hypothesis Testing, Probability and Distributions}
+\phantomsection\label{hypothesis-testing-probability-and-distributions-2}
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{gray}{Hypothesis Testing}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textcolor{gray}{Probability and Distributions}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  z-score
+\end{itemize}
+\end{frame}
+
+\begin{frame}{z-score}
+\phantomsection\label{z-score}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{z-scores} link measured or hypothesized values to
+  probabilities.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  A z-score (or standard score) indicates how many standard deviations a
+  value \emph{\emph{x}} is above or below the mean on the normal curve.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  It helps standardize values and connect them to probabilities.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  The z-score is calculated using the formula:
+\end{itemize}
+
+\[ z = \frac{(x - \mu)}{\sigma} \]
+
+\begin{itemize}
+\tightlist
+\item
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(x\) = the value of interest.\\
+  \item
+    \(\mu\) = mean of the population.\\
+  \item
+    \(\sigma\) = standard deviation of the population.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{z-scores: Linking observations to probabilities}
+\phantomsection\label{z-scores-linking-observations-to-probabilities}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{z-scores} link observations to probabilities.
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  Using a z-score for probability:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    z-scores are essentially the \textbf{x-axis} of the standard normal
+    distribution.
+  \item
+    They normalize any data set so that the mean is 0 and the standard
+    deviation is 1.
+  \item
+    The area under the curve tells you the probability of a certain
+    Z-score occurring.
+  \item
+    By using the Z-score, we can determine the probability associated
+    with different values.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Finding probabilities for z-scores}
+\phantomsection\label{finding-probabilities-for-z-scores}
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P(X \textless{} z)}: Denotes the probability of a value
+  falling \textbf{less than} a given Z-score (\(z\)).
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P(X \textgreater{} z)}: Denotes the probability of a value
+  falling \textbf{above} a given Z-score (\(z\)).
+\end{itemize}
+
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{P(z1 \textless{} X \textless{} z2)}: Denotes the probability
+  of a value falling \textbf{between} two different Z-scores (\(z1\) and
+  \(z2\)).
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-15-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Finding probabilities for z-scores using R}
+\phantomsection\label{finding-probabilities-for-z-scores-using-r}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{pnorm(z)}: Converts a z-score to a cumulative probability
+  (areas under the curve).
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{qnorm(p)}: Converts a cumulative probability (areas under the
+  curve) to a z-score.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Finding probabilities for z-scores using R}
+\phantomsection\label{finding-probabilities-for-z-scores-using-r-1}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  When you want the proportion of values larger than a certain value
+  (right-side or upper tail):\\
+  \centering
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use: \textbf{1 - pnorm(z\_score)}\\
+  \item
+    This calculates the area under the normal curve to the right of the
+    specified value (z-score).
+  \end{itemize}
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  When you want the proportion of values smaller than a certain value
+  (left-side or lower tail): \centering
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use: \textbf{pnorm(z\_score)}\\
+  \item
+    This gives you the area under the curve to the left of the specified
+    value (z-score).\\
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-16-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-16-2.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Finding probabilities for z-scores using R}
+\phantomsection\label{finding-probabilities-for-z-scores-using-r-2}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  For right-tail (upper tail): Use \textbf{qnorm(1 - p)} or \textbf{set
+  lower.tail = FALSE}.
+\end{itemize}
+
+\vspace{2cm}
+
+\begin{itemize}
+\tightlist
+\item
+  For left-tail (lower tail): Use \textbf{qnorm(p)} where p is the
+  cumulative probability.
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-17-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-17-2.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Example}
+\phantomsection\label{example}
+\end{frame}
+
+\begin{frame}{Example}
+\phantomsection\label{example-1}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  What percent of the area under the curve \textbf{falls below} a
+  z-score of 0.76?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  P (z\textless0.76)
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-18-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\phantomsection\label{example-2}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  What percent of the area under the curve \textbf{falls below} a
+  z-score of 0.76?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  P (z\textless0.76)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the cumulative }
+\CommentTok{\# probability for z = 0.76}
+\NormalTok{z\_score }\OtherTok{\textless{}{-}} \FloatTok{0.76}
+\NormalTok{p\_value }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(z\_score)}
+\CommentTok{\# Convert to percentage}
+\NormalTok{percent\_area }\OtherTok{\textless{}{-}}\NormalTok{ p\_value }\SpecialCharTok{*} \DecValTok{100}
+\NormalTok{percent\_area}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 77.63727
+\end{verbatim}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-20-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Example}
+\phantomsection\label{example-3}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  What is the z-score beyond which only 5\% of all possible outcomes are
+  higher?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  (P\textgreater z) = 0.05
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-21-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\phantomsection\label{example-4}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  What is the z-score beyond which only 5\% of all possible outcomes are
+  higher?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  (P\textgreater z) = 0.05
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Calculate the z{-}score for }
+\CommentTok{\# the upper 5\% }
+\NormalTok{p\_value }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\NormalTok{z\_score }\OtherTok{\textless{}{-}} \FunctionTok{qnorm}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p\_value)}
+\CommentTok{\# Print the result}
+\NormalTok{z\_score}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.644854
+\end{verbatim}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\vspace{1cm}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-23-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\phantomsection\label{example-5}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  In a distribution with a mean of 100 and a standard deviation of 15,
+  what is the probability that a score will fall between 100 and 115 ?
+\end{itemize}
+
+\[ Z = \frac{(x - \mu)}{\sigma} \]
+
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  Before you can find any probabilities you have to find z-scores
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Z = (100 - 100) / 15 = 0
+  \item
+    Z = (115 - 100) / 15 = 1
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\begin{verbatim}
+## [1] "Probability of falling between 100 and 115: 0.3413"
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-24-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\phantomsection\label{example-6}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  In a distribution with a mean of 100 and a standard deviation of 15,
+  what is the probability that a score will fall between 100 and 115 ?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parameters}
+\NormalTok{mean }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{sd }\OtherTok{\textless{}{-}} \DecValTok{15}
+\CommentTok{\# Values}
+\NormalTok{low\_value }\OtherTok{\textless{}{-}} \DecValTok{100}
+\NormalTok{high\_value }\OtherTok{\textless{}{-}} \DecValTok{115}
+
+\CommentTok{\# Calculate the z{-}scores}
+\NormalTok{z\_low }\OtherTok{\textless{}{-}}\NormalTok{ (low\_value}\SpecialCharTok{{-}}\NormalTok{mean)}\SpecialCharTok{/}\NormalTok{sd}
+\NormalTok{z\_high }\OtherTok{\textless{}{-}}\NormalTok{ (high\_value}\SpecialCharTok{{-}}\NormalTok{mean)}\SpecialCharTok{/}\NormalTok{sd}
+\end{Highlighting}
+\end{Shaded}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\begin{verbatim}
+## [1] "Probability of falling between 100 and 115: 0.3413"
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-26-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+\phantomsection\label{example-7}
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\begin{itemize}
+\tightlist
+\item
+  In a distribution with a mean of 100 and a standard deviation of 15,
+  what is the probability that a score will fall between 100 and 115 ?
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find the probabilities}
+\NormalTok{p\_low }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(z\_low)}
+\NormalTok{p\_high }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(z\_high)}
+
+\CommentTok{\# Probability of falling }
+\CommentTok{\# between 100 and 115}
+\NormalTok{probability }\OtherTok{\textless{}{-}}\NormalTok{ p\_high }\SpecialCharTok{{-}}\NormalTok{ p\_low}
+\NormalTok{probability}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3413447
+\end{verbatim}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\begin{verbatim}
+## [1] "Probability of falling between 100 and 115: 0.3413"
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-28-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Example}
+\phantomsection\label{example-8}
+\end{frame}
+
+\begin{frame}{Example: Probability of a Cat Living to a Certain Age}
+\phantomsection\label{example-probability-of-a-cat-living-to-a-certain-age}
+\begin{itemize}
+\tightlist
+\item
+  The lifespan of domestic cats is normally distributed with a mean of
+  15.7 years and a standard deviation of 1.6 years.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Question}: What is the probability that a cat will live to be
+  as old as Allison's 18-year-old cat?
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Example: Probability of a Cat Living to a Certain Age}
+\phantomsection\label{example-probability-of-a-cat-living-to-a-certain-age-1}
+\begin{itemize}
+\tightlist
+\item
+  The lifespan of domestic cats is normally distributed with a mean of
+  15.7 years and a standard deviation of 1.6 years.
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\vspace{1cm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Question}: What is the probability that a cat will live to be
+  as old as Allison's 18-year-old cat?
+\end{itemize}
+
+\begin{itemize}
+\tightlist
+\item
+  We're looking for the probability P(X \textgreater{} 18), which
+  represents the probability that a cat will live longer than 18 years.
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\pandocbounded{\includegraphics[keepaspectratio]{./M5-Hypothesis-Testing,-Probability-and-Distribution_files/figure-beamer/unnamed-chunk-29-1.pdf}}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{\textbf{Steps 1}:}
+\phantomsection\label{steps-1}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Calculate the Z-score}:
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.48\linewidth}
+\[
+   Z = \frac{X - \mu}{\sigma}
+   \]
+
+\begin{itemize}
+\tightlist
+\item
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(X\) is the value (18 years),
+  \item
+    \(\mu\) is the mean (15.7 years),
+  \item
+    \(\sigma\) is the standard deviation (1.6 years).
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\vspace{1cm}
+
+\[
+   Z = \frac{18 - 15.7}{1.6} = \frac{2.3}{1.6} \approx 1.4375
+   \]
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2.}
+\phantomsection\label{step-2.}
+\begin{itemize}
+\tightlist
+\item
+  Find the Probability:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Given values}
+\NormalTok{mean\_lifespan }\OtherTok{\textless{}{-}} \FloatTok{15.7}
+\NormalTok{sd\_lifespan }\OtherTok{\textless{}{-}} \FloatTok{1.6}
+\NormalTok{age\_allison\_cat }\OtherTok{\textless{}{-}} \DecValTok{18}
+\CommentTok{\# Calculate Z{-}score}
+\NormalTok{z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (age\_allison\_cat }\SpecialCharTok{{-}}\NormalTok{ mean\_lifespan) }\SpecialCharTok{/}\NormalTok{ sd\_lifespan}
+\CommentTok{\# Find the probability that a cat lives longer than 18 years}
+\NormalTok{probability }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(z\_score)}
+\NormalTok{probability}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.07528799
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  Thus, the probability that a cat will live to be as old as or older
+  than 18 years is approximately \textbf{0.0749} or \textbf{7.49\%}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Step 2.}
+\phantomsection\label{step-2.-1}
+\begin{itemize}
+\tightlist
+\item
+  Find the Probability:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Given values}
+\NormalTok{mean\_lifespan }\OtherTok{\textless{}{-}} \FloatTok{15.7}
+\NormalTok{sd\_lifespan }\OtherTok{\textless{}{-}} \FloatTok{1.6}
+\NormalTok{age\_allison\_cat }\OtherTok{\textless{}{-}} \DecValTok{18}
+\CommentTok{\# Calculate Z{-}score}
+\NormalTok{z\_score }\OtherTok{\textless{}{-}}\NormalTok{ (age\_allison\_cat }\SpecialCharTok{{-}}\NormalTok{ mean\_lifespan) }\SpecialCharTok{/}\NormalTok{ sd\_lifespan}
+\CommentTok{\# Find the probability that a cat lives longer than 18 years}
+\NormalTok{probability }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(z\_score)}
+\NormalTok{probability}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.07528799
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  This example walks you through calculating the probability in R using
+  \texttt{pnorm()}, which calculates the cumulative probability under
+  the normal distribution.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Another real life problems}
+\phantomsection\label{another-real-life-problems}
+\end{frame}
+
+\begin{frame}{Another real life problems}
+\phantomsection\label{another-real-life-problems-1}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Context}: The EPA is assessing drinking water standards to
+  protect public health.\\
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Problem}: If the EPA sets the maximum allowable lead
+  concentration in drinking water at 1ppm, and the lead concentrations
+  in public buildings are normally distributed with a mean of 0.6 ppm
+  and a standard deviation of 0.2ppm.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{What proportion of public buildings will exceed this
+    threshold and require lead remediation?}\\
+  \end{itemize}
+\end{itemize}
+
+\vspace{1cm}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Another real life problems}
+\phantomsection\label{another-real-life-problems-2}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Context}: The EPA is assessing drinking water standards to
+  protect public health.\\
+\end{itemize}
+
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+\small
+
+\begin{itemize}
+\tightlist
+\item
+  Analysis Required:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Calculate the z-score for the threshold of 1 ppm.
+  \item
+    Determine the proportion of buildings exceeding this lead level
+    using the normal distribution.\\
+  \end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Parameters}
+\NormalTok{mean }\OtherTok{\textless{}{-}} \FloatTok{0.6}
+\NormalTok{sd }\OtherTok{\textless{}{-}} \FloatTok{0.2}
+\CommentTok{\# Threshold 4 lead remediation}
+\NormalTok{threshold }\OtherTok{\textless{}{-}} \DecValTok{1}
+\CommentTok{\# Calculate the z{-}score for the threshold}
+\NormalTok{z\_score}\OtherTok{\textless{}{-}}\NormalTok{(threshold}\SpecialCharTok{{-}}\NormalTok{mean)}\SpecialCharTok{/}\NormalTok{sd}
+\CommentTok{\# Calculate the proportion of }
+\CommentTok{\#buildings above the threshold}
+\NormalTok{threshold}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(z\_score)}
+\NormalTok{threshold}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02275013
+\end{verbatim}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{}
+\phantomsection\label{section}
+\end{frame}
+
+\end{document}

@@ -47,6 +47,9 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Fish data](classes/Module 8 Descriptive Statistics/fish_data.csv)
 <br>
 
+### Module 9: [Hypothesis Testing, Probability and Distribution](classes/Module 9 Distribution, Probabilities and z-score/Hypothesis-Testing,-Probability-and-Distribution-xaringan.html)
+
+
 <hr style="border: 1px solid #ccc;">
 
 ## Tips and helpful reminders
