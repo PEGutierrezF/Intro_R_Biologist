@@ -45,10 +45,11 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 ### Module 8: [Descriptive Statistics](classes/Module 8 Descriptive Statistics/M4-Descriptice-Statistics-xaraingan.html)
 ### [Fish data](classes/Module 8 Descriptive Statistics/fish_data.csv)
-<br>
 
 ### Module 9: [Hypothesis Testing, Probability and Distribution](classes/Module 9 Distribution, Probabilities and z-score/Hypothesis-Testing,-Probability-and-Distribution-xaringan.html)
 
+### Module 10: [Inferential Stat and one sample Z-test](classes/Module 10 One Sample z-test/Inferential-Stat-and-one-sample-Z-test.html)
+<br>
 
 <hr style="border: 1px solid #ccc;">
 
