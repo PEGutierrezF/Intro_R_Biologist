@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>t-tests</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pablo E. Gutiérrez-Fonseca" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js-8.11.1/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="libs/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x34077010cfe48479913e00033ca5205","expires":1}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <script src="libs/d3-3.3.8/d3.min.js"></script>
+    <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+    <link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+    <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+    <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="libs/chromatography-0.1/chromatography.js"></script>
+    <script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
+    <link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
+    <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# t-tests
+]
+.subtitle[
+## Tests between the means of different groups
+]
+.author[
+### Pablo E. Gutiérrez-Fonseca
+]
+.date[
+### 2026-Jan-01 (updated: 2026-Oct-20)
+]
+
+---
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 4px;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+# t-test
+.pull-left[
+- A **t-test** is an inferential statistic used to determine if there is a statistically significant difference between the means of two variables.
+
+- **Student t-test** is named after its inventor, William Gosset (English statistician, chemist and brewer), who published under the pseudonym of student.
+]
+
+.pull-right[.center[
+![](Independent-t--test_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]]
+
+---
+# When would you run a t-test?
+
+- You have a continuous response variable.
+
+- You want to test for a **difference between two sample means**: considering the variance within each group, do the groups belong to two distinct populations, or not?
+
+- Data is **normally distributed** and both groups have approximately **equal variance**. 
+
+- If the groups are **not related** in any way = **Independent t-test**
+
+- If the groups are **related (paired)** = Dependent t-test (or matched pairs t-test).
+
+---
+# Flowcharts
+
+<div id="htmlwidget-2516b12334d4297a6d9b" style="width:850px;height:550px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2516b12334d4297a6d9b">{"x":{"diagram":"\n    graph TD;\n\n        A[What type of data?] --> B[Continuous] \n        A --> Z[Categorical]\n        \n        B --Research Question--> C[Comparing Differences] \n        B --Research Question--> D[Examining Relationships]\n        \n        C --How many groups?--> E[1 group] \n        C --How many groups?--> I[2 groups]\n        C --How many groups?--> Q[> 2 groups]\n        \n        E --> F[Normally distributed?] \n        F --Yes--> G[One sample z-test] \n        F --No--> H[Wilcoxon signed rank test]\n        \n        I --> J[Are Samples Independent?] \n        J --Yes--> K[Normally distributed?] \n        J --No--> L[Normally distributed?]\n        \n        K --Yes--> M[Independent t-test] \n        K --No--> N[Wilcoxon rank sum test] \n        \n        L --Yes--> O[Paired t-test] \n        L --No--> P[Wilcoxon matched pair test]\n        \n        Q --> R[Use ANOVA] \n        Q --> S[Non-parametric ANOVA]\n\n  style A fill:lightblue,stroke:#333,stroke-width:1px\n  style B fill:lightblue,stroke:#333,stroke-width:1px\n  style C fill:lightblue,stroke:#333,stroke-width:1px\n  style D fill:lightblue,stroke:#333,stroke-width:1px\n  style E fill:lightblue,stroke:#333,stroke-width:1px\n  style F fill:lightblue,stroke:#333,stroke-width:1px\n  style G fill:lightblue,stroke:#333,stroke-width:1px\n  style H fill:lightblue,stroke:#333,stroke-width:1px\n  style I fill:lightblue,stroke:#333,stroke-width:1px\n  style J fill:lightblue,stroke:#333,stroke-width:1px\n  style K fill:lightblue,stroke:#333,stroke-width:1px\n  style L fill:lightblue,stroke:#333,stroke-width:1px\n  style M fill:lightblue,stroke:#333,stroke-width:1px\n  style N fill:lightblue,stroke:#333,stroke-width:1px\n  style O fill:lightblue,stroke:#333,stroke-width:1px\n  style P fill:lightblue,stroke:#333,stroke-width:1px\n  style Q fill:lightblue,stroke:#333,stroke-width:1px\n  style Z fill:lightblue,stroke:#333,stroke-width:1px\n\n  "},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Independent vs. Dependent groups
+- How do I know if my samples are independent or dependent?  
+
+- Can you tell exactly which observation should be paired with which other observation?  If you can't tell, your groups are independent
+
+--
+
+.pull-left[
+**Examples of Independent Samples**
+
+1. Treated and untreated, randomly located plots.
+2. Monitoring sites set up with Systematic (grid) sampling.
+3. Infested and uninfested forest stands selected with stratified random sampling.
+]
+
+.pull-right[
+**Examples of Dependent Samples**
+
+1. Before and After data taken on the same observation.
+2. Paired watersheds / plots.
+3. Parent / offspring studies.
+4. Twin studies / partner studies. 
+]
+
+---
+# Degrees of Freedom (DF)
+
+
+---
+# Degrees of Freedom (DF)
+
+- The number of observations that are free to vary when calculating a statistic.
+
+- Importance in Inferential Statistics:
+  - **Influences Critical Values**: Degrees of freedom are crucial for determining the **critical values** in statistical tests, which help assess the significance of results.
+  - Unlike the one-sample z-test, many inferential tests (such as the t-test) rely on degrees of freedom to **accurately determine the p-value**.
+
+---
+# Degrees of Freedom (DF)
+
+.pull-left[ 
+For a t-test with **29 degrees of freedom** and an alpha of **0.05 (two-tailed)**, you would look up the critical value in the t-distribution table for df = 29. The critical value might be around `\(\mathbf{\pm 2.045}\)`, which indicates the cut-off points for determining significance.
+]
+
+.pull-right[ 
+&lt;img src="fig/t-table_1.png" alt="Degrees of Freedom T-Table" width="600"/&gt;
+]
+
+
+---
+# Degrees of Freedom (DF)
+
+.pull-left[ 
+For a t-test with **29 degrees of freedom** and an alpha of **0.05 (two-tailed)**, you would look up the critical value in the t-distribution table for df = 29. The critical value might be around `\(\mathbf{\pm 2.045}\)`, which indicates the cut-off points for determining significance.
+
+&lt;center&gt;
+![](Independent-t--test_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[ 
+&lt;img src="fig/t-table_1.png" alt="Degrees of Freedom T-Table" width="600"/&gt;
+]
+
+
+---
+# Degrees of Freedom (DF)
+
+.pull-left[ 
+- DF (degrees of freedom) defines the shape of the t-distribution.
+- A higher DF results in a distribution that is closer to a normal distribution, and using the wrong DF will lead to incorrect p-values.
+
+&lt;center&gt;
+![](Independent-t--test_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[ 
+&lt;img src="fig/t-table_1.png" alt="Degrees of Freedom T-Table" width="600"/&gt;
+]
+
+
+---
+# Degrees of Freedom (DF)
+
+- Example:
+  - Imagine a classroom with 30 seats. The first 29 people who enter can choose any seat. However, the 30th person has no choice, they can only sit in the one empty seat left.
+
+  - In a similar way, when you calculate the average (mean) of a group of 30 numbers, the first 29 numbers can vary freely. The 30th number is fixed because it has to be whatever value is needed to reach the average you calculated.
+
+  - So, when estimating the mean from a sample of 30 numbers, the degrees of freedom is 29.
+
+---
+# Degrees of Freedom (DF)
+
+.pull-left[ 
+- Depending on the type of the analysis you run, degrees of freedom typically (but not always) relate the size of the sample. Because **higher degrees of freedom** generally mean **larger sample sizes**, a higher degree of freedom means more power to reject a false null hypothesis and find a significant result.
+]
+
+.pull-right[
+&lt;center&gt;
+![](Independent-t--test_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+
+
+---
+# Independent vs. Dependent groups
+
+
+---
+# Independent vs. Dependent groups
+
+.pull-left[
+**- Independent t-test** quantifies the difference between sample means (numerator) vs. the amount of variability in the samples (denominator). 
+
+
+$$
+t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2} \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}}
+$$
+DF (for the critical value)= (n1 + n2)-2
+
+]
+
+
+.pull-right[
+**- Dependent t-test** quantifies the magnitude of the difference between paired observations (numerator) vs. the amount of variability in the samples (denominator).
+
+$$
+t = \frac{\sum D}{\sqrt{\frac{n \sum D^2 - (\sum D)^2}{n-1}}}
+$$
+
+DF (for the critical value) = n-1    
+where n is the number of paired observations
+
+
+]
+
+---
+
+# Basic Steps for an Inferential t-Test
+
+.pull-left[ 
+
+
+``` r
+t.test(x= , y = ,
+       mu = 0, 
+       paired = , 
+       var.equal= .
+       alternative = c("two.sided", "less", "greater"))
+```
+
+&lt;br&gt;
+
+
+``` r
+wilcox.testt(x= , y = ,
+       mu = 0, 
+       paired = , 
+       var.equal= .
+       alternative = c("two.sided", "less", "greater"))
+```
+
+]
+
+
+.pull-right[ 
+
+&lt;center&gt;
+
+<div class="DiagrammeR html-widget html-fill-item" id="htmlwidget-9c14a56f8b7b63255a02" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-9c14a56f8b7b63255a02">{"x":{"diagram":"\n\n  graph TD\n    A[Normally distribute data?]--Yes--> B[t.test]\n    A[Normally distribute data?]--No--> C[wilcox.test]\n    \n  style A fill:lightblue,stroke:#333,stroke-width:1px\n  style B fill:lightblue,stroke:#333,stroke-width:1px\n  style C fill:lightblue,stroke:#333,stroke-width:1px\n\n"},"evals":[],"jsHooks":[]}</script>
+
+&lt;/center&gt;
+]
+
+
+---
+
+# Basic Steps for an Inferential t-Test
+
+
+.pull-left[ 
+
+``` r
+t.test(x= , y = ,
+       mu = 0, 
+       `paired = `, 
+       var.equal= ,
+       alternative = c("two.sided", "less", "greater")
+       )
+```
+]
+
+
+.pull-right[ 
+&lt;center&gt;
+
+<div class="DiagrammeR html-widget html-fill-item" id="htmlwidget-60a04fea4a2210156531" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-60a04fea4a2210156531">{"x":{"diagram":"\ngraph TD;\n    A[Paired?]--Yes--> B[Dependend t-test, use paired=TRUE]\n    A[Paired?]--No--> C[Independend t-test, use paired=FALSE]\n    \n"},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+
+]
+
+
+---
+# Basic Steps for an Inferential t-Test
+
+
+.pull-left[ 
+
+``` r
+t.test(x= , y = ,
+       mu = 0, 
+       paired = , 
+       `var.equal= `, 
+       alternative = c("two.sided", "less", "greater")
+       )
+```
+]
+
+
+.pull-right[ 
+&lt;center&gt;
+
+<div class="DiagrammeR html-widget html-fill-item" id="htmlwidget-f0a013cfdce91f9f849e" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-f0a013cfdce91f9f849e">{"x":{"diagram":"\ngraph TD;\n    A[Equal variance?] -->|Yes| B[Set var.equal to TRUE];\n    A -->|No| C[Set var.equal to FALSE];\n"},"evals":[],"jsHooks":[]}</script>
+]
+
+
+---
+# Basic Steps for an Inferential t-Test
+
+.pull-left[
+- t-test
+
+``` r
+t.test(x= , y = ,
+       mu = 0, 
+       paired = , 
+       `var.equal= TRUE`, 
+       alternative = c("two.sided", "less", "greater")
+       )
+```
+
+- Welch t-test
+
+``` r
+t.test(x= , y = ,
+       mu = 0, 
+       paired = , 
+       `var.equal= FALSE`, 
+       alternative = c("two.sided", "less", "greater")
+       )
+```
+]
+
+.pull-right[ 
+- By default, the R `t.test()` function makes the assumption that the variances of the two groups of samples, being compared, **are different**. Therefore, **Welch t-test** is performed by default.
+
+&lt;br&gt;
+
+- **Welch t-test** is just an adaptation of t-test, and it is used when the two samples have possibly **unequal variances**.
+]
+
+
+
+---
+# Flowcharts for t-test
+
+<div id="htmlwidget-aab856462fe0e136a77e" style="width:850px;height:550px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-aab856462fe0e136a77e">{"x":{"diagram":"\n    graph TD;\n\n        A[Are the data within either both samples or pairs normally distributed<br><center>and free from outliers?<\/center>] --Yes--> B\n        A --No--> C[Are this samples Indenpendent or dependent?]\n\n        B[Are the sample independent?]--Yes-->F\n        B[Are the sample independent?]--No-->G[Paired t-test]\n        \n        F[Is the variance of each sample equal?]--Yes--> H[Student's t-test]\n        F[Is the variance of each sample equal?]--No--> I[Welch's t-test]\n        \n                \n        C--Independent--> D[Mann-Whitney U test]\n        C--Dependent--> E[Wilcoxon signed-rank test]\n        \n        \n  style A fill:lightblue,stroke:#333,stroke-width:1px\n  style B fill:lightblue,stroke:#333,stroke-width:1px\n  style C fill:lightblue,stroke:#333,stroke-width:1px\n  style D fill:lightblue,stroke:#333,stroke-width:1px\n  style E fill:lightblue,stroke:#333,stroke-width:1px\n  style F fill:lightblue,stroke:#333,stroke-width:1px\n  style G fill:lightblue,stroke:#333,stroke-width:1px\n  style H fill:lightblue,stroke:#333,stroke-width:1px\n  style I fill:lightblue,stroke:#333,stroke-width:1px\n  \n  "},"evals":[],"jsHooks":[]}</script>
+
+
+---
+
+# Basic Steps for an Inferential t-Test
+
+
+.pull-left[ 
+
+``` r
+t.test(x= , y = ,
+       mu = 0, 
+       paired = , 
+       var.equal= , 
+       `alternative = c("two.sided", "less", "greater")`
+       )
+```
+]
+
+
+.pull-right[ 
+&lt;center&gt;
+
+<div class="DiagrammeR html-widget html-fill-item" id="htmlwidget-9d0b8b30c615dcc75a12" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-9d0b8b30c615dcc75a12">{"x":{"diagram":"\ngraph TD;\n    A[Two-sided?] -->|Yes| B[Use alternative = 'less'];\n    A -->|Yes| C[Use alternative = 'greater'];\n    A -->|No| D[Use alternative = 'two.sided'];\n"},"evals":[],"jsHooks":[]}</script>
+&lt;/center&gt;
+]
+
+
+---
+
+# Step in R
+
+1. Import libraries and/or install packages.
+
+2. Import your data.
+
+3. Run descriptive statistics.
+
+4. Visualize your distribution.
+
+5. Test for normality.
+
+6. Test for equal variance.
+
+7. Determine if the test is paired or unpaired.
+
+8. Run the code for the appropriate test.
+
+---
+
+
+# Effect Size (Cohen's)
+
+- Effect size is a measure of how different two groups are from one another.
+
+
+.pull-left[
+**Independent t-test**
+
+
+$$
+ES = \frac{\bar{X}_1 - \bar{X}_2}{SD}
+$$
+
+]
+
+
+.pull-right[
+**Dependent t-test** 
+$$
+ES = \frac{\bar{X}_D}{SD}
+$$
+Where: `\(\bar{X}_D\)` is the mean of the differences between paired observations, and SD is the standard deviation of the differences.
+
+
+]
+
+
+
+---
+
+# Effect Size (Cohen's)
+
+- Effect size is a measure of how different two groups are from one another.
+
+
+.pull-left[
+**Independent t-test**
+
+
+$$
+ES = \frac{\bar{X}_1 - \bar{X}_2}{SD}
+$$
+
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+- Cohen's ES (d)  
+  - Small = 0.0 - .20  
+  - Medium = 0.20 - 0.50  
+  - Large = 0.50 and above  
+
+
+
+]
+
+
+.pull-right[
+**Dependent t-test** 
+$$
+ES = \frac{\bar{X}_D}{SD}
+$$
+Where: `\(\bar{X}_D\)` is the mean of the differences between paired observations, and SD is the standard deviation of the differences.
+
+]
+
+---
+
+# The Basic Steps for an Inferential Test in R
+
+- Start with a research question and your data ready.
+
+- Follow these steps:
+1. State your hypothesis. 
+2. Work in R
+    - Import libraries and load necessary packages.
+    - Import your data.
+    - Run descriptive statistics to understand your data.
+    - Visualize the data distribution.
+    - est for normality and check other assumptions (e.g., equal variance).
+3. Select the appropriate statistical test. 
+4. Run the analysis in R and evaluate statistical significance.
+5. Calculate Cohen's Effect Size (if relevant).
+5. Summarize your findings.
+
+---
+# Example #1
+
+---
+# Two-tailed t-test Example
+
+**Research Question**:  The state is looking to choose a stream for habitat restoration for native trout species.  Streams with deeper pools will provide necessary cover in the winter months and minimize potential scouring from severe rain events.  Which stream should they focus on?  Test to see if there is a significant difference in depth between stream 1 and stream 2?
+
+
+``` r
+stream_data &lt;- read.csv('Lecturer Practice/two_tail_water data.csv')
+head(stream_data)
+```
+
+```
+##   X waterbody depth_cm
+## 1 1   stream1     42.6
+## 2 2   stream1     48.4
+## 3 3   stream1     46.2
+## 4 4   stream1     44.2
+## 5 5   stream1     44.4
+## 6 6   stream1     50.6
+```
+
+---
+
+# Load libraries
+
+``` r
+library(RVAideMemoire) # for shapiro.text()
+library(dplyr) # for filter() and more
+library(lsr) # Cohenâs d for two-sample t-test
+```
+
+
+---
+
+# Step 1. Normality test
+
+- Test for normality
+
+.pull-left[ 
+
+``` r
+byf.shapiro(depth_cm~waterbody, data=stream_data)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality tests
+## 
+## data:  depth_cm by waterbody 
+## 
+##              W p-value
+*## stream1 0.9698  0.4749
+*## stream2 0.9819  0.7822
+```
+]
+
+.pull-right[ 
+- Since both p-values are greater than 0.05, we fail to reject the null hypothesis for both streams. 
+
+- This indicates that the data are **normally distributed** for both Stream 1 and Stream 2. 
+]
+
+
+---
+
+# Step 2. Equal variance
+
+.pull-left[
+
+``` r
+#var.test
+var.test(depth_cm ~ waterbody, data=stream_data)
+```
+
+```
+## 
+## 	F test to compare two variances
+## 
+## data:  depth_cm by waterbody
+*## F = 0.99478, num df = 32, denom df = 37, p-value = 0.9945
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.5080442 1.9810856
+## sample estimates:
+## ratio of variances 
+##          0.9947842
+```
+]
+
+.pull-right[
+
+- Since the p-value is greater than 0.05, we fail to reject the null hypothesis. 
+
+- Therefore, we conclude that the **variances** of pool depth between the two streams are **equal**.
+]
+
+---
+
+# Conducting the t-test
+
+Based on the results of the **Shapiro-Wilk normality test**, which indicated that both Stream 1 and Stream 2 data are **normally distributed**, and the F-test for equal variance, which showed that the **variances are equal**, we proceeded to conduct a two-tailed independent t-test.
+
+---
+
+# Conducting the t-test
+
+
+``` r
+t.test(filter(stream_data, waterbody == "stream1")$depth_cm, 
+       filter(stream_data, waterbody == "stream2")$depth_cm,
+       alternative = "two.sided",
+       mu = 0, 
+       paired = FALSE, 
+       var.equal = TRUE)
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  filter(stream_data, waterbody == "stream1")$depth_cm and filter(stream_data, waterbody == "stream2")$depth_cm
+*## t = -12.924, df = 69, p-value &lt; 0.00000000000000022
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -13.298846  -9.742143
+## sample estimates:
+## mean of x mean of y 
+##  44.42424  55.94474
+```
+
+---
+
+# Effect size 
+
+
+``` r
+cohensD(depth_cm ~ waterbody, data=stream_data)
+```
+
+```
+## [1] 3.075141
+```
+---
+
+# Summary
+
+&lt;span style="color:#00796B;"&gt;We tested to see if there was a significant difference in pool depth between Stream 1 and Stream 2, which are being considered for habitat restoration for native trout species.&lt;/span&gt; &lt;span style="color:#E65100;"&gt;Using a two-tailed independent t-test to compare depth measurements from 71 total samples,&lt;/span&gt; &lt;span style="color:#1E88E5;"&gt;we found a significant and meaningful difference between the streams ( `\(t_{(69)} = -12.92, \, p &lt; 2.2 \times 10^{-16}, ES=3.08)\)`.&lt;/span&gt;  &lt;span style="color:#424242;"&gt;This indicates that Stream 2, with deeper pools, may provide more suitable habitat for trout, offering better cover during winter and reducing the risk of scouring during severe rain events.&lt;/span&gt; 
+
+
+---
+
+# Summary
+
+&lt;span style="color:#00796B;"&gt;We tested to see if there was a significant difference in pool depth between Stream 1 and Stream 2, which are being considered for habitat restoration for native trout species.&lt;/span&gt; &lt;span style="color:#E65100;"&gt;Using a two-tailed independent t-test to compare depth measurements from 71 total samples,&lt;/span&gt; &lt;span style="color:#1E88E5;"&gt;we found a significant and meaningful difference between the streams ( `\(t_{(69)} = -12.92, \, p &lt; 2.2 \times 10^{-16}, ES=3.08)\)`.&lt;/span&gt;  &lt;span style="color:#424242;"&gt;This indicates that Stream 2, with deeper pools, may provide more suitable habitat for trout, offering better cover during winter and reducing the risk of scouring during severe rain events.&lt;/span&gt; 
+
+&lt;center&gt;
+![](Independent-t--test_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+
+---
+
+# Example #2
+
+
+---
+
+# Non-parametric t-test
+
+**Research Question**:  We want to know if different groups of squid differ in their predatory preferences.  Test to see if there is a significant difference between the number of "fish_in_stomach" between population_one and population_two quid groups.
+
+---
+
+# Load data and Test for normality
+
+- Load data
+
+``` r
+squids &lt;- read.csv('Lecturer Practice/Wilcox.practice_squids.csv')
+```
+
+- Test for normality
+
+``` r
+byf.shapiro(fish_in_stomach~population, data=squids)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality tests
+## 
+## data:  fish_in_stomach by population 
+## 
+##                     W p-value  
+*## population_one 0.9418 0.03007 *
+*## population_two 0.9813 0.63470  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+---
+
+# Equal variance
+
+
+``` r
+var.test(fish_in_stomach~population, data=squids)
+```
+
+```
+## 
+## 	F test to compare two variances
+## 
+## data:  fish_in_stomach by population
+*## F = 0.31143, num df = 42, denom df = 47, p-value = 0.0002002
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.1724347 0.5681678
+## sample estimates:
+## ratio of variances 
+##          0.3114305
+```
+
+---
+
+# Conducting the non-parametric t-test
+
+
+``` r
+wilcox.test(fish_in_stomach~population, data=squids,
+       alternative = c("two.sided"),
+       mu = 0, 
+     #  paired = FALSE, 
+       var.equal = FALSE,
+       conf.level = 0.95)
+```
+
+```
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  fish_in_stomach by population
+*## W = 480.5, p-value = 0.00001048
+## alternative hypothesis: true location shift is not equal to 0
+```
+
+---
+
+# Summary 
+
+&lt;span style="color:#00796B;"&gt;We investigated whether there are significant differences in predatory preferences between two groups of squid by comparing the number of fish found in their stomachs. &lt;/span&gt; &lt;span style="color:#E65100;"&gt;Using a Wilcoxon rank-sum test on stomach content data from both populations, we analyzed a total of 71 samples. &lt;/span&gt; &lt;span style="color:#1E88E5;"&gt;The results indicated a significant difference between the two squid populations ( `\(W_{(69)} = 480.5, \, p = 1.048 \times 10^{-5})\)`, suggesting that the predatory preferences of these groups are not equal. &lt;/span&gt;  &lt;span style="color:#424242;"&gt; This finding may provide insights into the ecological roles and feeding strategies of these squid populations in their respective habitats.&lt;/span&gt; 
+
+
+---
+
+# Summary 
+
+&lt;span style="color:#00796B;"&gt;We investigated whether there are significant differences in predatory preferences between two groups of squid by comparing the number of fish found in their stomachs. &lt;/span&gt; &lt;span style="color:#E65100;"&gt;Using a Wilcoxon rank-sum test on stomach content data from both populations, we analyzed a total of 71 samples. &lt;/span&gt; &lt;span style="color:#1E88E5;"&gt;The results indicated a significant difference between the two squid populations ( `\(W_{(69)} = 480.5, \, p = 1.048 \times 10^{-5})\)`, suggesting that the predatory preferences of these groups are not equal. &lt;/span&gt;  &lt;span style="color:#424242;"&gt; This finding may provide insights into the ecological roles and feeding strategies of these squid populations in their respective habitats.&lt;/span&gt; 
+
+&lt;center&gt;
+![](Independent-t--test_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+
+---
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightLanguage": "r",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(css/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 60px;
+  height: 78px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
