@@ -36,7 +36,7 @@ Utilice R y los paquetes tidyverse para contestar todas las preguntas.
 Trabaje de manera independiente y asegúrese de que su código sea reproducible.
 <br><br><br>
 
-```{r message=F}
+```{r message=F, warning=F}
 library(tidyverse)
 library(dplyr)
 library(aod)
