@@ -24,8 +24,8 @@ Su puntaje máximo será 100 puntos.
 Es altamente recomendado que todos los resultados, incluidas las tablas y salidas, sean siempre visibles en su documento de R Markdown.
 <br>
 
-- The exam must be completed and submitted during class time, on **Thursday, October 9, 2025, from 3:00 to 6:00 PM.**
-El examen se debe realizar y entregar durante el tiempo de clase, es decir, jueves 9 de octubre, de 3 a 6 pm.
+- The exam must be completed and submitted during class time, on **Thursday, October 22, 2025, from 3:00 to 6:00 PM.**
+El examen se debe realizar y entregar durante el tiempo de clase, es decir, jueves 22 de octubre, de 3 a 6 pm.
 <br>
 
 - Use R and the tidyverse packages to answer all questions.

@@ -65,10 +65,15 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 <hr style="border: 1px solid #ccc;">
 
 ## R Tutorials Prompts:
-
 ### [RTutorial 1](assignments/assignment_1/assignments1.html)
 ### [RTutorial 2](assignments/assignment_3/assignment3.html)
 ### [RTutorial 3](assignments/assignment_3_ggplot2/assignment.html)
+<br>
+
+<hr style="border: 1px solid #ccc;">
+
+## Midterm Exam
+### [Midterm Exam (Fall 2025)](assignments/midterm/2026/midterm_exam.html)
 
 <!--
 ### [RTutorial 4](assignments/assignment_4/assignment_4.html)
@@ -85,8 +90,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 <hr style="border: 1px solid #ccc;">
 
-## Midterm Exam
-### [Midterm Exam (Fall 2025)](assignments/midterm/midterm_exam.html)
+
 ```{r include=F}
 #(assignments/midterm/midterm_exam.html)
 ```
