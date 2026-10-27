@@ -73,7 +73,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 <hr style="border: 1px solid #ccc;">
 
 ## Midterm Exam
-### [Midterm Exam (Fall 2025)](assignments/midterm/2026/midterm_exam.html)
+### [Midterm Exam (Fall 2025)](assignments/midterm/2026/midterm_examen.html)
 
 <!--
 ### [RTutorial 4](assignments/assignment_4/assignment_4.html)
