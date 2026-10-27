@@ -7,17 +7,19 @@
 
 # We'll use our dragonflies dataset this week
 # This is a dataset measuring mercury in the bodies of dragonflies of two families:
-dragonflies <-read_csv("Dragonfly_THg_Database.csv")
+dragonflies <-read_csv("one_tail_Dragonfly_THg_Database1.csv")
 
 browseURL("https://en.wikipedia.org/wiki/Aeshnidae")
 browseURL("https://en.wikipedia.org/wiki/Libellulidae")
 
 
 #What do we see here?
-ggplot(dragonflies, aes(x = Total_mercury_ng_per_g, fill=Family)) + geom_density()
+ggplot(dragonflies, aes(x = Total_mercury_ng_per_g, fill=Family)) + 
+  geom_density()
 
 #Can't really see the red  group... 
-ggplot(dragonflies, aes(x = Total_mercury_ng_per_g, fill=Family)) + geom_density(alpha=0.5)
+ggplot(dragonflies, aes(x = Total_mercury_ng_per_g, fill=Family)) + 
+  geom_density(alpha=0.5)
 
 
 
