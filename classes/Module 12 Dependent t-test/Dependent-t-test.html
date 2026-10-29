@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Dependent t-tests</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pablo E. Gutiérrez-Fonseca" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js-8.11.1/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="libs/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"dffea8c2967746dd93da388c6e351be4","expires":1}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
+    <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
+    <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Dependent t-tests
+]
+.subtitle[
+## Tests between the means of different groups
+]
+.author[
+### Pablo E. Gutiérrez-Fonseca
+]
+.date[
+### 2025-Jan-01 (updated: 2026-Oct-28)
+]
+
+---
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 4px;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+# Dependent t-test
+- The paired sample t-test, sometimes called the dependent sample t-test, is a statistical procedure used to determine whether the mean difference between two sets of observations is zero.
+
+- In a paired sample t-test, each subject or entity is measured twice, resulting in pairs of observations. 
+
+---
+# Dependent t-test
+
+- Used when we have dependent samples - matched, paired or tied somehow:
+    1. **Seasonal comparisons of plant growth:** Measuring the height of the same set of plants in two different seasons (e.g., summer and winter).
+    2. **Invasive species control:** Comparing the number of native species before and after controlling an invasive species in a forest ecosystem. The samples are matched because they come from the same location before and after intervention.
+    3. **Pollution impact on water quality:** Comparing water quality measurements (e.g., levels of pollutants) before and after the implementation of pollution control measures in the same water bodies.
+    4. **Before-and-after studies on an ecosystem restoration project:** Measuring biodiversity in a wetland area before and after a restoration effort. The same sites are sampled both times (pre- and post-restoration), so the samples are dependent.
+
+---
+# Assumptions
+1. **Dependent variable must be continuous:** Data like height, species count, or temperature.
+2. **Two groups are paired:** Same sample measured under different conditions (e.g., before and after an intervention).
+3. **No significant outliers:** Ensure differences between pairs don't have extreme values.
+4. **Differences should be normally distributed:** The differences between pairs should follow a normal distribution.
+
+
+---
+# Function
+
+.pull-left[ 
+
+``` r
+t.test(x= , y = ,
+       `mu = 0`, 
+       paired = , 
+       var.equal =, 
+       alternative = c("two.sided", "less", "greater")
+       )
+```
+]
+
+
+.pull-right[ 
+
+- The `mu` argument indicate the true value of difference in means for a two sample test.
+
+]
+
+
+---
+# Function
+
+.pull-left[ 
+
+``` r
+t.test(x= , y = ,
+       `mu = 0`, 
+       paired = , 
+       var.equal =, 
+       alternative = c("two.sided", "less", "greater")
+       )
+```
+]
+
+
+.pull-right[ 
+
+- The `mu` argument indicate the true value of difference in means for a two sample test.
+
+
+- Hypotheses testing for mean difference ( `\(\mu_d\)` ):
+
+  - `\(H_0: \mu_d = 0\)`
+
+  - `\(H_1: \mu_d \neq 0\)` (two-tailed)
+  - `\(H_1: \mu_d &gt; 0\)` (upper-tailed)
+  - `\(H_1: \mu_d &lt; 0\)` (lower-tailed)
+
+]
+
+---
+# Example 
+
+---
+# Example 
+
+- Background About the Experiment:
+
+- During the winters of 2015 and 2016, scientists simulated ice storms in the Hubbard Brook Experimental Forest in New Hampshire by spraying water onto the forest canopy, creating ice accretion that mimicked natural storm conditions. Some plots received ¼ inch, ½ inch, or ¾ inch of ice, while treatments were repeated in 2017 to study the effects of consecutive storms.
+
+- Task:
+
+- Your task is to determine if live basal area (m²/ha) is significantly greater in control plots compared to ice-treated plots, using data collected one year after the initial treatment.
+
+- Additional Information: &lt;a href="https://hubbardbrook.org/story/the-ice-storm-experiment-at-hubbard-brook/"&gt;Link &lt;/a&gt;
+
+
+
+---
+# Import your data
+
+
+``` r
+ice_before_after &lt;- read_csv("Lecturer Practice/ice_storm_data_before_and_after.csv") 
+head(ice_before_after)
+```
+
+```
+## # A tibble: 6 × 3
+##   Plot_ID Control   Ice
+##     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+## 1       1    56.5 18.5 
+## 2       2    54.0 44.1 
+## 3       3    23.8 16.8 
+## 4       4    65.6  8.36
+## 5       5    21.3 23.3 
+## 6       6    49.5  0.81
+```
+
+
+---
+# Run descriptive statistics
+
+
+``` r
+pivot(ice_before_after, c(IQR, skew, kurtosis, mean, sd, var), Ice)
+```
+
+```
+##   n na    IQR  skew   kurt   mean     sd     var
+##  14  0 29.678 0.148 -1.577 24.952 16.484 271.715
+```
+
+``` r
+pivot(ice_before_after, c(IQR, skew, kurtosis, mean, sd, var), Control)
+```
+
+```
+##   n na    IQR  skew   kurt   mean     sd     var
+##  14  0 33.973 -0.48 -1.196 39.689 23.387 546.956
+```
+
+
+---
+#  Test for normality 
+
+``` r
+shapiro.test(ice_before_after$Control)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  ice_before_after$Control
+*## W = 0.90344, p-value = 0.1266
+```
+
+``` r
+shapiro.test(ice_before_after$Ice)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  ice_before_after$Ice
+*## W = 0.89493, p-value = 0.09523
+```
+
+---
+# Test for equal variance (homogeneity in variances)
+
+.panelset[
+.panel[.panel-name[Equal Variance]
+
+``` r
+var.test(ice_before_after$Control, ice_before_after$Ice)
+```
+
+```
+## 
+## 	F test to compare two variances
+## 
+## data:  ice_before_after$Control and ice_before_after$Ice
+*## F = 2.013, num df = 13, denom df = 13, p-value = 0.2205
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.6462141 6.2705042
+## sample estimates:
+## ratio of variances 
+##            2.01298
+```
+]
+
+.panel[.panel-name[But]
+
+- But...
+
+- When you run a paired test with `x` and `y`, you're actually running a one-sample test on d=`x`-`y` (e.g., Control vs. Ice). 
+
+- This means that there is only one variable `d`, so it doesn't make sense to talk about var.equal with a paired test.
+]
+]
+
+
+---
+# Data visualization
+
+.panelset[
+.panel[.panel-name[R Code]
+
+``` r
+# Convert data to long format for ggplot
+ice_before_after_long &lt;- ice_before_after %&gt;%
+  pivot_longer(cols = c("Control", "Ice"), 
+               names_to = "Condition", 
+               values_to = "Value")
+ggplot(ice_before_after_long, aes(x = Condition, y = Value, fill = Condition)) +
+  geom_boxplot() +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 4, color = "red", fill = "red") + theme_minimal() +
+  labs(title = "Comparison of Control and Ice Conditions",
+       x = "Condition", y = "Value") +
+  scale_fill_manual(values = c("lightblue", "lightgreen"))
+```
+]
+
+.panel[.panel-name[Plot]
+![](Dependent-t-test_files/figure-html/plot1-1.png)
+]
+]
+
+
+---
+# Data visualization
+
+.panelset[
+.panel[.panel-name[R Code]
+
+``` r
+# Convert data to long format for ggplot
+ice_before_after_long &lt;- ice_before_after %&gt;%
+  pivot_longer(cols = c("Control", "Ice"), 
+               names_to = "Condition", 
+               values_to = "Value") %&gt;%
+  mutate(ID = rep(1:(n() / 2), each = 2))  # Adding a unique ID for each pair
+
+# Step 2: Create the paired boxplot with connected points
+ggpaired(ice_before_after_long, x = "Condition", y = "Value", 
+         id = "ID",                # Using 'ID' to connect paired points
+         order = c("Control", "Ice"), 
+         line.color = "gray",       # Line color for connections
+         line.size = 0.5,           # Line thickness
+         boxplot = TRUE) +          # Adding boxplot
+  labs(x = "Treatment", y = "live basal area (m²/ha)")
+```
+]
+
+.panel[.panel-name[Plot]
+![](Dependent-t-test_files/figure-html/plot2-1.png)
+]
+]
+
+---
+
+# Mental check for paired or unpaired
+
+Paired!
+
+&lt;center&gt;
+&lt;img src="fig/someone.png" alt="" width="300"/&gt;
+  
+  
+---
+
+#8. Run the code for the appropriate test
+
+
+``` r
+t.test(ice_before_after$Control, ice_before_after$Ice,
+alternative = c("greater"),
+mu = 0, 
+paired = TRUE)
+```
+
+```
+## 
+## 	Paired t-test
+## 
+## data:  ice_before_after$Control and ice_before_after$Ice
+*## t = 1.8109, df = 13, p-value = 0.04666
+## alternative hypothesis: true mean difference is greater than 0
+## 95 percent confidence interval:
+##  0.3250056       Inf
+## sample estimates:
+## mean difference 
+##        14.73643
+```
+
+---
+# Simple plot of differences
+
+- A simple plot of differences between one sample and the other.  Points below the blue line indicate observations where Ice is greater than Control, that is where (Control - Ice) is negative. 
+
+.panelset[
+.panel[.panel-name[R Code]
+
+``` r
+Difference = ice_before_after$Control - ice_before_after$Ice
+
+plot(Difference,
+     pch = 16,
+     ylab="Difference (Control - Ice)")
+
+abline(0,0, col="blue", lwd=2)
+```
+]
+
+.panel[.panel-name[Plot]
+![](Dependent-t-test_files/figure-html/plot3-1.png)
+]
+]
+---
+# Effect size 
+
+
+``` r
+effectsize::cohens_d(ice_before_after$Control, ice_before_after$Ice,data=ice_before_after)
+```
+
+```
+## Cohen's d |        95% CI
+## -------------------------
+## 0.73      | [-0.04, 1.49]
+## 
+## - Estimated using pooled SD.
+```
+---
+
+# How do I report the result of a dependent t-test?
+
+- t(degrees of freedom) = t-value, p = significance level
+
+ `$$t_{(13)} = 1.8109, \, p = 0.04666$$`
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightLanguage": "r",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(css/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 60px;
+  height: 78px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
