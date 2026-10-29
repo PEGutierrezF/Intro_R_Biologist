@@ -32,7 +32,7 @@ No copies capturas de pantalla del resultado a menos que se indique.)
 
 ### Context: <br>
 We have a data set from a former student's biology thesis.
-[**butterflies_pesticides.xlsx**](assignments/assignment_4_indep_t_test/butterflies_pesticides.xlsx) reports the mean wing length for 80 butterflies (40 of which were treated with pesticides during the larval stage (labeled Group2) and 40 that were not (control group labeled 1))
+[**butterflies_pesticides.xlsx**](butterflies_pesticides.xlsx) reports the mean wing length for 80 butterflies (40 of which were treated with pesticides during the larval stage (labeled Group2) and 40 that were not (control group labeled 1))
 
 Our task will be to examine how pesticides impact butterfly development.
 Let's start with the Butterfly Pesticides Data.
