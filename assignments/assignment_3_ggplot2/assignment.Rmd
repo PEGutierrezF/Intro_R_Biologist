@@ -1,18 +1,16 @@
 ---
-title: "Assignment 3: GGPLOT"
+title: "Assignment 4: t-test"
 subtitle: ''
 author: "Pablo E. Gutiérrez-Fonseca"
 date: "`r format(Sys.time(), '%Y-%b-%d, %I:%M %p')`"
 ---
 
 ### Deadline / Fecha de entrega
-**Deadline:** Friday, OCt 2, 2026; 11:59 PM.  
-**Fecha de entrega:** Viernes, 2 de octubre de 2026; 11:59 PM.
+**Deadline:** Friday, OCt 30, 2026; 11:59 PM.  
+**Fecha de entrega:** Viernes, 30 de octubre de 2026; 11:59 PM.
 
 ### Instructions / Instrucciones generales
-
-- This assignment consists of 5 questions, each worth **20 points**.  
-(Esta tarea consta de 5 preguntas, cada una vale **20 puntos**.)
+- This assignment consists of one question worth 100 points, divided into three components: 1) Paragraph: 40 points; 2) Analysis (R output): 40 points; 3) ggplot: 20 points. <br>Esta tarea consta de una sola pregunta que vale 100 puntos, dividida en tres componentes: 1) Párrafo: 40 puntos; 2) Análisis (resultados de R): 40 puntos; 3) ggplot: 20 puntos.
 
 - Write your answers in R code chunks whenever applicable.  
 (Escribe tus respuestas en chunks de R cuando sea aplicable.)
@@ -30,50 +28,76 @@ Do not copy output screenshots unless requested.
 (Entrega la tarea en tus páginas personales usando el **archivo HTML** generado/kniteado desde el `.Rmd`.  
 No copies capturas de pantalla del resultado a menos que se indique.)
 
-<br><br><br>
+<br>
+
+### Context: <br>
+We have a data set from a former student's biology thesis.
+[**butterflies_pesticides.xlsx**](assignments/assignment_4_indep_t_test/butterflies_pesticides.xlsx) reports the mean wing length for 80 butterflies (40 of which were treated with pesticides during the larval stage (labeled Group2) and 40 that were not (control group labeled 1))
+
+Our task will be to examine how pesticides impact butterfly development.
+Let's start with the Butterfly Pesticides Data.
+
+Assume that we want to test to see if there is a difference between butterfly wing length for those treated with pesticides (group 2) and those not treated with pesticides (group 1).
+
+### Steps to guide your analysis
+#### Use the following steps to guide your work in R:
+1- Assess the normality of the wing-length data and report the relevant results.<br>
+2- Assess the equality of variances between the pesticide-treated and control groups and report the relevant results.<br>
+3- Conduct the appropriate statistical test to compare wing length between the pesticide-treated and control groups.<br>
+4- Report the test statistic, degrees of freedom (if applicable), and p-value. Determine whether the difference is statistically significant at α = 0.05.<br>
+5- Create an appropriate ggplot to visualize and compare wing length between the two groups.<br>
+6- Write a concise paragraph summarizing your research objective, methods, statistical results, and interpretation of the findings.
+
+<br>
+
+### Required submission / Entrega requerida
+- Submit your R output, ggplot, and one summary paragraph. Your paragraph should include the research objective, a brief description of the methods, the statistical results, and an interpretation of the findings, including whether the observed difference appears biologically meaningful.<br>
+- Entregue los resultados del análisis en R, el gráfico creado con ggplot y un párrafo de resumen. El párrafo debe incluir el objetivo de la investigación, una breve descripción de los métodos utilizados, los resultados estadísticos y una interpretación de los hallazgos, incluyendo si la diferencia observada parece tener relevancia biológica.
+
+<br>
 
 Install necessary packages (only run once if not installed).<br>
 Instalar los paquetes necesarios (solo ejecutar una vez si no están instalados).
-```{r, message =F}
-library(ggplot2)
-data("trees")
-head(trees)
+#1. Import libraries and load packages
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lessR)
+library(readxl)
+library(BSDA)
 ```
 <br><br><br>
 
-**Q1.** Create a histogram showing the distribution of Girth.<br>
-**Q1.** Cree un histograma que muestre la distribución de Girth.
+**Q1. Normality test / Prueba de normalidad (10pts)**
 ```{r}
-# Your output here 
+# Your output here
 ```
-<br><br>
 
-**Q2.** Create a histogram showing the distribution of Volume.<br>
-**Q2.** Cree un histograma que muestre la distribución de Volume.
+<br>
+
+**Q2. Equality of variances test / Prueba de igualdad de varianzas  (10pts)**
+
 ```{r}
-# Your output here 
+# Your output here
 ```
-<br><br>
+<br>
 
-**Q3.** Create a scatterplot showing the relationship between Girth and Volume.<br>
-**Q3.** Cree un gráfico de dispersión que muestre la relación entre Girth y Volume.
+**Q3. Statistical test / Prueba estadística  (20pts)**
 ```{r}
-# Your output here 
+# Your output here
 ```
-<br><br>
+<br>
 
-
-**Q4.** Use the Shapiro–Wilk test to assess whether Volume is normally distributed. Report the p-value and state whether the data are normally distributed.<br>
-**Q4.** Utilice la prueba de Shapiro–Wilk para evaluar si Volume tiene una distribución normal. Reporte el valor de p e indique si los datos tienen una distribución normal.
+**Q4. ggplot  (20pts)**
 ```{r}
-# Your output here 
+# Your output here
 ```
-<br><br>
+<br>
 
-**Q5.** Repeat the Shapiro–Wilk test for Girth. Report the p-value and state whether Girth is normally distributed.<br>
-**Q5.** Repita la prueba de Shapiro–Wilk para Girth. Reporte el valor de p e indique si los datos tienen una distribución normal.
+**Q5. Summary paragraph / Párrafo de resumen  (40pts)**
+- Write one concise paragraph summarizing your research objective, methods, statistical results, and interpretation of the findings, including whether the observed difference is statistically significant and biologically meaningful.<br>
+- Escriba un párrafo conciso que resuma el objetivo de la investigación, los métodos utilizados, los resultados estadísticos y la interpretación de los hallazgos, incluyendo si la diferencia observada es estadísticamente significativa y tiene relevancia biológica.
+
 ```{r}
-# Your output here 
+# Your paragraph here
 ```
-<br><br>
 <br><br><br>

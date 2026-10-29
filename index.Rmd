@@ -74,6 +74,8 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [RTutorial 1](assignments/assignment_1/assignments1.html)
 ### [RTutorial 2](assignments/assignment_3/assignment3.html)
 ### [RTutorial 3](assignments/assignment_3_ggplot2/assignment.html)
+### [RTutorial 4](assignments/assignment_4_indep_t_test/assignment.html)
+
 <br>
 
 <hr style="border: 1px solid #ccc;">
