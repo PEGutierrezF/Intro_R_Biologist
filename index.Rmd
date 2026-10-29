@@ -54,6 +54,8 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Dragonfly data](classes/Module 11&12 Independet and Dependent t-test/Lecturer Practice/one_tail_Dragonfly_THg_Database1.csv)
 ### [cannabis](classes/Module 12 Dependent t-test/Lecturer Practice/cannabis.xlsx)
 
+### Module 12: [Dependent t-tests](classes/Module 12 Dependent t-test/Dependent-t-test.html)
+### [Ice](classes/Module 12 Dependent t-test/Lecturer Practice/ice_storm_data_before_and_after.csv)
 
 <br>
 
