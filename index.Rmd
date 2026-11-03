@@ -57,6 +57,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### Module 12: [Dependent t-tests](classes/Module 12 Dependent t-test/Dependent-t-test.html)
 ### [Ice](classes/Module 12 Dependent t-test/Lecturer Practice/ice_storm_data_before_and_after.csv)
 
+### Module 13: [One-Way Anova](classes/Module 13 ANOVA/ANOVA.html)
 <br>
 
 <hr style="border: 1px solid #ccc;">
