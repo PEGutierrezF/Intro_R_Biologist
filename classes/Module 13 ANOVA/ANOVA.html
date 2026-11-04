@@ -4,7 +4,7 @@
     <title>Analysis of Variance</title>
     <meta charset="utf-8" />
     <meta name="author" content="Pablo E. Gutiérrez-Fonseca" />
-    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
     <script src="libs/panelset-0.3.0/panelset.js"></script>
@@ -22,7 +22,7 @@
     <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
     <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
     <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x671d68e0c3344b197959cb188295e0b","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x7aca0c3573548698f9bd9d0d173b6aa","expires":1}</script>
     <script src="libs/himalaya-1.1.0/himalaya.js"></script>
     <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
     <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
@@ -505,7 +505,14 @@ ggplot(crop) +
 ``` r
 one.way &lt;- aov(yield ~ fertilizer, 
                data = crop, var.equal = TRUE )
+```
 
+```
+## Warning: In lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...) :
+##  extra argument 'var.equal' will be disregarded
+```
+
+``` r
 summary(one.way)
 ```
 
@@ -664,6 +671,11 @@ The homogeneity of variances can also be checked using Bartlett's or **Levene's 
 
 ``` r
 leveneTest(yield ~ fertilizer, data=crop)
+```
+
+```
+## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
+## factor.
 ```
 
 ```
