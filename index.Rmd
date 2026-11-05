@@ -58,6 +58,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### [Ice](classes/Module 12 Dependent t-test/Lecturer Practice/ice_storm_data_before_and_after.csv)
 
 ### Module 13: [One-Way Anova](classes/Module 13 ANOVA/ANOVA.html)
+### [Environmental Justice](classes/Module 13 ANOVA/Lecturer Practice/cancer_riks/Environmental Justice.csv)
 <br>
 
 <hr style="border: 1px solid #ccc;">
@@ -81,7 +82,7 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 <hr style="border: 1px solid #ccc;">
 
 ## Midterm Exam
-### [Midterm Exam (Fall 2026)](assignments/midterm/2026/midterm_exam.html)
+### [Midterm Exam (Fall 2026)](assignments/midterm/2026/midterm_examen.html)
 
 <!--
 ### [RTutorial 4](assignments/assignment_4/assignment_4.html)
