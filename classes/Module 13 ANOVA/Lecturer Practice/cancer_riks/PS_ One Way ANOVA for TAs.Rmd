@@ -1,0 +1,69 @@
+---
+title: 'PS: One Sample Z test for TAs'
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "2023-08-09"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+
+# **R practice.<br />**
+\vspace{1em}
+
+**Install packages.<br />**  
+```{r}
+library(ggplot2)
+```
+\vspace{1em}
+
+**Load the water pollution data into R.<br />** 
+```{r, echo=FALSE}
+df_env_just <- read.csv('Environmental Justice.csv')
+head(df_env_just)
+```
+\newpage
+
+**H 1 :  Cancer risk differs by income level.**
+```{r}
+mod1 <- aov(Cancer_risk_mil~ Income_class, data=df_env_just)
+summary(mod1)
+```
+A one-way ANOVA to characterize the difference in CDC reported cancer rates across US counties indicated that there is no significant difference between income levels (F 2,81 = 1.95, p = 0.1486).  The cancer rate for low, middle and high income groups differed only as one would expect due to random variation in the human population.  This suggests that income level is not related to cancer rates, and rich are equally as susceptible as poor individuals.
+\vspace{1em}
+
+```{r}
+ggplot(df_env_just, aes(x=Income_class, y=Cancer_risk_mil)) +
+geom_boxplot()
+```
+\newpage
+
+**H 1 :  H 1 :  Cancer risk differs by ethnic group.**
+```{r}
+mod2 <- aov(Cancer_risk_mil~ Ethnicity, data=df_env_just)
+summary(mod2)
+```
+A one-way ANOVA to characterize the difference in CDC reported cancer rates across 5 US counties indicated that there is a significant difference between ethnic groups (F 3,80 = 3.5020, p = 0.0192, r2 = 0.11).  Post hoc Tukey's means comparison tests indicate that African Americans have significantly higher cancer risk than whites, but not significantly different from Latino and Native American.  Latino and Native Americans were also similar to Whites.  A very low R-square  (0.11) indicates, that while significant, Ethnicity does not account for much of the overall variability in the model for cancer risk, and is likely not meaningful.  Other factors likely contribute to cancer rates.
+\vspace{1em}
+
+```{r}
+ggplot(df_env_just, aes(x=Ethnicity, y=Cancer_risk_mil)) +
+geom_boxplot()
+```
+
+
+```{r}
+shapiro.test(residuals(mod1))
+```
+
+
+```{r}
+bartlett.test(Cancer_risk_mil~ Income_class, data=df_env_just)
+```
+
+```{r}
+plot(mod1)
+```
+  
+ 

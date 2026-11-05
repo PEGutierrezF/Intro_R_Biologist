@@ -1,0 +1,85 @@
+State,Country,Income_class,Ethnicity,Cancer_risk_mil
+CA,Los Angeles,High,White,290
+MI,Clinton,High,White,240
+MI,Clinton,Low,White,240
+NH,Strafford,Low,White,235
+FL,Palm Beach,Low,White,235
+CA,Los Angeles,Low,White,210
+MI,Clinton,Middle,White,210
+FL,Palm Beach,Middle,White,205
+CA,Los Angeles,Middle,White,200
+NH,Strafford,Middle,White,200
+FL,Palm Beach,High,White,190
+NH,Strafford,High,White,190
+VT,Chittenden,Low,White,150
+VT,Bennington,Low,White,142
+VT,Bennington,High,White,140
+VT,Chittenden,High,White,138
+VT,Chittenden,Middle,White,137
+VT,Bennington,Middle,White,135
+WY,Laramie,Low,White,125
+WY,Laramie,Middle,White,120
+WY,Laramie,High,White,110
+CA,Los Angeles,High,Native American,295
+CA,Los Angeles,Low,Native American,290
+VT,Bennington,Low,Native American,280
+VT,Chittenden,Low,Native American,280
+MI,Clinton,Low,Native American,280
+CA,Los Angeles,Middle,Native American,275
+FL,Palm Beach,High,Native American,230
+FL,Palm Beach,Low,Native American,215
+NH,Strafford,Middle,Native American,215
+NH,Strafford,Low,Native American,207
+MI,Clinton,High,Native American,200
+MI,Clinton,Middle,Native American,200
+FL,Palm Beach,Middle,Native American,200
+NH,Strafford,High,Native American,180
+VT,Chittenden,Middle,Native American,130
+WY,Laramie,Low,Native American,130
+VT,Bennington,Middle,Native American,128
+VT,Chittenden,High,Native American,110
+WY,Laramie,Middle,Native American,80
+VT,Bennington,High,Native American,77
+WY,Laramie,High,Native American,70
+CA,Los Angeles,Low,Latino,344
+CA,Los Angeles,High,Latino,348
+NH,Strafford,Low,Latino,332
+NH,Strafford,Middle,Latino,290
+MI,Clinton,Middle,Latino,280
+MI,Clinton,High,Latino,278
+CA,Los Angeles,Middle,Latino,265
+FL,Palm Beach,Low,Latino,260
+MI,Clinton,Low,Latino,250
+FL,Palm Beach,Middle,Latino,220
+NH,Strafford,High,Latino,210
+FL,Palm Beach,High,Latino,205
+VT,Chittenden,Middle,Latino,193
+WY,Laramie,Low,Latino,160
+VT,Chittenden,High,Latino,157
+VT,Bennington,Middle,Latino,156
+VT,Bennington,High,Latino,150
+WY,Laramie,Middle,Latino,130
+WY,Laramie,High,Latino,110
+VT,Chittenden,Low,Latino,107
+VT,Bennington,Low,Latino,62
+VT,Chittenden,Low,African American,340
+MI,Clinton,Low,African American,340
+CA,Los Angeles,Low,African American,332
+CA,Los Angeles,High,African American,310
+MI,Clinton,High,African American,310
+VT,Bennington,Low,African American,300
+MI,Clinton,Middle,African American,300
+CA,Los Angeles,Middle,African American,300
+VT,Chittenden,Middle,African American,295
+VT,Bennington,Middle,African American,272
+NH,Strafford,Low,African American,260
+FL,Palm Beach,Middle,African American,255
+FL,Palm Beach,High,African American,245
+WY,Laramie,High,African American,230
+NH,Strafford,Middle,African American,220
+FL,Palm Beach,Low,African American,205
+NH,Strafford,High,African American,205
+WY,Laramie,Low,African American,175
+WY,Laramie,Middle,African American,130
+VT,Chittenden,High,African American,123
+VT,Bennington,High,African American,85

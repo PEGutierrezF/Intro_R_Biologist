@@ -1,0 +1,56 @@
+---
+title: "Problem Set: One Way ANOVA"
+author: "Pablo E. Gutiérrez-Fonseca"
+date: "2023-08-09"
+output: pdf_document
+---
+
+You are being set loose on some very interesting data. Unlike the previous problem sets, I am only giving you the Research Hypothesis. You are responsible for completing all pertinent steps required for a sound statistical analysis on your own. You will write up your response in essay form on blackboard. It may be useful to do all of the work out first
+before writing up your results and conclusions for submission (you can write this directly in blackboard or keep a working draft in word for later pasting into blackboard). Try to keep your answer concise while providing all pertinent information to examine the quality of your analysis. Your grade will be assessed based on the following breakdown for each question:  
+\vspace{1em} 
+
+<table>
+<caption><span id="tab:table2">Table 1. Details. </span></caption>
+
+Item                                                              Points
+-------------                                                   ---------
+- Hypothesis or research objectives clearly stated                  5pts
+- Correct statistical test selected and clearly stated 
+(assumes testing to meet assumptions)                               5pts
+- Statistical analysis reported in shorthand with 
+proper values and format (including degrees of 
+freedom, test statistic and p-value)                                10pts
+- Correct interpretation of statistical results                     5pts
+- Completeness of analysis (were post hoc tests required, 
+nature of differences reported?)                                    10pts
+-Discussion of how meaningful results are with 
+justification for your opinion                                      5pts
+-Conclusions drawn with reference to the original research 
+objective                                                           5pts
+-Logic, clarity and brevity of your response.                       5 pts
+
+</table>
+\vspace{1em}
+
+I encourage you to work in groups to discuss these questions. However, you must ultimately do the work on your own and turn in your written answers and interpretations independently.
+HAVE FUN!
+\newpage
+
+**PS4 Environmental Justice.csv** contains data from the US Center for Disease Control (CDC) on the cancer risk per million residents for five different US counties. This data is further characterized by cancer risk for various ethnic groups and household income levels.
+\vspace{1em} 
+
+
+1. Using R, test the following research hypothesis and summarize your analysis on one concise paragraph:  
+**H1: Cancer risk differs by income level.**  
+
+2. Using R, test the following research hypothesis and summarize your analysis on one concise paragraph:  
+**H1: Cancer risk differs by ethnic group.**  
+\vspace{1em}
+
+For this week you are done, BUT Save these analyses.
+We will come back to them in a future problem set to examine the combined
+impact of income level and ethnic group on cancer rates.
+
+
+
+
