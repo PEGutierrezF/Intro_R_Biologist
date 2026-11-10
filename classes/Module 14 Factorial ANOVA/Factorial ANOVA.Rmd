@@ -1,0 +1,419 @@
+---
+title: "Factorial ANOVA"
+subtitle: ""
+author: "Pablo E. Guti\u00E9rrez-Fonseca"
+institute: ""
+date: "2025-Jan-01 (updated: `r format(Sys.Date(), '%Y-%b-%d')`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, "css/nhsr.css", "css/nhsr-fonts.css", "css/custom.css"]
+    nature:
+      highlightLanguage: r
+      highlightStyle: github
+      highlightLines: true
+      highlightSpans: true 
+      countIncrementalSlides: true
+      ratio: "16:9"
+    includes:
+      after_body: [css/insert-logo.html] #this is for logos in all slides
+xaringanExtra:
+    use_panelset: true
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(readxl)
+library(dplyr)
+library(readr)
+library(lessR)
+library(ggplot2)
+library(ggpubr)
+library(cowplot)
+library(patchwork)
+library(palmerpenguins)
+library(car)
+library(ggforce) # for geom_circle
+library(RVAideMemoire) #shapiro.test
+library(DiagrammeR)
+#knitr::opts_chunk$set(dpi= 100)
+xaringanExtra::use_panelset()
+xaringanExtra::use_scribble()
+xaringanExtra::use_search(show_icon = FALSE, position= "bottom-left") # Search
+xaringanExtra::use_progress_bar(color = "#0051BA", location = "bottom", 
+                                height = "4px")
+xaringanExtra::use_clipboard() # Copy Code 
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presentation
+```
+
+# What is a Full Factorial Experiment?
+- A factorial experiment allows researchers to study the joint **effect of two or more factors** on a **dependent variable**.
+
+- Factorial designs are an **extension of single factor ANOVA** designs in which additional factors are added such that each level of one factor is applied to all levels of the other factor(s) and these combinations are replicated.
+
+---
+# Treatment Groups in Full Factorial Design
+- Factor A has two levels (i.e., A1 and A2), factor B has three levels (i.e., B1, B2 and B3). Therefore, the full factorial design has 2 x 3 = 6 treatment groups.
+
+|         | B1            | B2            | B3            |
+|---------|---------------|---------------|---------------|
+| A1      | Group 1      | Group 2      | Group 3      |
+| A2      | Group 4      | Group 5      | Group 6      |
+
+---
+# Decision Flowchart: Testing Process
+
+```{r figure_2, echo = FALSE, fig.align='center'}
+DiagrammeR::mermaid("
+    graph TD;
+
+        A[What type of data?] --> B[Continuous] 
+        A --> Z[Categorical]
+        
+        B --Research Question--> C[Comparing Differences] 
+        B --Research Question--> D[Examining Relationships]
+        
+        C --> E[How many groups?] 
+      
+        E --1 group--> F[Normally distributed?] 
+        F --Yes--> G[One-sample z-test] 
+        F --No--> H[Wilcoxon signed rank test]
+        
+        E --2 groups--> I[Are Samples Independent?] 
+        I --Yes--> J[Normally distributed?]
+        I --No--> K[Normally distributed?]
+        
+        J --Yes--> L[Independent t-test] 
+        J --No--> M[Wilcoxon rank sum test] 
+        
+        K --Yes--> N[Paired t-test] 
+        K --No--> O[Wilcoxon matched pair test]
+        
+        E --More than 2 groups--> P[Number of Treatments?]
+        
+        P --One--> Q[Normally Distributed?]
+        Q --Yes--> R[One-Way ANOVA]
+        Q --No--> S[Non-Parametric ANOVA]
+        
+        P --More than One--> T[Normally Distributed?]
+        
+        T --Yes--> U[Factorial ANOVA]
+        T --No--> V[Friedman's Rank Test]
+
+  style A fill:lightblue,stroke:#333,stroke-width:1px
+  style B fill:lightblue,stroke:#333,stroke-width:1px
+  style C fill:lightblue,stroke:#333,stroke-width:1px
+  style D fill:lightblue,stroke:#333,stroke-width:1px
+  style E fill:lightblue,stroke:#333,stroke-width:1px
+  style F fill:lightblue,stroke:#333,stroke-width:1px
+  style G fill:lightblue,stroke:#333,stroke-width:1px
+  style H fill:lightblue,stroke:#333,stroke-width:1px
+  style I fill:lightblue,stroke:#333,stroke-width:1px
+  style J fill:lightblue,stroke:#333,stroke-width:1px
+  style K fill:lightblue,stroke:#333,stroke-width:1px
+  style L fill:lightblue,stroke:#333,stroke-width:1px
+  style M fill:lightblue,stroke:#333,stroke-width:1px
+  style N fill:lightblue,stroke:#333,stroke-width:1px
+  style O fill:lightblue,stroke:#333,stroke-width:1px
+  style P fill:lightblue,stroke:#333,stroke-width:1px
+  style Q fill:lightblue,stroke:#333,stroke-width:1px
+  style R fill:lightblue,stroke:#333,stroke-width:1px
+  style S fill:lightblue,stroke:#333,stroke-width:1px
+  style T fill:lightblue,stroke:#333,stroke-width:1px
+  style U fill:lightblue,stroke:#333,stroke-width:1px
+  style V fill:lightblue,stroke:#333,stroke-width:1px
+  style Z fill:lightblue,stroke:#333,stroke-width:1px
+
+  ", height = '600px', width = '900px'
+)
+```
+
+---
+# One-way ANOVA Summary Table
+
+| Source of<br/> Variation          |   Degrees of<br/> Freedom (DF)   |     Sum of Squares<br/> (SS)     |     Mean Square<br/> (MS)   |        F-value        |
+|----------------------------------|:----------------------------------:|:----------------------------------:|:---------------------------:|:---------------------:|
+| **Between<br/> Groups**          |          $c - 1$                  |             $SSB$                 |    $MSB = \frac{SSB}{c - 1}$  |       $\frac{MSB}{MSW}$  |
+| **Within<br/> Groups**           |          $n - c$                  |             $SSW$                 |    $MSW = \frac{SSW}{n - c}$  |                       |
+| **Total**                        |          $n - 1$                  |      $SST = SSB + SSW$            |                           |                       |
+
+- $c$ = number of groups.  
+- $n$ = number of observations.
+
+---
+# Factorial ANOVA Summary Table
+
+| Source of<br/> Variation          |   Degrees of<br/> Freedom (DF)   |     Sum of Squares<br/> (SS)     |     Mean Square<br/> (MS)   |        F-value        |
+|----------------------------------|:----------------------------------:|:----------------------------------:|:---------------------------:|:---------------------:|
+| **Factor A**                     |          $a - 1$                  |             $SSA$                 |    $MSA = \frac{SSA}{a - 1}$  |       $\frac{MSA}{MSW}$  |
+| **Factor B**                     |          $b - 1$                  |             $SSB$                 |    $MSB = \frac{SSB}{b - 1}$  |       $\frac{MSB}{MSW}$  |
+| **Interaction (A × B)**         |          $(a - 1)(b - 1)$         |             $SS_{AB}$             |    $MS_{AB} = \frac{SS_{AB}}{(a - 1)(b - 1)}$ |   $\frac{MS_{AB}}{MSW}$  |
+| **Within<br/> Groups**           |          $N - ab$                 |             $SSW$                 |    $MSW = \frac{SSW}{N - ab}$  |                       |
+| **Total**                        |          $N - 1$                  |      $SST = SSA + SSB + SS_{AB} + SSW$            |                           |                       |
+
+- $a$ = number of levels in Factor A.  
+- $b$ = number of levels in Factor B.  
+- $N$ = total number of observations.
+
+---
+# When do you do a Factorial ANOVA
+- You have a continuous response variable.
+
+- You have two or more categorical treatment variables (factors).
+
+  - You want to simultaneously test for differences in the response variable across these factors.
+
+  - You want to block for a source of known variability to better isolate the effect of the main variables of interest.
+
+  - You suspect there may be interactions between the factors that could influence the response, potentially hiding the true relationships.
+
+---
+# ANOVA Terminology
+
+1. **One-Way ANOVA**: Used when you have **one treatment variable**. The non-parametric alternative is the **Kruskal-Wallis test**.
+
+--
+
+2. **Factorial ANOVA**: Applied when there are **two or more treatment variables**. The name reflects the number of groups and variables, e.g., a 2x3 Factorial ANOVA. The non-parametric alternative is Friedman’s k-way test (use **rank(df$response_variable)**).
+
+--
+
+3. **Full Factorial ANOVA**: Used when you are also considering **interaction terms between variables**. This analysis examines the **main effects** and **interactions** among factors.
+
+---
+# Factorial ANOVA ANOVA test hypotheses
+
+- Two-way ANOVA test hypotheses:
+    - $H_{0A}: \mu_{A1} = \mu_{A2} = \dots = \mu_{Ak}$ (There is no difference in the means of factor A).
+    - $H_{0B}: \mu_{B1} = \mu_{B2} = \dots = \mu_{Bk}$ (There is no difference in the means of factor B).
+    - $H_{0AB}$: There is no interaction between factors A and B.
+
+--
+
+- Alternative Hypotheses:
+    - $H_{1A}$: The means for factor A are not equal.
+    - $H_{1B}$: The means for factor B are not equal.
+    - $H_{1AB}$: There is an interaction between factors A and B.
+
+---
+# Assumptions of two-way ANOVA test
+- Two-way ANOVA, like all ANOVA tests, makes the following assumptions:
+    1. The observations within each cell are normally distributed.
+    2. The variances across groups are equal (homogeneity of variances).
+
+
+---
+# Example
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# https://www.scribbr.com/statistics/anova-in-r/
+```
+
+---
+# Example
+```{r}
+crop <- read.csv('Lecturer Practice/crop.csv')
+head(crop)
+```
+
+---
+# Data visualization
+- Visualize the data distribution using boxplots and jitter for individual points:
+
+.panelset[
+.panel[.panel-name[R Code]
+```{r plot1, fig.show='hide', fig.width=5.5, fig.height=5.5}
+ggplot(crop) +
+  aes(x = fertilizer, y = yield, fill = density) +
+  geom_boxplot(position = position_dodge(width = 0.75), alpha = 0.6, outlier.shape = NA) +
+  geom_jitter(aes(color = density), shape = 15, position = position_jitterdodge(jitter.width = 0.2, dodge.width = 0.75)) +
+  theme_minimal() +
+  labs(title = "Yield by Fertilizer and Density",
+       x = "Fertilizer",
+       y = "Yield") +
+  theme(legend.position = "right") +
+  scale_fill_manual(values = c("low" = "lightblue", "high" = "lightcoral")) +
+  scale_color_manual(values = c("low" = "blue", "high" = "red"))
+```
+]
+
+.panel[.panel-name[Plot]
+![](`r knitr::fig_chunk("plot1", ".png")`)
+]
+]
+
+
+---
+# Running the Full Factorial ANOVA
+- Run Full Factorial ANOVA to assess differences between fertilizer groups:
+```{r highlight.output = 2:4}
+interaction <- aov(yield ~ fertilizer*density, data = crop)
+
+summary(interaction)
+```
+
+---
+# Data visualization
+- Visualize the data distribution using boxplots and jitter for individual points:
+
+.panelset[
+.panel[.panel-name[R Code]
+```{r plot2, fig.show='hide', fig.width=7, fig.height=5.5}
+ggplot(crop, aes(x = fertilizer, y = yield, color = density, group = density)) +
+  geom_point(position = position_jitter(width = 0.1), size = 2) + # jitter for clarity
+  geom_line(stat = "summary", fun = mean, size = 1) + # line for mean yield
+  stat_summary(fun = mean, geom = "point", size = 3, shape = 18) + # mean points
+  labs(title = "Interaction of Fertilizer and Density on Yield",
+       x = "Fertilizer Treatment",
+       y = "Yield") +
+  scale_color_manual(values = c("low" = "blue", "high" = "red"), 
+                     labels = c("Low Density", "High Density")) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.title = element_blank())
+```
+]
+
+.panel[.panel-name[Plot]
+![](`r knitr::fig_chunk("plot2", ".png")`)
+]
+]
+
+---
+# Checking Assumptions: Normality
+```{r highlight.output = 5}
+# Extract residuals
+residuals <- residuals(interaction)
+# Perform the Shapiro-Wilk test for normality
+shapiro.test(residuals)
+```
+
+---
+# Check Assumptions: Homogeneity of Variances
+- Perform Levene's Test for homogeneity of variances.
+```{r highlight.output = 3}
+leveneTest(yield ~ fertilizer * density, data = crop)
+```
+
+---
+# Check Assumptions: Homogeneity of Variances
+- Alternatively, use Bartlett's Test if data are normally distributed.
+
+```{r highlight.output = 5}
+bartlett.test(yield ~ interaction(fertilizer, density), data = crop)
+```
+
+
+---
+# Running the Post-hoc Test
+```{r, highlight.output = 8:10}
+tukey.two.way <- TukeyHSD(interaction)
+tukey.two.way
+```
+
+
+---
+# Visualizing the Post-hoc Test
+
+- The plot below visualizes the results of the Tukey HSD test:
+
+```{r fig.width=4.5, fig.height=4.5}
+tukey.plot.test <- TukeyHSD(interaction)
+plot(tukey.plot.test, las = 1)
+```
+
+---
+# How to summarize results
+
+<span style="color:#00796B;">In this analysis, we examined the effect of fertilizer type and planting density on crop yield</span> <span style="color:#E65100;"> using a two-way ANOVA.</span> 
+<span style="color:#1E88E5;"> Results showed that both fertilizer type and planting density significantly influenced yield, with fertilizer having an $F_{(2, 90)} =9.001, p<0.001 , r^2 =$ and density showing an even stronger effect with $F_{(1,90)} = 15.195, p<0.001 , r^2 =$. However, the interaction between fertilizer and density was not significant $F_{(2,90)} =0.635 , p=0.532 , r^2 =$, indicating that the effect of fertilizer on yield does not depend on planting density. A post-hoc Tukey’s HSD test revealed specific differences between fertilizer treatments: crops receiving the second fertilizer type showed significantly higher yields than the control group $(p<0.001)$, and also had significantly higher yields than the first fertilizer treatment $(p=0.012)$. Additionally, crops grown at lower planting densities had significantly higher yields than those grown at higher densities $(p<0.001)$. </span><span style="color:#424242;"> These results suggest that choosing an effective fertilizer and managing planting density are crucial for optimizing crop yield. However, the lack of a significant interaction indicates that adjustments in planting density do not change the relative effectiveness of the fertilizers tested.
+
+---
+# AIC: Akaike Information Criterion (AIC)
+- AIC is a statistical measure used to compare competing models and identify which model provides the best balance between goodness of fit and model complexity.
+- A model with more parameters can fit the observed data better, but it may also be unnecessarily complex.
+- AIC penalizes models for including additional parameters that do not provide sufficient improvement in model fit.
+- Lower AIC values indicate greater relative support for a model among the candidate models.
+
+---
+# AIC: Akaike Information Criterion (AIC)
+
+- Formula:
+$$
+AIC = 2k - 2\ln(\hat{L})
+$$
+
+Where:
+- $k$ = number of estimated parameters in the model.
+- $\hat{L}$ = maximum likelihood of the model.
+
+---
+# Calculate ΔAIC
+
+- AIC evaluates model fit while penalizing model complexity.
+- ΔAIC represents the difference between each model's AIC and the lowest AIC among candidate models.
+- Models with lower ΔAIC values have greater relative support.
+
+**Interpretation of ΔAIC:**
+- ΔAIC = 0: Best-supported model.
+- ΔAIC ≤ 2: Substantial support.
+- ΔAIC between 4 and 7: Considerably less support.
+- ΔAIC > 10: Very little support.
+
+---
+# Model construction
+```{r}
+# Null model
+model_null <- aov(yield ~ 1, data = crop)
+
+# Fertilizer only
+model_fertilizer <- aov(yield ~ fertilizer, data = crop)
+
+# Density only
+model_density <- aov(yield ~ density, data = crop)
+
+# Additive model (no interaction)
+model_additive <- aov(yield ~ fertilizer + density, data = crop)
+
+# Full factorial model (including interaction)
+model_full <- aov(yield ~ fertilizer * density, data = crop)
+```
+
+---
+# Compare models using AIC
+
+```{r}
+aic_results <- AIC(
+  model_null,
+  model_fertilizer,
+  model_density,
+  model_additive,
+  model_full
+)
+```
+
+---
+# Calculate ΔAIC
+- AIC (Akaike Information Criterion) evaluates model fit while penalizing model complexity.
+```{r}
+aic_results$Delta_AIC <- 
+  aic_results$AIC - min(aic_results$AIC)
+
+aic_results[order(aic_results$AIC), ]
+
+```
+
+---
+# Biological Interpretation and Model Selection
+- The model with the lowest AIC provides the best relative support among the candidate models, but it does not necessarily represent the best biological explanation.
+- AIC evaluates statistical fit and model complexity, not biological relevance or causality.
+- Model selection depends on the biological hypotheses, ecological knowledge, and assumptions underlying each model.
+- A model should be statistically supported, biologically meaningful, and consistent with the research question.
+
+**Key question:**
+
+*Does the model with the lowest AIC always represent the best biological explanation of the data?*
+
+**Remember:** Statistical models help us evaluate biological hypotheses, but they do not replace biological reasoning.

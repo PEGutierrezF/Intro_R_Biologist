@@ -1,0 +1,64 @@
+---
+title: "M10 Problem Set: Factorial ANOVA for TAs"
+author: "Pablo E. Gutierrez-Fonseca"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+output: pdf_document
+---
+
+Consider an example in which a researcher is investigating the **impact of metal contamination on the diversity of species found in sessile marine invertebrates such as sponges, bryozoans, and sea squirts**. The researcher aims to determine whether **copper reduces species richness**, while **also considering the potential influence of substrate orientation, whether vertical or horizontal**, on invertebrate richness.  
+
+To address this, they conducted an experiment where species richness was assessed in replicate samples under each of the six combinations of copper enrichment levels (**"None," "Low," "High"**) and substrate orientations (**"Vertical," "Horizontal"**). This experimental design is referred to as factorial, as it encompasses all levels of one treatment within all levels of the other treatment, also known as orthogonal.  
+
+**The factorial ANOVA will test the following hypotheses:**  
+1. Whether there are differences in richness among the three levels of copper enrichment.  
+2.  Whether there are differences in richness among the two levels of substrate orientation.  
+3. Whether there is an interaction effect between copper enrichment and substrate orientation, indicating whether the effect of copper on richness depends on the orientation of the substrate.  
+
+Summarize:  Write a concise one paragraph summary of this analysis. Remember that any summary should include the following:  
+1. Statement of the research hypothesis or study objectives.  
+2. Brief summary of methods (one sentence or less).  
+3. Statement of the statistical results (including type of test and shorthand: F(df)= obtained value, p = 0.xxx). Include results of the possible interaction between copper enrichment and substrate orientation.  
+4. Description of any differences, if meaningful, along with an interpretation of why these results make sense (or don't make sense).
+
+#1. Import libraries and load packages
+```{r message=FALSE}
+library(tidyverse)
+library(lessR)
+library(readxl)
+library(dplyr)
+# tinytex::install_tinytex()
+```
+
+
+```{r}
+Sessile <- read.csv(file = "Sessile.csv", header = TRUE)
+```
+
+
+```{r}
+Sessile.aov <- aov(Richness ~ Copper * Orientation, data = Sessile)
+summary(Sessile.aov)
+```
+
+# Assumptions
+```{r}
+residuals <- residuals(Sessile.aov)
+shapiro.test(residuals)
+```
+
+
+```{r}
+interaction.plot(Sessile$Copper, Sessile$Orientation, Sessile$Richness)
+```
+
+# Rank
+```{r}
+Sessile$rank <- rank(Sessile$Richness)
+mod2 <- aov(rank ~ Copper * Orientation, data = Sessile)
+summary(mod2)
+```
+
+
+
+References:
+https://environmentalcomputing.net/statistics/linear-models/anova/anova-factorial/
