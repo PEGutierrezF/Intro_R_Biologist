@@ -59,6 +59,10 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 
 ### Module 13: [One-Way Anova](classes/Module 13 ANOVA/ANOVA.html)
 ### [Environmental Justice](classes/Module 13 ANOVA/Lecturer Practice/cancer_riks/Environmental Justice.csv)
+
+### Module 14: [Two-Way Anova](classes/Module 14 Factorial ANOVA/Factorial-ANOVA.html)
+<br>
+
 <br>
 
 <hr style="border: 1px solid #ccc;">

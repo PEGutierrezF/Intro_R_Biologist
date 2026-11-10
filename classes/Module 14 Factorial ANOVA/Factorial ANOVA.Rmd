@@ -347,7 +347,7 @@ $$
 
 Where:
 - $k$ = number of estimated parameters in the model.
-- $\hat{L}$ = maximum likelihood of the model.
+- $\hat{L}$ = maximum likelihood of the model (máxima verosimilitud).
 
 ---
 # Calculate ΔAIC
