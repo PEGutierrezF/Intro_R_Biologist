@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Correlations and Partial Correlations in R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pablo E. Gutiérrez-Fonseca" />
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/panelset-0.3.0/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.3.0/panelset.js"></script>
+    <script src="libs/fabric-4.3.1/fabric.min.js"></script>
+    <link href="libs/xaringanExtra-scribble-0.0.1/scribble.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-scribble-0.0.1/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="libs/mark.js-8.11.1/mark.min.js"></script>
+    <link href="libs/xaringanExtra-search-0.0.1/search.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-search-0.0.1/search.js"></script>
+    <script>window.addEventListener('load', function() { window.xeSearch = new RemarkSearch({"position":"bottom-left","caseSensitive":false,"showIcon":false,"autoSearch":true}) })</script>
+    <script src="libs/xaringanExtra-progressBar-0.0.1/progress-bar.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x927928c7e474144a41a25e3f0f7e6d7","expires":1}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <script src="libs/d3-3.3.8/d3.min.js"></script>
+    <script src="libs/dagre-0.4.0/dagre-d3.min.js"></script>
+    <link href="libs/mermaid-0.3.0/dist/mermaid.css" rel="stylesheet" />
+    <script src="libs/mermaid-0.3.0/dist/mermaid.slim.min.js"></script>
+    <link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+    <script src="libs/chromatography-0.1/chromatography.js"></script>
+    <script src="libs/DiagrammeR-binding-1.0.11/DiagrammeR.js"></script>
+    <link rel="stylesheet" href="css/nhsr.css" type="text/css" />
+    <link rel="stylesheet" href="css/nhsr-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Correlations and Partial Correlations in R
+]
+.author[
+### Pablo E. Gutiérrez-Fonseca
+]
+.date[
+### 2025-Jan-01 (updated: 2026-Nov-17)
+]
+
+---
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 4px;
+  background-color: #0051BA;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+# Decision Flowchart
+
+<div id="htmlwidget-62eac7a6e62193a16923" style="width:1000px;height:450px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-62eac7a6e62193a16923">{"x":{"diagram":"\n    graph TD;\n\n        A[What type of data?] --> B[Continuous] \n        A --> C[Categorical]\n        \n        B --Research Question--> D[Comparing Differences] \n        B --Research Question--> E[Examining Relationships]\n        \n        D --> F[How many groups?] \n      \n        F --1 group--> G[Normally distributed?] \n        G --Yes--> H[One-sample z-test] \n        G --No--> I[Wilcoxon signed rank test]\n        \n        F --2 groups--> J[Are Samples Independent?] \n        J --Yes--> K[Normally distributed?]\n        J --No--> L[Normally distributed?]\n        \n        K --Yes--> M[Independent t-test] \n        K --No--> N[Wilcoxon rank sum test] \n        \n        L --Yes--> O[Paired t-test] \n        L --No--> P[Wilcoxon matched pair test]\n        \n        F --More than 2 groups--> Q[Number of Treatments?]\n        \n        Q --One--> R[Normally Distributed?]\n        R --Yes--> S[One-Way ANOVA]\n        R --No--> T[Non-Parametric ANOVA]\n        \n        Q --More than One--> U[Normally Distributed?]\n        \n        U --Yes--> V[Factorial ANOVA]\n        U --No--> W[Friedman's Rank Test]\n        \n        E --> X[Number of Treatment Variables?]\n        \n        X --Two--> Y[Normally Distributed?]\n        Y --Yes--> Z[Pearson's Correlation]\n        Y --No--> AA[Spearman's Rho]\n        \n        X --More than Two--> AB[Partial Correlation]\n\n  style A fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style B fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style C fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style D fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style E fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style F fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style G fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style H fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style I fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style J fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style K fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style L fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style M fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style N fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style O fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style P fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style Q fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style R fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style S fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style T fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style U fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style V fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style W fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style X fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style Y fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style Z fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style AA fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n  style AB fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px\n\n  "},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# What is correlation?
+- A correlation test quantifies how two variables change together.
+  - Are the variables closely related?
+  - To what extent does one variable predict the other?
+
+---
+# When to use correlation?
+- Correlation test is used to **evaluate** the **association between two or more variables**.
+
+- You have two continuous variables measured from the same observational unit.
+
+- You want to determine if the variables are related (vary in unison).
+
+---
+# Key assumptions:
+- Independent, random samples.
+
+- Normality:
+    - Pearson correlation (parametric): Assumes both variables follow a normal distribution.
+    - Spearman correlation (nonparametric): Does not assume normality.
+
+- Linear relationship: Correlation looks for a linear association between the variables.
+
+---
+# Describing correlations
+- **Strength**: Indicates how closely the variables are related.
+    - Categories: Weak, Moderate, Strong
+
+--
+
+- **Nature**: Shows the direction of the relationship.
+    - Direct (Positive): As one variable increases, so does the other.
+    - Indirect (Negative): As one variable increases, the other decreases.
+
+--
+
+- **Significance**: Assesses if the correlation is meaningful.
+    - Based on the p-value, which tells us if the observed relationship is likely due to chance.
+
+---
+# Hypothesis testing with Correlations
+- **Null Hypothesis ( `\(H_0\)` )**
+    - ** `\(H_0\)` **: There is no correlation in the population.
+        - For a two-tailed test, this means there is **no linear relationship** between x and y.
+   $$ H_0: r = 0 $$
+   $$ p &gt; 0.05 $$
+
+--
+
+- **Alternative Hypothesis ( `\(H_1\)` )**
+    - ** `\(H_1\)` **: There is a real, non-zero correlation in the population.
+        - The alternative hypothesis suggests a **significant linear relationship** between x and y.
+   $$ H_1: r \neq 0 $$
+   $$ p &lt; 0.05 $$
+
+---
+# Computing Simple Correlations
+- There are many kinds of correlation coefficients but the most commonly used measure of correlation is the **Pearson’s correlation (parametric statistic)**. 
+
+`$$r_{XY} = \frac{n \sum XY - \left( \sum X \right) \left( \sum Y \right)}{\sqrt{\left[ n \sum X^2 - \left( \sum X \right)^2 \right] \left[ n \sum Y^2 - \left( \sum Y \right)^2 \right]}}$$`
+
+
+---
+# Computing Simple Correlations
+- There are many kinds of correlation coefficients but the most commonly used measure of correlation is the **Pearson’s correlation (parametric statistic)**. 
+
+`$$r_{XY} = \frac{n \sum XY - \left( \sum X \right) \left( \sum Y \right)}{\sqrt{\left[ n \sum X^2 - \left( \sum X \right)^2 \right] \left[ n \sum Y^2 - \left( \sum Y \right)^2 \right]}}$$`
+
+Where:
+
+- `\(r\)` = Pearson Correlation Coefficient
+- `\(N\)` = Number of pairs of observations
+- `\(∑XY\)` = Sum of the products of paired values
+- `\(∑X\)` = Sum of the \(x\) scores
+- `\(∑Y\)` = Sum of the \(y\) scores
+- `\(∑X^2\)` = Sum of the squared \(x\) scores
+- `\(∑Y^2\)` = Sum of the squared \(y\) scores
+
+---
+# Nature and Interpretation of `\(r\)` Value
+.pull-left[ 
+- Perfect **Positive Correlation**: `\(r=+1\)`  
+
+  - All points lie on an upward-sloping line.
+]
+
+.pull-right[
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+
+---
+# Nature and Interpretation of `\(r\)` Value
+.pull-left[ 
+- Perfect Positive Correlation: `\(r=+1\)`
+  - All points lie on an upward-sloping line.
+  
+- **No Correlation**: `\(r=0\)`
+  - Points do not align along any line, or they form a horizontal line.
+
+]
+
+.pull-right[
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+
+---
+# Nature and Interpretation of `\(r\)` Value
+.pull-left[ 
+- Perfect Positive Correlation: `\(r=+1\)`
+  - All points lie on an upward-sloping line.
+  
+- No Correlation: `\(r=0\)`
+  - Points do not align along any line, or they form a horizontal line.
+  
+- Perfect **Negative Correlation**: `\(r=−1\)`
+  - All points lie on a downward-sloping line.
+
+
+]
+
+.pull-right[
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
+
+---
+# Nature and Interpretation of `\(r\)` Value
+.pull-left[ 
+- Perfect **Positive Correlation**: `\(r=+1\)`
+  - All points lie on an upward-sloping line.
+  
+- No Correlation: `\(r=0\)`
+  - Points do not align along any line, or they form a horizontal line.
+  
+- Perfect **Negative Correlation**: `\(r=−1\)`
+  - All points lie on a downward-sloping line.
+
+
+]
+
+.pull-right[
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+
+- Note: When `\(∣r∣=1\)`, we have a perfect correlation, meaning all points fall precisely along a straight line.
+
+---
+# Strength of Correlation
+
+.pull-left[
+
+- Weak Correlation: 
+  - `\(0.0≤ ∣r∣ &lt;0.3\)`
+
+- Moderate Correlation: 
+  - `\(0.3≤∣r∣&lt;0.7\)`
+
+- Strong Correlation: 
+  - `\(0.7≤∣r∣&lt;1.0\)`
+
+- Perfect Correlation: 
+  - `\(∣r∣=1.0\)`
+]
+
+.pull-right[
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+
+]
+
+---
+# Strength of Correlation: Examples
+.pull-left[
+
+- Weak Correlation: 
+  - `\(0.0≤ ∣r∣ &lt;0.3\)`
+
+- Moderate Correlation: 
+  - `\(0.3≤∣r∣&lt;0.7\)`
+
+- Strong Correlation: 
+  - `\(0.7≤∣r∣&lt;1.0\)`
+
+- Perfect Correlation: 
+  - `\(∣r∣=1.0\)`
+]
+
+.pull-right[
+- Husband’s age / Wife’s age:
+    - r = .94 (strong positive correlation)
+
+- Husband’s height / Wife’s height:
+    - r = .36 (weak positive correlation)
+
+- Distance of golf putt / percent success:
+    - r = -.94 (strong negative correlation)
+]
+
+---
+# Coefficient of Determination ( `\(r^2\)` )
+- `\(r^2\)` **quantifies the proportion of variability in one variable that can be explained by its relationship with the other variable**.
+
+- It represents the shared variability between the two variables, indicating how much of the total variability they have in common.
+
+- When two variables are correlated, `\(r^2\)` tells us how much variance in one variable can be accounted for by the other.
+
+- This concept is similar to the Effect Size we examined in ANOVA.
+
+&lt;img src="Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Difference between `\(r\)` and `\(r^2\)`
+- `\(r\)` (Pearson’s Correlation Coefficient):
+
+  - Measures how much two variables vary together.
+    - Ranges from -1 to 1:
+      - -1: Perfect negative correlation
+      - 0: No correlation
+      - 1: Perfect positive correlation
+    - Unitless and applicable across contexts.
+
+---
+# Difference between `\(r\)` and `\(r^2\)`
+- `\(r\)` (Pearson’s Correlation Coefficient):
+  - Measures how much two variables vary together.
+    - Ranges from -1 to 1:
+      - -1: Perfect negative correlation
+      - 0: No correlation
+      - 1: Perfect positive correlation
+    - Unitless and applicable across contexts.
+
+- `\(r^2\)` (Coefficient of Determination):
+  - Indicates the proportion of variability explained by the relationship.
+    - Ranges from 0 to 1:
+      - 0: No variability explained
+      - 1: All variability explained
+    - Interpreted as the percentage of variance explained.
+
+---
+# p-value of the correlation 
+The p-value (significance level) of the correlation can be determined :
+
+  - by using the correlation coefficient table for the degrees of freedom : **df= n−2**, where **n is the number of observation in x and y variables**.
+
+
+---
+# p-value of the correlation 
+The p-value (significance level) of the correlation can be determined :
+
+  - by using the correlation coefficient table for the degrees of freedom : **df= n−2**, where **n is the number of observation in x and y variables**.
+
+  - or by calculating the t value as follow:
+$$
+t = \frac{r_1 - r_2}{\sqrt{\frac{1 - r^2}{n - 2}}}
+$$
+
+In the case 2) the corresponding p-value is determined using t distribution table for df=n−2
+
+---
+# Understanding significant correlations
+- **Significant correlations** indicate that fluctuations in the values are sufficiently regular, making it unlikely that the association occurred by chance.
+
+- However, significance does not imply meaningfulness:
+  - A significant correlation does not guarantee that the amount of variance accounted for is practically significant.
+
+- Use ** `\(r^2\)` to assess the meaningfulness** of your results:
+  - Interpret `\(r^2\)` to understand the proportion of variance explained by the correlation and its practical implications.
+
+---
+# Writing up your results
+.pull-left[
+Example:
+  - Correlation Results: `\(r_{(19)}=0.606, p=0.024, r^2=0.37\)`
+]
+
+---
+# Writing up your results
+.pull-left[
+Example:
+  - Correlation Results: `\(r_{(19)}=0.606, p=0.024, r^2=0.37\)`
+
+**Interpretation:**
+r: 
+  - Test Statistic: 0.606 (obtained value)
+  - Indicates a moderate positive correlation between the variables.
+
+Degrees of Freedom:
+  - 19 (calculated as `\(n−2\)`, where `\(n\)` is the number of observations).
+]
+
+.pull-right[
+p-value:
+  - 0.024: Indicates a statistically significant correlation (p &lt; 0.05), suggesting the correlation is unlikely to have arisen by chance.
+
+`\(r^2\)`:
+  - 0.37: Indicates that approximately 37% of the variance in one variable is explained by the other, providing a measure of the correlation's practical significance.
+]
+
+---
+# Complications and limitations of correlation
+
+---
+# Complications and limitations of correlation
+.pull-left[
+- Sensitivity to outliers:
+  - Correlations can be significantly affected by outliers, which may skew the results.
+
+- Influence of outliers:
+  - A single outlier can have a disproportionate impact on the correlation coefficient, potentially leading to misleading conclusions.
+]
+
+.pull-right[
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+] 
+
+---
+# Complications and limitations of correlation
+- **Spurious Correlations**:
+  - A significant correlation may not indicate a direct relationship between the two variables.
+  - It can arise from an indirect correlation influenced by a third variable.
+  - For example, an observed correlation between ice cream sales and drowning incidents might be spurious, driven by a third factor like temperature.
+
+- **Causation vs. Correlation**:
+  - Correlation does not imply causation. Just because two variables are correlated does not mean one causes the other.
+
+- **Context Matters**:
+  - Always consider the context and underlying mechanisms that could affect the relationship between the variables.
+
+---
+# Multivariate interpretation
+- What to Do?
+
+---
+# Multivariate interpretation
+- What to Do?
+- Check out your Partial Correlations.
+
+  - Purpose: These correlations adjust each correlation to account for the influence of all other variables in the analysis.
+  - Benefit: They reveal the unique relationship between variables by removing the influence of others.
+  - When to use: Conduct this analysis only on variables that significantly correlate with your variable of interest.
+
+---
+# Partial Correlations
+- Keep in Mind:
+  - These new partial correlations have been adjusted for covariance with all other variables.
+  - The goal is to isolate the unique covariance between the two variables of interest.
+
+- Important Note:
+
+  - Expect these values to be lower than the original correlations!
+    - Why? Because we are accounting for the influence of other variables.
+  - Focus on relative strength rather than trying to meet an absolute threshold of strength.
+
+---
+# Other complications
+- Quantifying Relationships: Pearson’s, Spearman’s non-parametric, and Partial Correlations are all designed to quantify linear relationships.
+
+  - They will not detect nonlinear relationships.
+
+- Misleading Data: Correlations using rates and averages (smoothed data) can be misleading.
+
+&lt;img src="Correlations-and-Partial-Correlations-in-R_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Things to remember
+- Correlations only tell us about the strength of a linear relationship between two variables.
+- We cannot interpret causality from correlation alone.
+
+---
+# Spearman correlation formula
+The Spearman correlation method computes the correlation between the rank of `\(x\)` and the rank of `\(y\)` variables:
+
+`$$\rho = \frac{\sum (x' - \bar{X}) (y' - \bar{Y})}{\sqrt{\sum (x' - \bar{X})^2 \sum (y' - \bar{Y})^2}}$$`
+
+Where `\(x' = rank(x)\)` and `\(y' = rank(y)\)`.
+
+---
+# Example
+
+---
+# Examining the relationship between CO₂ and Global Temperature
+
+**Load Data**: Import the dataset containing global temperature and CO₂ concentration.
+
+
+``` r
+global_T &lt;- read_xlsx('Lecturer Practice/global mean T.xlsx')
+tail(global_T)
+```
+
+```
+## # A tibble: 6 × 3
+##    year temperature Mona_Loa_co2
+##   &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
+## 1  2013        14.6         397.
+## 2  2014        14.7         399.
+## 3  2015        14.8         401.
+## 4  2016        14.9         404.
+## 5  2017        14.8         407.
+## 6  2018        14.7         409.
+```
+
+---
+# Relationship between CO₂ and Temperature
+
+**Test for Normality**: Use Shapiro-Wilk tests to check if temperature and Mona_Loa_co2 are normally distributed.
+
+
+``` r
+shapiro.test(global_T$temperature)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  global_T$temperature
+*## W = 0.9314, p-value = 0.000002771
+```
+
+---
+# Relationship between CO₂ and Temperature
+
+**Test for Normality**: Use Shapiro-Wilk tests to check if temperature and Mona_Loa_co2 are normally distributed.
+
+
+``` r
+shapiro.test(global_T$Mona_Loa_co2)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  global_T$Mona_Loa_co2
+*## W = 0.94085, p-value = 0.005914
+```
+
+---
+# Relationship between CO₂ and Temperature
+This code performs a **Spearman correlation** test to examine the relationship between global temperature and CO₂ concentration.
+
+
+``` r
+#Test correlation (parametric)
+test &lt;- cor.test(global_T$temperature,
+         global_T$Mona_Loa_co2,
+         method = "spearman")
+test
+```
+
+```
+## 
+## 	Spearman's rank correlation rho
+## 
+## data:  global_T$temperature and global_T$Mona_Loa_co2
+*## S = 2403.6, p-value &lt; 0.00000000000000022
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##       rho 
+*## 0.9332148
+```
+
+---
+# Coefficient of Determination (R²) for Spearman Correlation
+Approximate the proportion of variance in temperature explained by CO₂ concentration.
+
+
+``` r
+rho &lt;- test$estimate  # Spearman correlation coefficient
+R_squared &lt;- rho^2
+R_squared
+```
+
+```
+##       rho 
+## 0.8708898
+```
+
+``` r
+# Extract correlation coefficient and p-value
+p_value &lt;- test$p.value
+```
+
+---
+# Data visualization
+
+.panelset[
+.panel[.panel-name[R Code]
+
+``` r
+ggplot(global_T, aes(x = Mona_Loa_co2, y = temperature)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth() +
+#  ylim(14,14.75) +
+  labs(x = "CO2 (ppm)", y = "Temperature (C)", title = "") +
+  annotate("text", x = 350, y = 14.8, 
+           label = paste("Spearman's correlation =", round(rho, 2), "\n", 
+                         "p =", format.pval(p_value)),
+           hjust = 1, vjust = 0)
+```
+]
+
+.panel[.panel-name[Plot]
+![](Correlations-and-Partial-Correlations-in-R_files/figure-html/plot_1-1.png)
+]
+]
+
+---
+# How to summarize results
+
+&lt;span style="color:#00796B;"&gt;We set out to examine the relationship between CO2 concentrations and global mean temperatures based on 60 years of observations at the Mona Loa Observatory. &lt;/span&gt; &lt;span style="color:#E65100;"&gt; A Spearman’s rho correlation&lt;/span&gt;&lt;span style="color:#1E88E5;"&gt; identified an extremely strong, significant direct correlation ( `\(rho_{(58)} =0.93, p&lt;0.001 , r^2 =0.87\)` ) &lt;/span&gt;&lt;span style="color:#424242;"&gt; This indicates that of all the myriad of factors that influence global mean temperatures, the concentration of ONE gas alone can account for 87% of the variability witnessed over the past six decades. This information strongly suggests that CO2 emissions have contributed to warming trends witnessed over the past half century.&lt;/span&gt;
+
+---
+# Example
+
+---
+# Example: Partial Correlation Analysis
+
+---
+# Partial Correlation Analysis
+- Explore the relationships between variables in the dataset while controlling for the influence of other variables.
+
+
+``` r
+df &lt;- data.frame( x= c(1,2,3,4,5,6,7,7,7,8),
+                           y= c(4,5,6,7,8,9,9,9,10,10),
+                           z= c(1,3,5,7,9,11,13,15,17,19))
+head(df)
+```
+
+```
+##   x y  z
+## 1 1 4  1
+## 2 2 5  3
+## 3 3 6  5
+## 4 4 7  7
+## 5 5 8  9
+## 6 6 9 11
+```
+
+---
+# Partial Correlation Analysis
+- Load library ppcor
+
+``` r
+library(ppcor)
+```
+
+---
+# Partial Correlation Analysis
+.pull-left[
+- Calculate Partial Correlation
+
+
+``` r
+pcor( df )
+```
+] 
+
+.pull-right[
+
+```
+## $estimate
+##           x          y          z
+## x 1.0000000 0.76314445 0.58810321
+## y 0.7631444 1.00000000 0.05552034
+## z 0.5881032 0.05552034 1.00000000
+## 
+## $p.value
+##            x          y          z
+## x 0.00000000 0.01673975 0.09578687
+## y 0.01673975 0.00000000 0.88718502
+## z 0.09578687 0.88718502 0.00000000
+## 
+## $statistic
+##          x         y         z
+## x 0.000000 3.1244245 1.9238403
+## y 3.124425 0.0000000 0.1471199
+## z 1.923840 0.1471199 0.0000000
+## 
+## $n
+## [1] 10
+## 
+## $gp
+## [1] 1
+## 
+## $method
+## [1] "pearson"
+```
+]
+
+---
+# Partial Correlation Analysis
+.pull-left[
+- Calculate Partial Correlation
+
+
+``` r
+pcor( df )
+```
+- **$estimate**: The partial correlation value between x and y.
+
+- **$p.value**: The p-value for this partial correlation is 0.01673975.
+
+- **$statistic**: A matrix of the value of the test statistic.
+] 
+
+.pull-right[
+
+```
+## $estimate
+##           x          y          z
+## x 1.0000000 0.76314445 0.58810321
+## y 0.7631444 1.00000000 0.05552034
+## z 0.5881032 0.05552034 1.00000000
+## 
+## $p.value
+##            x          y          z
+## x 0.00000000 0.01673975 0.09578687
+## y 0.01673975 0.00000000 0.88718502
+## z 0.09578687 0.88718502 0.00000000
+## 
+## $statistic
+##          x         y         z
+## x 0.000000 3.1244245 1.9238403
+## y 3.124425 0.0000000 0.1471199
+## z 1.923840 0.1471199 0.0000000
+## 
+## $n
+## [1] 10
+## 
+## $gp
+## [1] 1
+## 
+## $method
+## [1] "pearson"
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightLanguage": "r",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "highlightSpans": true,
+  "countIncrementalSlides": true,
+  "ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(css/logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  width: 60px;
+  height: 78px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

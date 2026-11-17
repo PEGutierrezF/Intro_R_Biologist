@@ -1,0 +1,839 @@
+---
+title: "Correlations and Partial Correlations in R"
+subtitle: ""
+author: "Pablo E. Guti\u00E9rrez-Fonseca"
+institute: ""
+date: "2025-Jan-01 (updated: `r format(Sys.Date(), '%Y-%b-%d')`)"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, "css/nhsr.css", "css/nhsr-fonts.css", "css/custom.css"]
+    nature:
+      highlightLanguage: r
+      highlightStyle: github
+      highlightLines: true
+      highlightSpans: true 
+      countIncrementalSlides: true
+      ratio: "16:9"
+    includes:
+      after_body: [css/insert-logo.html] #this is for logos in all slides
+xaringanExtra:
+    use_panelset: true
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(readxl)
+library(dplyr)
+library(readr)
+library(lessR)
+library(ggplot2)
+library(ggpubr)
+library(cowplot)
+library(patchwork)
+library(palmerpenguins)
+library(car)
+library(ggforce) # for geom_circle
+library(RVAideMemoire) #shapiro.test
+library(DiagrammeR)
+#knitr::opts_chunk$set(dpi= 100)
+xaringanExtra::use_panelset()
+xaringanExtra::use_scribble()
+xaringanExtra::use_search(show_icon = FALSE, position= "bottom-left") # Search
+xaringanExtra::use_progress_bar(color = "#0051BA", location = "bottom", 
+                                height = "4px")
+xaringanExtra::use_clipboard() # Copy Code 
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+xaringanExtra::use_editable(expires = 1) # Add textboxes to edit during presentation
+```
+
+# Decision Flowchart
+
+```{r figure_1, echo = FALSE, fig.align='center'}
+DiagrammeR::mermaid("
+    graph TD;
+
+        A[What type of data?] --> B[Continuous] 
+        A --> C[Categorical]
+        
+        B --Research Question--> D[Comparing Differences] 
+        B --Research Question--> E[Examining Relationships]
+        
+        D --> F[How many groups?] 
+      
+        F --1 group--> G[Normally distributed?] 
+        G --Yes--> H[One-sample z-test] 
+        G --No--> I[Wilcoxon signed rank test]
+        
+        F --2 groups--> J[Are Samples Independent?] 
+        J --Yes--> K[Normally distributed?]
+        J --No--> L[Normally distributed?]
+        
+        K --Yes--> M[Independent t-test] 
+        K --No--> N[Wilcoxon rank sum test] 
+        
+        L --Yes--> O[Paired t-test] 
+        L --No--> P[Wilcoxon matched pair test]
+        
+        F --More than 2 groups--> Q[Number of Treatments?]
+        
+        Q --One--> R[Normally Distributed?]
+        R --Yes--> S[One-Way ANOVA]
+        R --No--> T[Non-Parametric ANOVA]
+        
+        Q --More than One--> U[Normally Distributed?]
+        
+        U --Yes--> V[Factorial ANOVA]
+        U --No--> W[Friedman's Rank Test]
+        
+        E --> X[Number of Treatment Variables?]
+        
+        X --Two--> Y[Normally Distributed?]
+        Y --Yes--> Z[Pearson's Correlation]
+        Y --No--> AA[Spearman's Rho]
+        
+        X --More than Two--> AB[Partial Correlation]
+
+  style A fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style B fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style C fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style D fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style E fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style F fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style G fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style H fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style I fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style J fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style K fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style L fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style M fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style N fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style O fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style P fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style Q fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style R fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style S fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style T fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style U fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style V fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style W fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style X fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style Y fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style Z fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style AA fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+  style AB fill:lightblue,stroke:#333,stroke-width:1px, fontSize: 18px
+
+  ", height = '450px', width = '1000px'
+)
+
+
+```
+
+---
+
+# What is correlation?
+- A correlation test quantifies how two variables change together.
+  - Are the variables closely related?
+  - To what extent does one variable predict the other?
+
+---
+# When to use correlation?
+- Correlation test is used to **evaluate** the **association between two or more variables**.
+
+- You have two continuous variables measured from the same observational unit.
+
+- You want to determine if the variables are related (vary in unison).
+
+---
+# Key assumptions:
+- Independent, random samples.
+
+- Normality:
+    - Pearson correlation (parametric): Assumes both variables follow a normal distribution.
+    - Spearman correlation (nonparametric): Does not assume normality.
+
+- Linear relationship: Correlation looks for a linear association between the variables.
+
+---
+# Describing correlations
+- **Strength**: Indicates how closely the variables are related.
+    - Categories: Weak, Moderate, Strong
+
+--
+
+- **Nature**: Shows the direction of the relationship.
+    - Direct (Positive): As one variable increases, so does the other.
+    - Indirect (Negative): As one variable increases, the other decreases.
+
+--
+
+- **Significance**: Assesses if the correlation is meaningful.
+    - Based on the p-value, which tells us if the observed relationship is likely due to chance.
+
+---
+# Hypothesis testing with Correlations
+- **Null Hypothesis ( $H_0$ )**
+    - ** $H_0$ **: There is no correlation in the population.
+        - For a two-tailed test, this means there is **no linear relationship** between x and y.
+   $$ H_0: r = 0 $$
+   $$ p > 0.05 $$
+
+--
+
+- **Alternative Hypothesis ( $H_1$ )**
+    - ** $H_1$ **: There is a real, non-zero correlation in the population.
+        - The alternative hypothesis suggests a **significant linear relationship** between x and y.
+   $$ H_1: r \neq 0 $$
+   $$ p < 0.05 $$
+
+---
+# Computing Simple Correlations
+- There are many kinds of correlation coefficients but the most commonly used measure of correlation is the **Pearson’s correlation (parametric statistic)**. 
+
+$$r_{XY} = \frac{n \sum XY - \left( \sum X \right) \left( \sum Y \right)}{\sqrt{\left[ n \sum X^2 - \left( \sum X \right)^2 \right] \left[ n \sum Y^2 - \left( \sum Y \right)^2 \right]}}$$
+
+
+---
+# Computing Simple Correlations
+- There are many kinds of correlation coefficients but the most commonly used measure of correlation is the **Pearson’s correlation (parametric statistic)**. 
+
+$$r_{XY} = \frac{n \sum XY - \left( \sum X \right) \left( \sum Y \right)}{\sqrt{\left[ n \sum X^2 - \left( \sum X \right)^2 \right] \left[ n \sum Y^2 - \left( \sum Y \right)^2 \right]}}$$
+
+Where:
+
+- $r$ = Pearson Correlation Coefficient
+- $N$ = Number of pairs of observations
+- $∑XY$ = Sum of the products of paired values
+- $∑X$ = Sum of the \(x\) scores
+- $∑Y$ = Sum of the \(y\) scores
+- $∑X^2$ = Sum of the squared \(x\) scores
+- $∑Y^2$ = Sum of the squared \(y\) scores
+
+---
+# Nature and Interpretation of $r$ Value
+.pull-left[ 
+- Perfect **Positive Correlation**: $r=+1$  
+
+  - All points lie on an upward-sloping line.
+]
+
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=5}
+# Generate data for perfect positive correlation
+set.seed(0)
+n <- 50
+x <- seq(1, 10, length.out = n)
+y_positive <- x  # Perfect correlation: y = x
+
+# Create a data frame
+data_positive <- data.frame(x = x, y = y_positive)
+
+# Plot
+ggplot(data_positive, aes(x = x, y = y)) +
+  geom_point(color = "blue") +
+  geom_line(color = "blue") +
+  labs(title = "Perfect Positive Correlation (r = +1)", x = "X", y = "Y") +
+  theme_minimal()
+
+```
+]
+
+---
+# Nature and Interpretation of $r$ Value
+.pull-left[ 
+- Perfect Positive Correlation: $r=+1$
+  - All points lie on an upward-sloping line.
+  
+- **No Correlation**: $r=0$
+  - Points do not align along any line, or they form a horizontal line.
+
+]
+
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=5}
+# Generate data for no correlation
+set.seed(0)
+y_no_corr <- runif(n, 1, 10)  # Random y values, no correlation
+
+# Create a data frame
+data_no_corr <- data.frame(x = x, y = y_no_corr)
+
+# Plot
+ggplot(data_no_corr, aes(x = x, y = y)) +
+  geom_point(color = "blue") +
+  labs(title = "No Correlation (r = 0)", x = "X", y = "Y") +
+  theme_minimal()
+
+```
+]
+
+---
+# Nature and Interpretation of $r$ Value
+.pull-left[ 
+- Perfect Positive Correlation: $r=+1$
+  - All points lie on an upward-sloping line.
+  
+- No Correlation: $r=0$
+  - Points do not align along any line, or they form a horizontal line.
+  
+- Perfect **Negative Correlation**: $r=−1$
+  - All points lie on a downward-sloping line.
+
+
+]
+
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=5}
+# Generate data for perfect negative correlation
+y_negative <- -x  # Perfect correlation: y = -x
+
+# Create a data frame
+data_negative <- data.frame(x = x, y = y_negative)
+
+# Plot
+ggplot(data_negative, aes(x = x, y = y)) +
+  geom_point(color = "blue") +
+  geom_line(color = "blue") +
+  labs(title = "Perfect Negative Correlation (r = -1)", x = "X", y = "Y") +
+  theme_minimal()
+```
+]
+
+---
+# Nature and Interpretation of $r$ Value
+.pull-left[ 
+- Perfect **Positive Correlation**: $r=+1$
+  - All points lie on an upward-sloping line.
+  
+- No Correlation: $r=0$
+  - Points do not align along any line, or they form a horizontal line.
+  
+- Perfect **Negative Correlation**: $r=−1$
+  - All points lie on a downward-sloping line.
+
+
+]
+
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=5}
+# Generate data for perfect negative correlation
+y_negative <- -x  # Perfect correlation: y = -x
+
+# Create a data frame
+data_negative <- data.frame(x = x, y = y_negative)
+
+# Plot
+ggplot(data_negative, aes(x = x, y = y)) +
+  geom_point(color = "blue") +
+  geom_line(color = "blue") +
+  labs(title = "Perfect Negative Correlation (r = -1)", x = "X", y = "Y") +
+  theme_minimal()
+```
+]
+
+- Note: When $∣r∣=1$, we have a perfect correlation, meaning all points fall precisely along a straight line.
+
+---
+# Strength of Correlation
+
+.pull-left[
+
+- Weak Correlation: 
+  - $0.0≤ ∣r∣ <0.3$
+
+- Moderate Correlation: 
+  - $0.3≤∣r∣<0.7$
+
+- Strong Correlation: 
+  - $0.7≤∣r∣<1.0$
+
+- Perfect Correlation: 
+  - $∣r∣=1.0$
+]
+
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=6, fig.height=5}  
+
+set.seed(123)  # For reproducibility
+
+# Function to generate correlated data
+generate_data <- function(n, r) {
+  x <- rnorm(n)
+  y <- r * x + sqrt(1 - r^2) * rnorm(n)
+  data.frame(x = x, y = y)
+}
+
+# Generate datasets for each correlation strength
+data_r0 <- generate_data(100, 0)       # Correlation of 0
+data_r03 <- generate_data(100, 0.3)    # Correlation of 0.3
+data_r07 <- generate_data(100, 0.7)    # Correlation of 0.7
+data_r1 <- data.frame(x = rnorm(100))  # Correlation of 1
+data_r1$y <- data_r1$x
+
+# Create scatterplots for each correlation level
+plot_r0 <- ggplot(data_r0, aes(x, y)) +
+  geom_point() +
+  ggtitle("No Correlation (r = 0)") +
+  theme_minimal()
+
+plot_r03 <- ggplot(data_r03, aes(x, y)) +
+  geom_point() +
+  ggtitle("Weak Correlation (r ≈ 0.3)") +
+  theme_minimal()
+
+plot_r07 <- ggplot(data_r07, aes(x, y)) +
+  geom_point() +
+  ggtitle("Moderate Correlation (r ≈ 0.7)") +
+  theme_minimal()
+
+plot_r1 <- ggplot(data_r1, aes(x, y)) +
+  geom_point() +
+  ggtitle("Perfect Correlation (r = 1)") +
+  theme_minimal()
+
+# Arrange plots in a single plate using patchwork
+(plot_r0 | plot_r03) /
+  (plot_r07 | plot_r1)
+
+```
+
+]
+
+---
+# Strength of Correlation: Examples
+.pull-left[
+
+- Weak Correlation: 
+  - $0.0≤ ∣r∣ <0.3$
+
+- Moderate Correlation: 
+  - $0.3≤∣r∣<0.7$
+
+- Strong Correlation: 
+  - $0.7≤∣r∣<1.0$
+
+- Perfect Correlation: 
+  - $∣r∣=1.0$
+]
+
+.pull-right[
+- Husband’s age / Wife’s age:
+    - r = .94 (strong positive correlation)
+
+- Husband’s height / Wife’s height:
+    - r = .36 (weak positive correlation)
+
+- Distance of golf putt / percent success:
+    - r = -.94 (strong negative correlation)
+]
+
+---
+# Coefficient of Determination ( $r^2$ )
+- $r^2$ **quantifies the proportion of variability in one variable that can be explained by its relationship with the other variable**.
+
+- It represents the shared variability between the two variables, indicating how much of the total variability they have in common.
+
+- When two variables are correlated, $r^2$ tells us how much variance in one variable can be accounted for by the other.
+
+- This concept is similar to the Effect Size we examined in ANOVA.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.width=5, fig.height=4}
+# Define the plot data for two overlapping circles
+circle_data <- data.frame(
+  x = c(0.75, 2.25),    # Center x-coordinates of the circles
+  y = c(1, 1),    # Center y-coordinates of the circles
+  r = c(1, 1)     # Radii of the circles
+)
+
+# Create the ggplot with overlapping circles
+ggplot(circle_data) +
+  geom_circle(aes(x0 = x, y0 = y, r = r), fill = "skyblue", alpha = 0.1) +
+  annotate("text", x = 0.6, y = 1.25,
+           label = "Variable X", color = "blue", size = 5) +
+  annotate("text", x = 2.4, y = 1.25,
+           label = "Variable Y", color = "darkorange", size = 5) +
+  annotate("text", x = 1.5, y = 1,
+           label = "r^2", parse = TRUE,
+           color = "purple", size = 6)  +
+  coord_fixed() +
+  theme_void()
+
+```
+
+---
+# Difference between $r$ and $r^2$
+- $r$ (Pearson’s Correlation Coefficient):
+
+  - Measures how much two variables vary together.
+    - Ranges from -1 to 1:
+      - -1: Perfect negative correlation
+      - 0: No correlation
+      - 1: Perfect positive correlation
+    - Unitless and applicable across contexts.
+
+---
+# Difference between $r$ and $r^2$
+- $r$ (Pearson’s Correlation Coefficient):
+  - Measures how much two variables vary together.
+    - Ranges from -1 to 1:
+      - -1: Perfect negative correlation
+      - 0: No correlation
+      - 1: Perfect positive correlation
+    - Unitless and applicable across contexts.
+
+- $r^2$ (Coefficient of Determination):
+  - Indicates the proportion of variability explained by the relationship.
+    - Ranges from 0 to 1:
+      - 0: No variability explained
+      - 1: All variability explained
+    - Interpreted as the percentage of variance explained.
+
+---
+# p-value of the correlation 
+The p-value (significance level) of the correlation can be determined :
+
+  - by using the correlation coefficient table for the degrees of freedom : **df= n−2**, where **n is the number of observation in x and y variables**.
+
+
+---
+# p-value of the correlation 
+The p-value (significance level) of the correlation can be determined :
+
+  - by using the correlation coefficient table for the degrees of freedom : **df= n−2**, where **n is the number of observation in x and y variables**.
+
+  - or by calculating the t value as follow:
+$$
+t = \frac{r_1 - r_2}{\sqrt{\frac{1 - r^2}{n - 2}}}
+$$
+
+In the case 2) the corresponding p-value is determined using t distribution table for df=n−2
+
+---
+# Understanding significant correlations
+- **Significant correlations** indicate that fluctuations in the values are sufficiently regular, making it unlikely that the association occurred by chance.
+
+- However, significance does not imply meaningfulness:
+  - A significant correlation does not guarantee that the amount of variance accounted for is practically significant.
+
+- Use ** $r^2$ to assess the meaningfulness** of your results:
+  - Interpret $r^2$ to understand the proportion of variance explained by the correlation and its practical implications.
+
+---
+# Writing up your results
+.pull-left[
+Example:
+  - Correlation Results: $r_{(19)}=0.606, p=0.024, r^2=0.37$
+]
+
+---
+# Writing up your results
+.pull-left[
+Example:
+  - Correlation Results: $r_{(19)}=0.606, p=0.024, r^2=0.37$
+
+**Interpretation:**
+r: 
+  - Test Statistic: 0.606 (obtained value)
+  - Indicates a moderate positive correlation between the variables.
+
+Degrees of Freedom:
+  - 19 (calculated as $n−2$, where $n$ is the number of observations).
+]
+
+.pull-right[
+p-value:
+  - 0.024: Indicates a statistically significant correlation (p < 0.05), suggesting the correlation is unlikely to have arisen by chance.
+
+$r^2$:
+  - 0.37: Indicates that approximately 37% of the variance in one variable is explained by the other, providing a measure of the correlation's practical significance.
+]
+
+---
+# Complications and limitations of correlation
+
+---
+# Complications and limitations of correlation
+.pull-left[
+- Sensitivity to outliers:
+  - Correlations can be significantly affected by outliers, which may skew the results.
+
+- Influence of outliers:
+  - A single outlier can have a disproportionate impact on the correlation coefficient, potentially leading to misleading conclusions.
+]
+
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=5, fig.height=7}
+# Generate example data
+set.seed(123) # For reproducibility
+n <- 30
+x <- rnorm(n) # Normally distributed data
+y <- 2 * x + rnorm(n, sd = 0.5) # Create a linear relationship with some noise
+
+# Introduce extreme outliers only in the y-values
+y_outliers <- c(y, 25, 30) # Adding two extreme outliers to y
+x_outliers <- c(x, 0, 0) # x-values remain the same for outliers
+
+# Create data frames
+df_normal <- data.frame(x = x, y = y)
+df_outliers <- data.frame(x = x_outliers, y = y_outliers)
+
+# Calculate correlations
+cor_normal <- cor(df_normal$x, df_normal$y)
+cor_outliers <- cor(df_outliers$x, df_outliers$y)
+
+# Plot without outliers
+p1 <- ggplot(df_normal, aes(x = x, y = y)) +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +
+  labs(title = paste("Correlation Without Outliers: r =", round(cor_normal, 2)),
+       x = "X Variable",
+       y = "Y Variable") +
+  theme_minimal() +
+  xlim(-5, 5) + ylim(-5, 10) # Adjust limits for better visibility
+
+# Plot with extreme outliers in y
+p2 <- ggplot(df_outliers, aes(x = x, y = y)) +
+  geom_point(color = "red") +
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(title = paste("Correlation With Extreme Outliers in Y: r =", round(cor_outliers, 2)),
+       x = "X Variable",
+       y = "Y Variable") +
+  theme_minimal() +
+  xlim(-5, 5) + ylim(-5, 35) # Adjust limits for better visibility
+
+# Combine plots using patchwork
+(p1 / p2) 
+```
+
+] 
+
+---
+# Complications and limitations of correlation
+- **Spurious Correlations**:
+  - A significant correlation may not indicate a direct relationship between the two variables.
+  - It can arise from an indirect correlation influenced by a third variable.
+  - For example, an observed correlation between ice cream sales and drowning incidents might be spurious, driven by a third factor like temperature.
+
+- **Causation vs. Correlation**:
+  - Correlation does not imply causation. Just because two variables are correlated does not mean one causes the other.
+
+- **Context Matters**:
+  - Always consider the context and underlying mechanisms that could affect the relationship between the variables.
+
+---
+# Multivariate interpretation
+- What to Do?
+
+---
+# Multivariate interpretation
+- What to Do?
+- Check out your Partial Correlations.
+
+  - Purpose: These correlations adjust each correlation to account for the influence of all other variables in the analysis.
+  - Benefit: They reveal the unique relationship between variables by removing the influence of others.
+  - When to use: Conduct this analysis only on variables that significantly correlate with your variable of interest.
+
+---
+# Partial Correlations
+- Keep in Mind:
+  - These new partial correlations have been adjusted for covariance with all other variables.
+  - The goal is to isolate the unique covariance between the two variables of interest.
+
+- Important Note:
+
+  - Expect these values to be lower than the original correlations!
+    - Why? Because we are accounting for the influence of other variables.
+  - Focus on relative strength rather than trying to meet an absolute threshold of strength.
+
+---
+# Other complications
+- Quantifying Relationships: Pearson’s, Spearman’s non-parametric, and Partial Correlations are all designed to quantify linear relationships.
+
+  - They will not detect nonlinear relationships.
+
+- Misleading Data: Correlations using rates and averages (smoothed data) can be misleading.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.width=5, fig.height=4}
+# Create a sample dataset with a non-linear (inverted U-shape) relationship
+set.seed(123)
+x <- seq(-10, 10, length.out = 100)
+y <- -(x^2) + rnorm(100, sd = 10) # Adding random noise for scatter
+
+data <- data.frame(x, y)
+
+# Create the scatterplot
+ggplot(data, aes(x, y)) +
+  geom_point(color = "blue", alpha = 0.6) +
+  geom_smooth(method = "loess", color = "red", linetype = "dashed", se = FALSE) +  # Non-linear fit
+  geom_smooth(method = "lm", color = "black", linetype = "solid", se = FALSE) +    # Linear fit
+  labs(
+    x = "X Variable",
+    y = "Y Variable"
+  ) +
+  theme_minimal() +
+  annotate(
+    "text", x = 0, y = 40,
+    label = "",
+    color = "darkred", size = 5, hjust = 0.5
+  )
+
+```
+
+---
+# Things to remember
+- Correlations only tell us about the strength of a linear relationship between two variables.
+- We cannot interpret causality from correlation alone.
+
+---
+# Spearman correlation formula
+The Spearman correlation method computes the correlation between the rank of $x$ and the rank of $y$ variables:
+
+$$\rho = \frac{\sum (x' - \bar{X}) (y' - \bar{Y})}{\sqrt{\sum (x' - \bar{X})^2 \sum (y' - \bar{Y})^2}}$$
+
+Where $x' = rank(x)$ and $y' = rank(y)$.
+
+---
+# Example
+
+---
+# Examining the relationship between CO₂ and Global Temperature
+
+**Load Data**: Import the dataset containing global temperature and CO₂ concentration.
+
+```{r}
+global_T <- read_xlsx('Lecturer Practice/global mean T.xlsx')
+tail(global_T)
+```
+
+---
+# Relationship between CO₂ and Temperature
+
+**Test for Normality**: Use Shapiro-Wilk tests to check if temperature and Mona_Loa_co2 are normally distributed.
+
+```{r highlight.output = 5}
+shapiro.test(global_T$temperature)
+```
+
+---
+# Relationship between CO₂ and Temperature
+
+**Test for Normality**: Use Shapiro-Wilk tests to check if temperature and Mona_Loa_co2 are normally distributed.
+
+```{r highlight.output = 5}
+shapiro.test(global_T$Mona_Loa_co2)
+```
+
+---
+# Relationship between CO₂ and Temperature
+This code performs a **Spearman correlation** test to examine the relationship between global temperature and CO₂ concentration.
+
+```{r highlight.output = c(5,9)}
+#Test correlation (parametric)
+test <- cor.test(global_T$temperature,
+         global_T$Mona_Loa_co2,
+         method = "spearman")
+test
+```
+
+---
+# Coefficient of Determination (R²) for Spearman Correlation
+Approximate the proportion of variance in temperature explained by CO₂ concentration.
+
+```{r}
+rho <- test$estimate  # Spearman correlation coefficient
+R_squared <- rho^2
+R_squared
+
+# Extract correlation coefficient and p-value
+p_value <- test$p.value
+```
+
+---
+# Data visualization
+
+.panelset[
+.panel[.panel-name[R Code]
+```{r plot_1, message=FALSE, fig.show='hide', fig.width=7, fig.height=5.5}
+ggplot(global_T, aes(x = Mona_Loa_co2, y = temperature)) +
+  geom_line() +
+  geom_point() +
+  geom_smooth() +
+#  ylim(14,14.75) +
+  labs(x = "CO2 (ppm)", y = "Temperature (C)", title = "") +
+  annotate("text", x = 350, y = 14.8, 
+           label = paste("Spearman's correlation =", round(rho, 2), "\n", 
+                         "p =", format.pval(p_value)),
+           hjust = 1, vjust = 0)
+```
+]
+
+.panel[.panel-name[Plot]
+![](`r knitr::fig_chunk("plot_1", ".png")`)
+]
+]
+
+---
+# How to summarize results
+
+<span style="color:#00796B;">We set out to examine the relationship between CO2 concentrations and global mean temperatures based on 60 years of observations at the Mona Loa Observatory. </span> <span style="color:#E65100;"> A Spearman’s rho correlation</span><span style="color:#1E88E5;"> identified an extremely strong, significant direct correlation ( $rho_{(58)} =0.93, p<0.001 , r^2 =0.87$ ) </span><span style="color:#424242;"> This indicates that of all the myriad of factors that influence global mean temperatures, the concentration of ONE gas alone can account for 87% of the variability witnessed over the past six decades. This information strongly suggests that CO2 emissions have contributed to warming trends witnessed over the past half century.</span>
+
+---
+# Example
+
+---
+# Example: Partial Correlation Analysis
+
+---
+# Partial Correlation Analysis
+- Explore the relationships between variables in the dataset while controlling for the influence of other variables.
+
+```{r}
+df <- data.frame( x= c(1,2,3,4,5,6,7,7,7,8),
+                           y= c(4,5,6,7,8,9,9,9,10,10),
+                           z= c(1,3,5,7,9,11,13,15,17,19))
+head(df)
+```
+
+---
+# Partial Correlation Analysis
+- Load library ppcor
+```{r message=FALSE, warning=FALSE}
+library(ppcor)
+```
+
+---
+# Partial Correlation Analysis
+.pull-left[
+- Calculate Partial Correlation
+
+```{r upload dat, paged.print=FALSE, eval=FALSE}
+pcor( df )
+```
+] 
+
+.pull-right[
+```{r upload dat-out, ref.label="upload dat", echo=FALSE, message=FALSE}
+```
+]
+
+---
+# Partial Correlation Analysis
+.pull-left[
+- Calculate Partial Correlation
+
+```{r upload dat #1, paged.print=FALSE, eval=FALSE}
+pcor( df )
+```
+- **$estimate**: The partial correlation value between x and y.
+
+- **$p.value**: The p-value for this partial correlation is 0.01673975.
+
+- **$statistic**: A matrix of the value of the test statistic.
+] 
+
+.pull-right[
+```{r upload dat-out, ref.label="upload dat", echo=FALSE, message=FALSE}
+```
+]
