@@ -63,6 +63,8 @@ Welcome everyone. On this page, you will find the prompts for the R Tutorials th
 ### Module 14: [Two-Way Anova](classes/Module 14 Factorial ANOVA/Factorial-ANOVA.html)
 ### [Sessile](classes/Module 14 Factorial ANOVA/Lecturer Practice/sessile/sessile.csv)
 
+### Module 15: [Correlation](classes/Module 15 Correlation/Correlations-and-Partial-Correlations-in-R.html)
+
 <br>
 
 <br>
